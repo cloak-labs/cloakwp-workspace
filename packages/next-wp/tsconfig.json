@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "rootDir": "lib",
+    "outDir": "dist",
+    "jsx": "react-jsx"
+
+  },
+  "include": ["lib/**/*"],
+}

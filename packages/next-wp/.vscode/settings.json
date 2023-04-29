@@ -1,0 +1,10 @@
+{
+  // Enable/disable TypeScript validation.
+  "typescript.validate.enable": false,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/dist": true
+  }
+}
