@@ -1,7 +1,7 @@
 {
   "name": "next-wp",
   "version": "0.3.8",
-  "description": "An NPM package for integrating WordPress into your NextJS front-end.",
+  "description": "An NPM package for integrating WordPress into your NextJS front-end",
   "main": "dist/index",
   "typings": "dist/next-wp.d.ts",
   "scripts": {
