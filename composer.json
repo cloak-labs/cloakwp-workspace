@@ -7,6 +7,6 @@
     }
   ],
   "require": {
-    "cloak-labs/cloakwp-plugin": "dev-main"
+    "cloak-labs/cloakwp-plugin": "0.0.1"
   }
 }
