@@ -6,7 +6,7 @@
   "repositories": [
     {
       "type": "path",
-      "url": "wordpress/plugins/cloakwp-plugin"
+      "url": "./wordpress/plugins/cloakwp-plugin"
     }
   ]
 }
