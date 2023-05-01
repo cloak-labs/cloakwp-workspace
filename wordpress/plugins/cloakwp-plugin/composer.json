@@ -2,7 +2,7 @@
   "name": "cloak-labs/cloakwp-plugin",
   "description": "Adds headless capabilities to WordPress as required by the CloakWP NPM package.",
   "type": "wordpress-plugin",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "require": {
     "composer/installers": "^2.2"
   }
