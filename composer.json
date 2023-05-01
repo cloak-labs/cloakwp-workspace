@@ -1,0 +1,12 @@
+{
+  "name": "cloak-labs/cloakwp",
+  "repositories": [
+    {
+      "type": "path",
+      "url": "wordpress/plugins/cloakwp-plugin"
+    }
+  ],
+  "require": {
+    "cloak-labs/cloakwp-plugin": "dev-main"
+  }
+}
