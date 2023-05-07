@@ -1,8 +1,0 @@
-{
-  "name": "cloak-labs/headless-wp-child",
-  "description": "A child theme of HeadlessWP that comes with many commonly used ACF Blocks + Field Groups, Gutenberg theme customizations, and more.",
-  "type": "wordpress-theme",
-  "require": {
-      "composer/installers": "^2.2"
-  }
-}
