@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       Headless WP
+ * Plugin Name:       CloakWP
  * Plugin URI:        https://github.com/cloak-labs/headless-wp-plugin
- * Description:       Add gutenberg blocks data into post / page / widget REST API endpoints. 
+ * Description:       Makes WordPress headless-friendly, especially when paired with CloakWP's NPM package. 
  * Author:            Cloak Labs
  * Author URI:        https://www.stikkymedia.com/
  * Text Domain:       wp-rest-blocks
