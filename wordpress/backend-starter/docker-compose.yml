@@ -40,12 +40,8 @@ services:
     volumes:
       - ./src:/var/www/html:rw,cached
       - ./config/php.ini:/usr/local/etc/php/conf.d/php.ini
-      - type: bind
-        source: ../plugins
-        target: /var/www/html/plugins
-      - type: bind
-        source: ../themes
-        target: /var/www/html/themes
+      - ../plugins:/var/www/html/plugins
+      - ../themes:/var/www/html/themes
     depends_on:
       - mysql
     restart: always
@@ -78,3 +74,5 @@ services:
     restart: 'no'
     volumes:
       - ./src:/var/www/html:rw,cached
+      - ../plugins:/var/www/html/plugins
+      - ../themes:/var/www/html/themes
