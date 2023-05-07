@@ -57,10 +57,7 @@
     },   
     {
       "type": "path",
-      "url": "../../themes/*",
-      "options": {
-        "symlink": false
-      }
+      "url": "./themes/*"
     },
     {
       "type": "path",
