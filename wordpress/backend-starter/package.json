@@ -1,0 +1,12 @@
+{
+  "name": "@cloakwp/backend-starter",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "pnpm init && docker-compose up -d",
+    "dev": "docker-compose up -d",
+    "stop": "docker-compose down",
+    "update": "docker-compose run composer update",
+    "init": "docker-compose run composer create-project"
+  }
+}
