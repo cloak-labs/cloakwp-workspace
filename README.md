@@ -1,30 +1,23 @@
-# Turborepo Design System starter with Changesets
+# CloakWP
+This is a monorepo containing all CloakWP packages/plugins/themes/starters/examples/docs. It is currently under construction as we bring everything into the monorepo. The monorepo was setup using a Turborepo starter template, and probably still has leftover remnants from the template that are yet to be deleted.
 
-This is an official React design system starter powered by Turborepo. Versioning and package publishing is handled by [Changesets](https://github.com/changesets/changesets) and fully automated with GitHub Actions.
+## TODO List:
+- [x] Initiate monorepo with Turborepo + Changesets
+- [x] Copy in next-wp package, themes, and plugins
+- [x] Copy in WP backend-starter and customize `composer.json` + `docker-compose.yml` to install Monorepo plugins/themes via local paths for better local development
+- [ ] Copy in our NextJS + CloakWP starter template under the `examples` folder, update it to use the latest `next-wp` version + breaking changes.
+- [ ] Adjust the frontend starter to connect to our local backend starter only while in local development (i.e. env.local overrides next-wp config)
+- [ ] Split up next-wp into separate package architecture as defined in Notion, update frontend starter's `package.json`
+- [ ] Publish new packages to NPM under new scope/name
+- [ ] Build `create-cloakwp-app` NPM package which provides `npx` command/script for quickly bootstrapping projects using our frontend + backend starters (see NextJS' `create-next-app` for inspo)
+- [ ] Add `src/composer.npx.json` to backend starter (copied from `src/composer.json`) and customize to install plugins/themes from wpackagist; make `create-cloakwp-app` delete the default `composer.json` and rename `composer.npx.json` to `composer.json` when you bootstrap a backend
+- [ ] Finish clean-up + separation of two WP plugins
+- [ ] Publish WP plugins/theme to wpackagist
+- [ ] Figure out best way to bootstrap WP child theme in backend starter only on project initialization (i.e. not a composer dependency)
+- [ ] Launch production version of CloakWP demo site; all frontend starters will connect to the demo's WP backend by default
+- [ ] Finish this TODO list
 
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest -e with-changesets
-```
-
-## What's inside?
-
-This Turborepo includes the following:
-
-### Apps and Packages
-
-- `docs`: A placeholder documentation site powered by [Next.js](https://nextjs.org/)
-- `@acme/core`: core React components
-- `@acme/utils`: shared React utilities
-- `@acme/tsconfig`: shared `tsconfig.json`s used throughout the monorepo
-- `eslint-config-acme`: ESLint preset
-
-Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
+## Utilities
 
 This Turborepo has some additional tools already setup for you:
 
@@ -32,13 +25,13 @@ This Turborepo has some additional tools already setup for you:
 - [ESLint](https://eslint.org/) for code linting
 - [Prettier](https://prettier.io) for code formatting
 
-### Useful commands
+## Useful commands
 
-- `yarn build` - Build all packages and the docs site
-- `yarn dev` - Develop all packages and the docs site
-- `yarn lint` - Lint all packages
-- `yarn changeset` - Generate a changeset
-- `yarn clean` - Clean up all `node_modules` and `dist` folders (runs each package's clean script)
+- `pnpm build` - Build all packages and the docs site
+- `pnpm dev` - Develop all packages and the docs site
+- `pnpm lint` - Lint all packages
+- `pnpm changeset` - Generate a changeset
+- `pnpm clean` - Clean up all `node_modules` and `dist` folders (runs each package's clean script)
 
 ### Changing the npm organization scope
 
@@ -46,7 +39,7 @@ The npm organization scope for this design system starter is `@acme`. To change 
 
 - Rename folders in `packages/*` to replace `acme` with your desired scope
 - Search and replace `acme` with your desired scope
-- Re-run `yarn install`
+- Re-run `pnpm install`
 
 ## Versioning and Publishing packages
 
