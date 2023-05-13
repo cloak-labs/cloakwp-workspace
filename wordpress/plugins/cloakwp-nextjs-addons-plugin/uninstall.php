@@ -22,7 +22,7 @@
  * @link       https://https://github.com/cloak-labs
  * @since      0.6.0
  *
- * @package    Next_Wp
+ * @package    CloakWP
  */
 
 // If uninstall not called from WordPress, then exit.

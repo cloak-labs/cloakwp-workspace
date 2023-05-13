@@ -200,7 +200,7 @@ importers:
         specifier: 7.28.0
         version: 7.28.0(eslint@8.40.0)
 
-  packages/next-wp:
+  packages/cloakwp:
     dependencies:
       cookies-next:
         specifier: '>= 2.1.0'

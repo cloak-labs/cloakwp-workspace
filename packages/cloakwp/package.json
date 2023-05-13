@@ -1,0 +1,40 @@
+{
+  "name": "cloakwp",
+  "version": "0.3.8",
+  "description": "An NPM package for integrating WordPress into your NextJS front-end",
+  "main": "dist/index",
+  "typings": "dist/cloakwp.d.ts",
+  "scripts": {
+    "test": "cross-env NODE_ENV=development npm run watch",
+    "build": "cross-env NODE_ENV=production tsc",
+    "watch": "tsc-watch --onSuccess 'yalc push' --onFailure 'yalc push' --noClear",
+    "postpublish": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaelansmith/cloakwp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaelansmith/cloakwp/issues"
+  },
+  "homepage": "https://github.com/kaelansmith/cloakwp#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "cross-env": "^7.0.3",
+    "tailwind-merge": "^0.8.1",
+    "tsc-watch": "^5.0.3",
+    "typescript": "^4.9.3"
+  },
+  "peerDependencies": {
+    "cookies-next": ">= 2.1.0",
+    "html-react-parser": "3.x",
+    "next": ">= 12.3",
+    "react": ">= 17.0.2",
+    "react-dom": ">= 17.0.2"
+  }
+}

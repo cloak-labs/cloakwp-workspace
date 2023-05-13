@@ -3,11 +3,11 @@ This is a monorepo containing all CloakWP packages/plugins/themes/starters/examp
 
 ## TODO List:
 - [x] Initiate monorepo with Turborepo + Changesets
-- [x] Copy in next-wp package, themes, and plugins
+- [x] Copy in cloakwp package, themes, and plugins
 - [x] Copy in WP backend-starter and customize `composer.json` + `docker-compose.yml` to install Monorepo plugins/themes via local paths for better local development
-- [ ] Copy in our NextJS + CloakWP starter template under the `examples` folder, update it to use the latest `next-wp` version + breaking changes.
-- [ ] Adjust the frontend starter to connect to our local backend starter only while in local development (i.e. env.local overrides next-wp config)
-- [ ] Split up next-wp into separate package architecture as defined in Notion, update frontend starter's `package.json`
+- [ ] Copy in our NextJS + CloakWP starter template under the `examples` folder, update it to use the latest `cloakwp` version + breaking changes.
+- [ ] Adjust the frontend starter to connect to our local backend starter only while in local development (i.e. env.local overrides cloakwp config)
+- [ ] Split up cloakwp into separate package architecture as defined in Notion, update frontend starter's `package.json`
 - [ ] Publish new packages to NPM under new scope/name
 - [ ] Build `create-cloakwp-app` NPM package which provides `npx` command/script for quickly bootstrapping projects using our frontend + backend starters (see NextJS' `create-next-app` for inspo)
 - [ ] Add `src/composer.npx.json` to backend starter (copied from `src/composer.json`) and customize to install plugins/themes from wpackagist; make `create-cloakwp-app` delete the default `composer.json` and rename `composer.npx.json` to `composer.json` when you bootstrap a backend
