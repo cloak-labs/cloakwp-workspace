@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e6bdfef1d93d69019a367cafe98a767",
+    "content-hash": "7ed6dab97f5287c9c7a53416f5ba0d8a",
     "packages": [
         {
             "name": "cloak-labs/cloakwp-child-theme",
@@ -12,13 +12,30 @@
             "dist": {
                 "type": "path",
                 "url": "./themes/cloakwp-child-theme",
-                "reference": "e10f54638693243f91da8159007bd065f6558ffd"
+                "reference": "58747cf696bc636bcdb575c2638cd4791e441dee"
             },
             "require": {
                 "composer/installers": "^2.2"
             },
             "type": "wordpress-theme",
             "description": "A child theme of HeadlessWP that comes with many commonly used ACF Blocks + Field Groups, Gutenberg theme customizations, and more.",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "cloak-labs/cloakwp-nextjs-addons",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "./plugins/cloakwp-nextjs-addons-plugin",
+                "reference": "7c3e148430ed3fe7e959e0553e2086474fc33d82"
+            },
+            "require": {
+                "composer/installers": "^2.2"
+            },
+            "type": "wordpress-plugin",
+            "description": "Adds NextJS specific utilities to the CloakWP Plugin.",
             "transport-options": {
                 "relative": true
             }
@@ -46,7 +63,7 @@
             "dist": {
                 "type": "path",
                 "url": "./themes/cloakwp-theme",
-                "reference": "0325fd90686387ccea5b9fdc8d00b363ff7d7971"
+                "reference": "debe2f3705287c4054f75b7b8808d32e88cfd278"
             },
             "require": {
                 "composer/installers": "^2.2"
@@ -1279,15 +1296,15 @@
         },
         {
             "name": "wpackagist-plugin/wordpress-seo",
-            "version": "20.6",
+            "version": "20.7",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/20.6"
+                "reference": "tags/20.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.20.6.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.20.7.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1321,12 +1338,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "f86a07b7eb07f9297e939d8c5f97178b2c189dfe"
+                "reference": "d1af11449398214f9664514ce705c5154ead9c38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/f86a07b7eb07f9297e939d8c5f97178b2c189dfe",
-                "reference": "f86a07b7eb07f9297e939d8c5f97178b2c189dfe",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/d1af11449398214f9664514ce705c5154ead9c38",
+                "reference": "d1af11449398214f9664514ce705c5154ead9c38",
                 "shasum": ""
             },
             "conflict": {
@@ -1511,6 +1528,7 @@
                 "ibexa/core": ">=4,<4.0.7|>=4.1,<4.1.4|>=4.2,<4.2.3",
                 "ibexa/graphql": ">=2.5,<2.5.31|>=3.3,<3.3.28|>=4.2,<4.2.3",
                 "ibexa/post-install": "<=1.0.4",
+                "ibexa/user": ">=4,<4.4.3",
                 "icecoder/icecoder": "<=8.1",
                 "idno/known": "<=1.3.1",
                 "illuminate/auth": ">=4,<4.0.99|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.10",
@@ -1553,7 +1571,7 @@
                 "laravel/framework": "<6.20.42|>=7,<7.30.6|>=8,<8.75",
                 "laravel/socialite": ">=1,<1.0.99|>=2,<2.0.10",
                 "latte/latte": "<2.10.8",
-                "lavalite/cms": "<=5.8",
+                "lavalite/cms": "<=9",
                 "lcobucci/jwt": ">=3.4,<3.4.6|>=4,<4.0.4|>=4.1,<4.1.5",
                 "league/commonmark": "<0.18.3",
                 "league/flysystem": "<1.1.4|>=2,<2.1.1",
@@ -1651,6 +1669,7 @@
                 "phpwhois/phpwhois": "<=4.2.5",
                 "phpxmlrpc/extras": "<0.6.1",
                 "phpxmlrpc/phpxmlrpc": "<4.9.2",
+                "pimcore/customer-management-framework-bundle": "<3.3.9",
                 "pimcore/data-hub": "<1.2.4",
                 "pimcore/perspective-editor": "<1.5.1",
                 "pimcore/pimcore": "<10.5.21",
@@ -1837,7 +1856,7 @@
                 "wp-graphql/wp-graphql": "<0.3.5",
                 "wpanel/wpanel4-cms": "<=4.3.1",
                 "wpcloud/wp-stateless": "<3.2",
-                "wwbn/avideo": "<12.4",
+                "wwbn/avideo": "<=12.4",
                 "xataface/xataface": "<3",
                 "xpressengine/xpressengine": "<3.0.15",
                 "yeswiki/yeswiki": "<4.1",
@@ -1919,7 +1938,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-06T00:13:11+00:00"
+            "time": "2023-05-12T21:03:58+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",

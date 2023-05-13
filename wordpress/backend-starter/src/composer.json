@@ -43,7 +43,8 @@
     "wpackagist-plugin/post-2-post-for-acf": "^1.7.0",
     "cloak-labs/cloakwp-theme": "^1.0.0",
     "cloak-labs/cloakwp-child-theme": "^1.0.0",
-    "cloak-labs/cloakwp-plugin": "^1.0.0"
+    "cloak-labs/cloakwp-plugin": "^1.0.0",
+    "cloak-labs/cloakwp-nextjs-addons": "^1.0.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
