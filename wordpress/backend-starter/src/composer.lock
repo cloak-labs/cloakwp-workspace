@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ed6dab97f5287c9c7a53416f5ba0d8a",
+    "content-hash": "bce75f99fc08af632e042f64b2fb903b",
     "packages": [
         {
             "name": "cloak-labs/cloakwp-child-theme",
@@ -1999,7 +1999,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
         "roave/security-advisories": 20
     },
