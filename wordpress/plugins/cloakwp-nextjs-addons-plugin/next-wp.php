@@ -13,9 +13,9 @@
  * @package           Next_Wp
  *
  * @wordpress-plugin
- * Plugin Name:       NextWP
+ * Plugin Name:       CloakWP - NextJS Addons
  * Plugin URI:        https://https://github.com/cloak-labs/next-wp-plugin
- * Description:       Base plugin for Next-WP configuration
+ * Description:       Adds NextJS specific utilities to the CloakWP Plugin.
  * Version:           0.6.0
  * Author:            Cloak Labs
  * Author URI:        https://https://github.com/cloak-labs
