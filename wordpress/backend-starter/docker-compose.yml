@@ -10,6 +10,8 @@ services:
       - "./nginx/:/etc/nginx/templates/"
       - ./src:/var/www/html:rw,cached
       - ./certs:/etc/certs
+      - ../plugins:/var/www/html/plugins
+      - ../themes:/var/www/html/themes
     environment:
       - "NGINX_ENVSUBST_TEMPLATE_SUFFIX=.conf"
       - "DOMAIN=${DOMAIN}"
