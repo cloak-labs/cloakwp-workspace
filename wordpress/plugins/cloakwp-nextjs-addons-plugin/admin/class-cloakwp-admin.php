@@ -79,7 +79,7 @@ class CloakWP_Admin
     $view_site_node->meta['target'] = '_blank';
     $site_name_node->meta['target'] = '_blank';
 
-    // Change hrefs to our Next front-end URL
+    // Change hrefs to our frontend URL
     $url = CloakWP::get_frontend_url();
     $view_site_node->href = $url;
     $site_name_node->href = $url;
