@@ -1,5 +1,9 @@
 <?php
 
+namespace CloakWP\Admin;
+
+use CloakWP\CloakWP;
+
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -20,7 +24,7 @@
  * @subpackage CloakWP/admin
  * @author     Cloak Labs 
  */
-class CloakWP_Admin
+class Admin
 {
 
   /**

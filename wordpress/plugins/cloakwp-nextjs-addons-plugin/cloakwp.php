@@ -25,9 +25,16 @@
  * Domain Path:       /languages
  */
 
+use CloakWP\CloakWP;
+use CloakWP\General\PluginActivator;
+use CloakWP\General\PluginDeactivator;
+use CloakWP\Utils;
+
+use function CloakWP\Utils\write_log;
+
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
+if (!defined('WPINC')) {
+  die;
 }
 
 /**
@@ -35,34 +42,96 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 0.6.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'CLOAKWP_VERSION', '0.6.0' );
+define('CLOAKWP_VERSION', '0.6.0');
+
+
+/**
+ * Define PHP Constant defaults.
+ */
+if (!defined('CLOAKWP_FRONTEND_URL')) define('CLOAKWP_FRONTEND_URL', 'http://localhost:3000');
+if (!defined('CLOAKWP_PREVIEW_SECRET')) define('CLOAKWP_PREVIEW_SECRET', 'wefPWh8XDU43fgNUmi9IC9hjKOrvfvjijKNKNh8uf8');
+if (!defined('CLOAKWP_ENABLE_DEV_MODE')) define('CLOAKWP_ENABLE_DEV_MODE', FALSE);
+if (!defined('CLOAKWP_REVALIDATE_API_ROUTE')) define('CLOAKWP_REVALIDATE_API_ROUTE', 'revalidate');
+if (!defined('CLOAKWP_LOGIN_API_ROUTE')) define('CLOAKWP_LOGIN_API_ROUTE', 'login');
+if (!defined('CLOAKWP_LOGOUT_API_ROUTE')) define('CLOAKWP_LOGOUT_API_ROUTE', 'logout');
+if (!defined('CLOAKWP_PREVIEW_API_ROUTE')) define('CLOAKWP_PREVIEW_API_ROUTE', 'preview');
+if (!defined('CLOAKWP_DEBUG')) define('CLOAKWP_DEBUG', TRUE);
+
+/**
+ * Autoloads plugin classes and functions.
+ *
+ * @param string $class_or_function The fully-qualified class or function name.
+ */
+function cloakwp_autoload($class_or_function)
+{
+  // Base plugin namespace.
+  $plugin_namespace = 'CloakWP\\';
+
+  // Check if the class or function belongs to the plugin.
+  if ( 0 === strpos( $class_or_function, $plugin_namespace ) ) {
+    // Remove the plugin namespace.
+    $relative_path = str_replace( $plugin_namespace, '', $class_or_function );
+    error_log('AUTOLOADER - $relative_path: ' . $relative_path);
+    
+    // Convert namespace separators to directory separators.
+    $relative_path = str_replace( '\\', DIRECTORY_SEPARATOR, $relative_path );
+    error_log('AUTOLOADER - $relative_path 2: ' . $relative_path);
+    
+    // Determine if it's a class or function based on the file name.
+    $is_class = substr( $relative_path, -4 ) === '.php';
+    error_log('AUTOLOADER - $is_class: ' . $is_class);
+    
+    // Get the full path to the class or function file.
+    $file_path = plugin_dir_path( __FILE__ ) . 'includes' . DIRECTORY_SEPARATOR . $relative_path . '.php';
+    error_log('AUTOLOADER - $file_path: ' . $file_path);
+
+    // Check if the file exists and load it.
+    if ( file_exists( $file_path ) ) {
+        if ( $is_class ) {
+            require_once $file_path;
+        } else {
+            require $file_path;
+        }
+    }
+}
+}
+
+// Register the autoloader function.
+spl_autoload_register('cloakwp_autoload');
+
+// Pull in vendor autoloader (for autoloading 3rd party classes such as pQuery)
+if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
+	require_once __DIR__ . '/vendor/autoload.php';
+}
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-cloakwp-activator.php
  */
-function activate_cloakwp() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-cloakwp-activator.php';
-	CloakWP_Activator::activate();
+function activate_cloakwp()
+{
+  // require_once plugin_dir_path(__FILE__) . 'includes/CloakWP/General/PluginActivator.php';
+  PluginActivator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-cloakwp-deactivator.php
  */
-function deactivate_cloakwp() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-cloakwp-deactivator.php';
-	CloakWP_Deactivator::deactivate();
+function deactivate_cloakwp()
+{
+  // require_once plugin_dir_path(__FILE__) . 'includes/CloakWP/General/PluginDeactivator.php';
+  PluginDeactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_cloakwp' );
-register_deactivation_hook( __FILE__, 'deactivate_cloakwp' );
+register_activation_hook(__FILE__, 'activate_cloakwp');
+register_deactivation_hook(__FILE__, 'deactivate_cloakwp');
 
 /**
  * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
+ * admin-specific hooks, public-facing site hooks, and all other plugin functionality.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-cloakwp.php';
+// require plugin_dir_path(__FILE__) . 'includes/CloakWP/CloakWP.php';
 
 /**
  * Begins execution of the plugin.
@@ -73,10 +142,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-cloakwp.php';
  *
  * @since    0.6.0
  */
-function run_cloakwp() {
-
-	$plugin = new CloakWP();
-	$plugin->run();
-
+function run_cloakwp()
+{
+  Utils::write_log('RUN CLOAKWP');
+  $plugin = new CloakWP();
+  $plugin->run();
 }
 run_cloakwp();
