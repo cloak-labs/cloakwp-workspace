@@ -5,6 +5,7 @@
   "main": "dist/index",
   "typings": "dist/cloakwp.d.ts",
   "scripts": {
+    "dev": "cross-env NODE_ENV=development tsc-watch",
     "test": "cross-env NODE_ENV=development npm run watch",
     "build": "cross-env NODE_ENV=production tsc",
     "watch": "tsc-watch --onSuccess 'yalc push' --onFailure 'yalc push' --noClear",
