@@ -4,10 +4,10 @@ add_action('enqueue_block_editor_assets', 'gutenberg_editor_assets');
 function gutenberg_editor_assets()
 {
   // Load our custom styles for the Gutenberg editor:
-  wp_enqueue_style('my-gutenberg-editor-styles', get_theme_file_uri('/blocks/styles.css'), array(), filemtime(), 'all');
+  wp_enqueue_style('my-gutenberg-editor-styles', get_theme_file_uri('/blocks/styles.css'), array(), filemtime('/blocks/styles.css'), 'all');
   
   // Load our custom JS scripts that modify/strip the Gutenberg editor in opinionated ways:
-  wp_enqueue_script('gutenberg-editor-js', get_theme_file_uri('/blocks/scripts.js'), array(), filemtime(), true);
+  wp_enqueue_script('gutenberg-editor-js', get_theme_file_uri('/blocks/scripts.js'), array(), filemtime('/blocks/scripts.js'), true);
 }
 
 add_theme_support('post-thumbnails'); // enable featured images
