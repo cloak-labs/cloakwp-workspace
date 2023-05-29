@@ -1,19 +1,2 @@
-- Check options for installing Github monorepo sub-packages via composer
-
-  - Option 1: publish to WP plugin + theme directories, thereby making them available on WPackagist and therefore installable via composer
-    - Look at how FaustWP has their plugin in a monorepo and uses a Github action + changesets to detect if a new version needs to be deployed to the WP directories
-    - Would require that we adhere to WP coding standards
-    - Probably the best option to also leverage the visibility from WP directories
-  
-  - Option 2: try methods to install from subfolder.. not sure if possible with Composer
-  - Option 3: use a GitHub action to extract the plugin/theme subdirectories using `git subtree` and push them to their own unique branches, so that you could install them via composer by referencing those branches, thereby avoiding the monorepo/subdirectory constraints... but I don't like this complexity, see below thoughts.
-
-
-  ----
-  Learnings from above: it's basically impossible. I'm thinking we just include our backend-starter in the monorepo as well, so we can therefore install the plugins/themes via composer by using local path references (similar to how a NextJS app in the monorepo can install our NPM packages locally). I wasn't sure about this because putting the backend-starter in the monorepo as a subdirectory makes it less easy to clone/fork and use as a template -- I need to look into using a subdirectory as a template and/or cloning/forking a subdirectory.
-
-    -- Update on above: I think we'll just have to maintain a separate "backend-starter" repo which people can use as a starter template, and also have a 99% copy of that within our monorepo just for local development purposes. The monorepo's version will have a composer.json that's slightly different since it installs our plugins/themes via local paths rather than via GitHub repo links, and it may also come with way more plugins in order for us to test conflicts etc. (our separate backend-starter will be a bit simpler/less opinionated); but besides that, it should be pretty much the same. Unfortunately, if we build improvements to the backend-starter while working on the monorepo, we'll have to manually port those changes over to the separate backend-starter repo. Lastly, since it's basically impossible to install private composer packages when they're in a subdirectory of a git monorepo, we'll have to develop deploy scripts (similar to FaustWP) that publish our plugins/theme to the WordPress Plugin/Theme Directories, so that our separate backend-starter can install them as proper 3rd party dependencies.
-
-        -- OR, consider using `wp-env` for spinning up WP instance within monorepo.. maybe even consider using it for the backend-starter -- but I'm not sure about that since it's marketed as being used for transient dev/test environments. wp-env simplifies the whole docker setup stuff
-
-    -- I considered having two monorepos, one for frontend stuff, one for all WP stuff (backend-starter + our plugins/themes); during local development, you would have the two repos open running the back-end and front-end, and the front-end NextJS demo site would be pulling from the locally running WP instance. That way the WP repo could still act as a standalone backend-starter template; BUT, people who clone the starter would end up with a copy of the plugins/themes, rather than installing them as proper 3rd party dependencies. Possibly we could have a CLI installation script that deletes their local copies of the plugins/themes and installs them properly via composer, but that complexity feels like a smell. 
+- Look into using Extended ACF as preferred way to register ACF field groups (https://github.com/vinkla/extended-acf) -- it provides a nice OOP way of registering them
+  - Same idea for CPTs using the Extended CPTs library: https://github.com/johnbillion/extended-cpts/
