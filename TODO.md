@@ -8,3 +8,6 @@ This reduces a ton of friction and makes it way easier and more productive to wo
 Turborepo makes those builds easier and faster.
 
 We also leverage Changesets to standardize and automate our changelog management, version bumping, GitHub releases, and NPM registry publishing.
+
+TODOs:
+[ ] Add 'init' scripts to all packages and set up Turbo so that running `pnpm init` runs all those scripts -- useful when cloning and setting up the repo locally for first time.

@@ -7,6 +7,7 @@ export async function useFetchRestAPI(
   modifyBaseSlugs = true, // when true, our custom hook, useSlugModifier, is used to prepend the page/post slugs returned from WP according to the package user's config
   convertToRelativeURLs = true // when true, we search/replace all WordPress admin URLs found in data returned from WP with an empty string, except /wp-content URLs. This ensures internal linking always works (including across environments)
 ) {
+
   if(!endpoint) throw new Error('You must pass in an endpoint to useFetchRestAPI')
   const config = await useGlobalConfig()
 
@@ -37,9 +38,11 @@ export async function useFetchRestAPI(
     }
   );
 
+  console.log(`Fetched`)
   let posts = await res.json();
 
   if (posts.errors) {
+    console.log(`Fetch errors`)
     console.error(posts.errors);
     throw new Error('Failed to fetch data from REST API: ', posts.errors);
   }

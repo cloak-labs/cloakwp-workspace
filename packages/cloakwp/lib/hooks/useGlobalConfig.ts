@@ -1,11 +1,10 @@
 let blockConfig;
-console.log('CloakWP custom config path: ', process.env.NEXT_PUBLIC_CUSTOM_CLOAKWP_CONFIG_PATH)
 
 if (process.env.NEXT_PUBLIC_CUSTOM_CLOAKWP_CONFIG_PATH) {
+  // user can set this ENV var in their front-end to customize the path to the CloakWP config file
   blockConfig = require(process.env.NEXT_PUBLIC_CUSTOM_CLOAKWP_CONFIG_PATH);
-} else if (process.env.NODE_ENV == 'development') {
-  blockConfig = require('../../../../examples/basic-starter/cloakwp.config.js');
 } else {
+  // defaults to assuming we're running in node_modules at the root of the project:
   blockConfig = require('../../../../cloakwp.config.js');
 }
 

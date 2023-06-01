@@ -5,11 +5,9 @@ services:
     container_name: ${APP_NAME}-nginx
     ports:
       - '80:80'
-      - '443:443'
     volumes:
       - "./nginx/:/etc/nginx/templates/"
       - ./src:/var/www/html:rw,cached
-      - ./certs:/etc/certs
       - ../plugins:/var/www/html/plugins
       - ../themes:/var/www/html/themes
     environment:
