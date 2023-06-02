@@ -31,7 +31,7 @@ class Menus
     $this->bootstrap();
   }
 
-  public function custom_menus_endpoints()
+  public function register_routes()
   {
     // Register menus endpoint
     register_rest_route('cloakwp', '/menus', array(
@@ -127,6 +127,6 @@ class Menus
   private function bootstrap()
   {
     // Add custom endpoint for menus
-    add_action('rest_api_init', array($this, 'custom_menus_endpoints'));
+    add_action('rest_api_init', array($this, 'register_routes'));
   }
 }
