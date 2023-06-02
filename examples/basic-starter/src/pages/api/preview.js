@@ -1,4 +1,4 @@
-import { usePage } from 'cloakwp';
+import { getPage } from 'cloakwp';
 
 export default async function preview(req, res) {
   const { secret, id, slug, parent } = req.query;
@@ -14,7 +14,7 @@ export default async function preview(req, res) {
   }
 
   // Fetch WordPress to check if the provided `id` or `slug` exists
-  const { data: {slug: parentSlug} } = await usePage({id: parent});
+  const { data: {slug: parentSlug} } = await getPage({id: parent});
   // console.log(parent);
 
   // If the post doesn't exist prevent preview mode from being enabled

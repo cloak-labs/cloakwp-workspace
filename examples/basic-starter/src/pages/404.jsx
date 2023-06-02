@@ -26,8 +26,8 @@ export default function Custom404() {
 }
 
 export async function getStaticProps(context) {
-  const { useNavbar } = await import('@/hooks/useNavbar');
-  const navBarData = await useNavbar();
+  const { getMenus } = await import('cloakwp');
+  const navBarData = await getMenus('header-nav');
 
   return {
     props: {

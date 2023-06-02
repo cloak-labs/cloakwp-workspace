@@ -1,5 +1,5 @@
 import { useScrollYPosition } from 'react-use-scroll-position';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import classNames from '@/utils/classNames';
 import { Popover } from '@headlessui/react';
@@ -23,7 +23,7 @@ function MobileNavLink({ children, ...props }) {
   )
 }
 
-export function Header( { navBarData }) {
+export function Header({ navBarData }) {
   const scrollY = useScrollYPosition();
   const [isAtTop, setIsAtTop] = useState(scrollY == 0);
   
@@ -31,6 +31,11 @@ export function Header( { navBarData }) {
     if(scrollY == 0) setIsAtTop(true)
     else if(isAtTop == true) setIsAtTop(false) // this condition is a huge performance boost (I think) -- ensures we don't reset state on every scroll pixel change
   }, [scrollY])
+
+  const menuItems = useMemo(() => navBarData.menu_items.slice(0, -1), [navBarData.menu_items])
+  console.log({menuItems})
+  const menuButton = useMemo(() => menuItems.pop(), [navBarData.menu_items])
+  console.log({menuButton})
   
   return (
     <motion.header initial={{y: -100, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{delay: 1, duration: 1.2}} className={classNames(
@@ -44,7 +49,7 @@ export function Header( { navBarData }) {
               <Logo />
             </Link>
             <div className="hidden xmd:justify-center xmd:flex-grow xmd:flex xmd:gap-x-10 xl:gap-x-16 2xl:gap-x-20">
-              <NavLinks links={navBarData.slice(0,-1)}/>
+              <NavLinks links={menuItems}/>
             </div>
 
             {/* Mobile Menu */}
@@ -87,17 +92,13 @@ export function Header( { navBarData }) {
                           className="absolute inset-x-0 top-0 z-0 px-6 pt-24 pb-6 origin-top shadow-2xl rounded-b-2xl bg-gray-50 shadow-gray-900/20"
                         >
                           <div className="space-y-2 mb-4">
-                            {navBarData.map(({title, url}, index) => {
-                                if(index != navBarData.length-1) {
-                                  return <MobileNavLink key={index} href={url}>{title}</MobileNavLink>
-                              }
-                            })}
+                            {menuItems?.map(({title, url}, index) => <MobileNavLink key={index} href={url}>{title}</MobileNavLink> )}
                           </div>
-
-                          <div className="flex justify-center">
-                            <Popover.Button as={Button} href={navBarData[navBarData.length-1].url}>{navBarData[navBarData.length-1].title}</Popover.Button>
-                          </div>
-
+                          {menuButton && menuButton.url && (
+                            <div className="flex justify-center">
+                              <Popover.Button as={Button} href={menuButton.url}>{menuButton.title}</Popover.Button>
+                            </div>
+                          )}
                         </Popover.Panel>
                       </>
                     )}
@@ -106,10 +107,11 @@ export function Header( { navBarData }) {
               )}
             </Popover>
             {/* END Mobile Menu */}
-
-            <Button href={navBarData[navBarData.length-1].url} className="hidden xmd:block">
-              {navBarData[navBarData.length-1].title}
-            </Button>
+            {menuButton && menuButton.url && (
+              <Button href={menuButton.url} className="hidden xmd:block">
+                {menuButton.title}
+              </Button>
+            )}
           </div>
         </Container>
       </nav>

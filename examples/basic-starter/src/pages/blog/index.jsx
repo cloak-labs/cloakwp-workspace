@@ -52,19 +52,18 @@ export default function BlogArchive({ data, blogPosts }) {
 }
 
 export async function getStaticProps(context) {
-  const { usePreview, usePage, usePosts } = await import('cloakwp');
-  const { useNavbar } = await import('@/hooks/useNavbar');
+  const { getPreviewData, getPage, getPosts, getMenus } = await import('cloakwp');
 
-  const page = await usePage({ slug: 'blog' }); // manually pass in slug because context.params.page != '/blog' because it's an index file
-  const navBarData = await useNavbar();
-  const blogPosts = await usePosts('posts');
+  const page = await getPage({ slug: 'blog' }); // manually pass in slug because context.params.page != '/blog' because it's an index file
+  const navBarData = await getMenus('header-nav');
+  const blogPosts = await getPosts('posts');
   let data = page.data;
 
   let preview = {};
   const { preview: isPreview, previewData } = context
   
   if (isPreview) {
-    preview = await usePreview(previewData);
+    preview = await getPreviewData(previewData);
     data = preview.data;
   }
 

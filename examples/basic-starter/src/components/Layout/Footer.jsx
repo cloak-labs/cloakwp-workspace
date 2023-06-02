@@ -35,7 +35,7 @@ export function Footer({ navBarData }) {
             </Link>
           </div>
           <div className='flex-col text-center sm:flex-row flex flex-wrap justify-center gap-x-10 gap-y-3 my-10'>
-            {navBarData.slice(0,-1).map(( {title, url}, index ) => (
+            {navBarData.menu_items.slice(0,-1).map(( {title, url}, index ) => (
               <Link href={url} key={index}>
                 <p className='uppercase text-base'>
                   {title}

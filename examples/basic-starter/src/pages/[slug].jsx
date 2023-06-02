@@ -27,18 +27,17 @@ export default function Page({ data }) {
 }
 
 export async function getStaticProps(context) {
-  const { usePage, usePreview } = await import('cloakwp');
-  const { useNavbar } = await import('@/hooks/useNavbar');
+  const { getPage, getPreviewData, getMenus } = await import('cloakwp');
   
-  const page = await usePage({slug: context.params.slug});
-  const navBarData = await useNavbar();
+  const page = await getPage({slug: context.params.slug});
+  const navBarData = await getMenus('header-nav');
   let data = page.data;
 
   let preview = {};
   const { preview: isPreview, previewData } = context
   
   if (isPreview) {
-    preview = await usePreview(previewData);
+    preview = await getPreviewData(previewData);
     data = preview.data;
   }
 
@@ -57,8 +56,8 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const { usePaths } = await import('cloakwp')
-  let paths = await usePaths()
+  const { getPaths } = await import('cloakwp')
+  let paths = await getPaths()
   const excludePaths = ['/blog', '/']
   paths = paths.filter(path => !excludePaths.includes(path))
 

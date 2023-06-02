@@ -21,11 +21,10 @@ export default function Home({ data }) {
 }
 
 export async function getStaticProps(context) {
-  const { usePage, usePreview } = await import('cloakwp');
-  const { useNavbar } = await import('@/hooks/useNavbar');
+  const { getPage, getPreviewData, getMenus } = await import('cloakwp');
   
-  const page = await usePage({slug: '/'});
-  const navBarData = await useNavbar();
+  const page = await getPage({slug: '/'});
+  const navBarData = await getMenus('header-nav');
   let data = page.data;
 
   let preview = {};
@@ -33,7 +32,7 @@ export async function getStaticProps(context) {
   const { preview: isPreview, previewData } = context
   
   if (isPreview) {
-    preview = await usePreview(previewData);
+    preview = await getPreviewData(previewData);
     data = preview.data;
   }
 
