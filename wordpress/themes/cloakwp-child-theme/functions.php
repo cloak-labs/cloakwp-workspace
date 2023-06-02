@@ -14,37 +14,19 @@ add_theme_support('post-thumbnails'); // enable featured images
 add_post_type_support('page', 'excerpt'); // enable page excerpts
 
 /*
-  Register whatever menus your project needs here. This is required in order for WP Admin > Appearance > Menus page to be visible for new Block themes such as this one. 
+  Register whatever menus your project needs here. This is required in 
+  order for WP Admin > Appearance > Menus page to be visible for new 
+  Block themes such as this one. 
 */
 add_action('init', 'register_menus');
 function register_menus()
 {
   register_nav_menus(
     array(
-      'nav-1' => __('Nav Dropdown #1'),
-      'nav-2' => __('Nav Dropdown #2'),
-      'nav-3' => __('Nav Dropdown #3'),
-      'nav-4' => __('Nav Dropdown #4'),
-      'footer-menu' => __('Footer')
+      'nav' => __('Main Nav'), // this creates a menu location that doesn't serve a purpose other than to get the "Menus" page to become visible in wp-admin
     )
   );
 }
-
-// TODO: consider better solution for exposing menu in REST API and put in parent theme?
-// Adds a custom REST API endpoint "/menu" which returns WP menu data
-add_action('rest_api_init', function () {
-  register_rest_route('wp/v2', 'menu', array(
-    'methods' => 'GET',
-    'callback' => 'custom_wp_menu',
-  ));
-});
-
-// create custom function to return nav menu
-function custom_wp_menu() {
-   // Replace your menu name, slug or ID carefully
-   return wp_get_nav_menu_items('Navbar');
-}
-
 
 /*
   Register your custom Gutenberg/ACF blocks here
@@ -89,6 +71,13 @@ function wpd_change_post_type_args($args, $post_type)
   return $args;
 }
 
+// Give editors access to the Menu tab
+function allow_menu_editing_for_editors() {
+  $role = get_role('editor');
+  $role->add_cap('edit_theme_options');
+}
+add_action('admin_init', 'allow_menu_editing_for_editors');
+
 
 /*
   Remove "Comments" from wp-admin sidebar for all roles.
@@ -97,7 +86,7 @@ function wpd_change_post_type_args($args, $post_type)
 function remove_admin_pages(){
   remove_menu_page('edit-comments.php');
 
-  if (!current_user_can( 'administrator' )) { // remove certain pages for editors only
+  if (!current_user_can( 'administrator' )) { // remove certain pages for non-administrators
     remove_menu_page('tools.php'); // remove "Tools"
     remove_menu_page('index.php'); // remove "Dashboard"
 
