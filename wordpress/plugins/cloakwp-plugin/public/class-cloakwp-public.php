@@ -1,7 +1,5 @@
 <?php
 
-namespace CloakWP\Public;
-
 /**
  * The public-facing functionality of the plugin.
  *
