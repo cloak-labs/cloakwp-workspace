@@ -1,7 +1,7 @@
 import { getQueryParamsString } from "../utils/getQueryParamsString";
-import { useFetchRestAPI } from "./useFetchRestAPI";
+import { useFetchRestAPI } from "../hooks/useFetchRestAPI";
 
-export async function usePosts(postType = 'posts', options = {}) {
+export async function getPosts(postType = 'posts', options = {}) {
   let { queryParams = '', postsPerCall = 100 } = options
 
   // WordPress limits us to retrieve at most 100 pages/posts at a time, so the following loop logic retrieves all posts/pages using multiple requests if needed.

@@ -1,6 +1,6 @@
-import { useFetchRestAPI } from "./useFetchRestAPI";
+import { useFetchRestAPI } from "../hooks/useFetchRestAPI";
 
-export async function usePreview(previewParams) {
+export async function getPreviewData(previewParams) {
   const { revisionId = null, postId, postTypeRestEndpoint, ...rest } = previewParams.post
 
   let data

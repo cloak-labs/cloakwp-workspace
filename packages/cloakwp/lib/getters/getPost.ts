@@ -1,7 +1,7 @@
 import { getQueryParamsString } from "../utils/getQueryParamsString";
-import { useFetchRestAPI } from "./useFetchRestAPI";
+import { useFetchRestAPI } from "../hooks/useFetchRestAPI";
 
-export async function usePost({ postType = 'posts', slug, id, queryParams = '' }) {
+export async function getPost({ postType = 'posts', slug, id, queryParams = '' }) {
   let endpoint
   if (id) endpoint = `/${postType}/${id}`
   else endpoint = (slug && slug != '/') ? `/${postType}?slug=${slug}` : `/frontpage`
