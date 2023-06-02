@@ -4,8 +4,7 @@
     "module": "commonjs",
     "rootDir": "lib",
     "outDir": "dist",
-    "jsx": "react-jsx"
-
+    "jsx": "react-jsx",
   },
   "include": ["lib/**/*"],
 }
