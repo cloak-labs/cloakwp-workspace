@@ -18,8 +18,7 @@ add_filter('jwt_auth_iss', function () {
 /*
   Add ability for "editor" user role to edit WP Menus, but hide all other submenus under Appearance (for editors only) -- eg. we don't want clients to be able to switch/deactivate theme and break site 
 */
-function enable_menu_for_editors() {
-
+function restrict_appearance_menu_for_editors() {
   $role_object = get_role( 'editor' );
   if(!$role_object->has_cap('edit_theme_options')){
     $role_object->add_cap( 'edit_theme_options' );
@@ -42,4 +41,4 @@ function enable_menu_for_editors() {
       }
   }
 }
-add_action('admin_head', 'enable_menu_for_editors');
+add_action('admin_head', 'restrict_appearance_menu_for_editors');
