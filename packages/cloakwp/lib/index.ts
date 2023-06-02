@@ -13,18 +13,21 @@ export { AdminBar } from './components/AdminBar'
 // Hooks
 export { useGlobalConfig } from './hooks/useGlobalConfig';
 export { useBlockConfig } from './hooks/useBlockConfig';
-export { useSlugModifier } from './hooks/useSlugModifier';
 export { useBlockStyleBuilder } from './hooks/useBlockStyleBuilder';
-export { usePage } from './hooks/usePage';
-export { usePreview } from './hooks/usePreview';
-export { usePost } from './hooks/usePost';
-export { usePosts } from './hooks/usePosts';
-export { usePaths } from './hooks/usePaths';
+export { getPage } from './getters/getPage';
 export { useFetchGraphAPI } from './hooks/useFetchGraphAPI';
 export { useFetchRestAPI } from './hooks/useFetchRestAPI';
 export { useUser } from './hooks/useUser';
 
+// Getters
+export { getPreviewData } from './getters/getPreviewData';
+export { getPost } from './getters/getPost';
+export { getPosts } from './getters/getPosts';
+export { getPaths } from './getters/getPaths';
+export { getMenus } from './getters/getMenus';
+
 // Utils
+export { slugModifier } from './utils/slugModifier';
 export { deepMerge } from './utils/deepMerge'
 export { classNames } from './utils/classNames'
 
