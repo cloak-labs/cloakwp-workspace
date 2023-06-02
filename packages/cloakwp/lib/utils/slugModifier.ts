@@ -1,12 +1,12 @@
-import { useGlobalConfig } from "./useGlobalConfig"
+import { useGlobalConfig } from "../hooks/useGlobalConfig"
 
 /* Function definition:
-  useSlugModifier() takes an array of posts (or a single post object), and modifies each post's slug based on your CloakWP config option "postBaseSlugs". 
+  slugModifier() takes an array of posts (or a single post object), and modifies each post's slug based on your CloakWP config option "postBaseSlugs". 
   'postBaseSlugs' allows you to specify that certain post type slugs should get prepended with a sub-directory. If you specify in your Next.js routing that blog posts live under the '/blog/' route,
   you must specify 'postBaseSlugs': { post: 'blog/' } in your cloakwp.config.js file. This ensures any time you fetch blog posts from WordPress, each post's slug property gets prepended with 'blog/',
   which ensures all internal linking and static revalidation works as expected. This is required because WordPress doesn't know about your Next.js routing strategy, and doesn't ever prepend the 'slug' property of posts with the correct sub-route.
 */
-export async function useSlugModifier(posts) {
+export async function slugModifier(posts) {
   const config = await useGlobalConfig()
   const { postBaseSlugs } = config
   if(!postBaseSlugs) return posts
