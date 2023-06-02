@@ -6,12 +6,13 @@ use CloakWP\General\i18n;
 use CloakWP\General\PluginLoader;
 use CloakWP\Admin\Admin;
 use CloakWP\API\BlockTransformer;
+use CloakWP\API\Menus;
 use CloakWP\API\Posts;
 use CloakWP\API\Widgets;
 use CloakWP\Frontend\Auth;
 use CloakWP\Frontend\ISR;
 use CloakWP\Frontend\Preview;
-use CloakWP\Public\CloakWP_Public;
+use CloakWP_Public;
 
 /**
  * The file that defines the core plugin class
@@ -225,6 +226,7 @@ class CloakWP
     
     new Widgets();
     new Posts();
+    new Menus();
     new BlockTransformer();
 
     $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
