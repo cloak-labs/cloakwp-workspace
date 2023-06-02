@@ -11,8 +11,6 @@
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
-    "@acme/core": "workspace:*",
-    "@acme/utils": "workspace:*",
     "@algolia/autocomplete-core": "^1.7.3",
     "@algolia/autocomplete-preset-algolia": "^1.7.3",
     "@headlessui/react": "^1.7.13",
@@ -42,7 +40,6 @@
     "zustand": "^4.3.2"
   },
   "devDependencies": {
-    "@acme/tsconfig": "workspace:*",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.2",
     "prettier": "^2.8.7",
