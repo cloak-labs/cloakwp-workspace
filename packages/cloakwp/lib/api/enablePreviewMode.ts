@@ -1,6 +1,5 @@
-import { usePost } from "../hooks/usePost";
+import { getPost } from "../getters/getPost";
 import { useGlobalConfig } from "../hooks/useGlobalConfig";
-import { useSlugModifier } from "../hooks/useSlugModifier";
 
 export default async function enablePreviewMode(req, res) {
   const config = await useGlobalConfig()
@@ -30,8 +29,8 @@ export default async function enablePreviewMode(req, res) {
   else if(postType == 'post') postTypeRestEndpoint = 'posts'
 
   // Fetch WordPress to check if the provided `id` or `slug` exists
-  // Note: usePost calls useSlugModifier internally to correct slugs that need a sub-directory prepended.. so postSlug shoudl equal the final front-end slug
-  const { data: {slug: postSlug} } = await usePost({
+  // Note: getPost calls slugModifier internally to correct slugs that need a sub-directory prepended.. so postSlug should equal the final front-end slug
+  const { data: {slug: postSlug} } = await getPost({
     postType: postTypeRestEndpoint,
     id: postId
   });

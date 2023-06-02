@@ -1,5 +1,4 @@
 import { useGlobalConfig } from "./useGlobalConfig";
-// import { useSlugModifier } from "../hooks/useSlugModifier";
 
 export async function useFetchGraphAPI(query = '', { variables } = {}) {
   const config = await useGlobalConfig()

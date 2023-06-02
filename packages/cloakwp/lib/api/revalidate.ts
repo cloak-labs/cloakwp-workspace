@@ -1,10 +1,10 @@
 import { useGlobalConfig } from "../hooks/useGlobalConfig";
-import { useSlugModifier } from "../hooks/useSlugModifier";
+import { slugModifier } from "../utils/slugModifier";
 
 export default async function regenerateStaticPage(req, res){
     const config = await useGlobalConfig()
     const { slug, type, secret } = req.query;
-    const post = await useSlugModifier({slug, type})
+    const post = await slugModifier({slug, type})
 
     console.log('on-demand revalidate page: ', post.slug)
 
