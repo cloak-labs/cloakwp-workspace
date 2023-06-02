@@ -1,25 +1,28 @@
 import { useGlobalConfig } from "./useGlobalConfig";
-import { useSlugModifier } from "./useSlugModifier";
+import { slugModifier } from "../utils/slugModifier";
 
 export async function useFetchRestAPI(
   endpoint, // api URL endpoint that comes after `wp-json/wp/v2` (include first slash)
-  embed = true, // the embed param tells WordPress to return expanded data for certain things such as a page/post's full taxonomy data
-  modifyBaseSlugs = true, // when true, our custom hook, useSlugModifier, is used to prepend the page/post slugs returned from WP according to the package user's config
-  convertToRelativeURLs = true // when true, we search/replace all WordPress admin URLs found in data returned from WP with an empty string, except /wp-content URLs. This ensures internal linking always works (including across environments)
+  options = {},
 ) {
+  const {
+    embed = true, // the embed param tells WordPress to return expanded data for certain things such as a page/post's full taxonomy data
+    modifyBaseSlugs = true, // when true, our custom hook, slugModifier, is used to prepend the page/post slugs returned from WP according to the package user's config
+    convertToRelativeURLs = true, // when true, we search/replace all WordPress admin URLs found in data returned from WP with an empty string, except /wp-content URLs. This ensures internal linking always works (including across environments)
+    apiNamespace = "wp-json/wp/v2",
+    includeJwt = true
+  } = options
 
   if(!endpoint) throw new Error('You must pass in an endpoint to useFetchRestAPI')
   const config = await useGlobalConfig()
 
   if(!config?.wpUrl) throw new Error('wpUrl is missing from CloakWP global config -- this is required to use useFetchRestAPI.')
 
-  // JWT is required for fetching post revisions (for preview feature), and for fetching draft posts (so logged in users can preview drafts)
-  if(!config?.wpJwt) throw new Error('wpJwt is missing from CloakWP global config -- this is required to use useFetchRestAPI.') 
-
-  const headers = {
+  let headers = {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${config.wpJwt}`, // including our JWT in all requests just ensures we can fetch data from any protected routes (such as post revisions for our preview feature)
   };
+
+  if (includeJwt && config.wpJwt) headers['Authorization'] = `Bearer ${config.wpJwt}` // including our JWT in all requests just ensures we can fetch data from any protected routes (such as post revisions for our preview feature)
 
   let embedParam = ''
   if(embed){
@@ -30,8 +33,11 @@ export async function useFetchRestAPI(
   let url = config.wpUrl
   if(url.slice(-1) != "/") url += '/' // add trailing slash if missing
 
+  const fetchUrl = `${url}${apiNamespace}${endpoint}${embedParam}`
+  console.log('Fetch URL: ', fetchUrl)
+
   const res = await fetch(
-    `${url}wp-json/wp/v2${endpoint}${embedParam}`,
+    fetchUrl,
     {
       headers,
       method: 'GET',
@@ -51,7 +57,7 @@ export async function useFetchRestAPI(
     console.error(res.status, res.statusText);
   }
 
-  if(modifyBaseSlugs) posts = await useSlugModifier(posts) // adjust post slugs if necessary
+  if(modifyBaseSlugs) posts = await slugModifier(posts) // adjust post slugs if necessary
 
   if(posts && convertToRelativeURLs){ // remove all references to WP URL in data
     let postsString = JSON.stringify(posts)
