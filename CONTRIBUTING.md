@@ -1,17 +1,18 @@
 This is a monorepo containing all CloakWP packages/plugins/themes/starters/examples/docs. It is currently under construction as we bring everything into the monorepo. The monorepo was setup using a Turborepo starter template, and probably still has leftover remnants from the template that are yet to be deleted.
 
 ## Getting Started
-- Install pre-requisite software on your machine:
-  - Docker (https://www.docker.com/get-started)
-  - `pnpm` (we use it instead of `npm`)
 - Clone the repo
+- Install pre-requisite software on your machine:
+  - `pnpm` (we use it instead of `npm`)
+- Follow the [README](./wordpress/backend-starter/README.md) of the WordPress Backend Starter up until the "Install" step, then continue below:
 - Run `pnpm install` at the root, which basically runs `pnpm install` within each sub-package
-- Run `pnpm dev` to build and run everything while in development -- it runs the `dev` script defined in each sub-package's `package.json`. It spins up the following (which are all linked together):
-  - WordPress Backend Starter (http://localhost/wp/wp-admin), using `Docker` (make sure to open the `Docker Desktop` app before running `pnpm dev`)
-    - Which installs the CloakWP Plugin + Themes via local file paths with `Composer`, so you can work on those with real-time updates in the running WP instance
-  - Next.js Front-end Starter (http://localhost:5000)
-  - Builds the CloakWP NPM package in watch mode, which the front-end starter installs locally, meaning you get real-time package updates in the running front-end
-  - CloakWP Docs site (http://localhost:8888)
+- Open the Docker Desktop app on your local machine
+- Run `pnpm dev` to build and run everything in development mode -- it runs the `dev` script defined in each sub-package's `package.json`. It spins up the following (which are all linked together):
+  - [WordPress Backend Starter](./wordpress/backend-starter/) (http://localhost/wp/wp-admin), using `Docker` (make sure to open the `Docker Desktop` app before running `pnpm dev`)
+    - Which installs the CloakWP [Plugin](./wordpress/plugins/cloakwp-plugin/) + [Themes](./wordpress/themes/) via local file paths with `Composer`, so you can work on those with real-time updates in the running WP instance
+  - [Next.js Front-end Starter](./examples/basic-starter/) (http://localhost:5000)
+  - Builds the [CloakWP NPM package](./packages/cloakwp/) in watch mode, which the front-end starter installs locally, meaning you get real-time package updates in the running front-end
+  - [CloakWP Docs site](./docs/) (http://localhost:8888)
 
 ## TODO List:
 - [x] Initiate monorepo with Turborepo + Changesets
@@ -57,13 +58,7 @@ This Turborepo has some additional tools already setup for you:
 - `pnpm changeset` - Generate a changeset
 - `pnpm clean` - Clean up all `node_modules` and `dist` folders (runs each package's clean script)
 
-### Changing the npm organization scope
-
-The npm organization scope for this design system starter is `@acme`. To change this, it's a bit manual at the moment, but you'll need to do the following:
-
-- Rename folders in `packages/*` to replace `acme` with your desired scope
-- Search and replace `acme` with your desired scope
-- Re-run `pnpm install`
+> TODO: update the below items with more detail -- the following is the default explainer text from the Turbo starter:
 
 ## Versioning and Publishing packages
 
