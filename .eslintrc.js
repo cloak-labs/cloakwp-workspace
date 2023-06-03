@@ -1,10 +1,10 @@
 module.exports = {
   root: true,
-  // This tells ESLint to load the config from the package `eslint-config-acme`
-  extends: ["acme"],
+  // This tells ESLint to load the config from the package `@cloakwp-eslint-config`
+  extends: ["cloakwp"],
   settings: {
     next: {
-      rootDir: ["apps/*/"],
+      rootDir: ["examples/*/"],
     },
   },
 };

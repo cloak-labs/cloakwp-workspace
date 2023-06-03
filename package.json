@@ -15,7 +15,7 @@
     "@changesets/cli": "^2.22.0",
     "@wordpress/env": "^6.0.0",
     "eslint": "^7.32.0",
-    "eslint-config-acme": "workspace:*",
+    "@cloakwp/eslint-config": "workspace:*",
     "prettier": "^2.5.1",
     "turbo": "latest"
   },
