@@ -1,27 +1,24 @@
+# CloakWP WordPress Backend Starter
+This is the official WordPress backend starter for CloakWP (headless WordPress) projects. It uses Docker Compose to spin up a local WP instance with all kinds of goodies, sensible defaults, and optimizations for headless WordPress projects. You can easily deploy your WP instance to production, leveraging Git and modern CI/CD workflows.
 
-# Docker Compose and WordPress
-
-[![Build Status](https://travis-ci.org/urre/wordpress-nginx-docker-compose.svg?branch=master)](https://travis-ci.org/urre/wordpress-nginx-docker-compose)
-
-[![Donate](https://img.shields.io/badge/Donation-green?logo=paypal&label=Paypal)](https://www.paypal.me/urbansanden)
-
-Use WordPress locally with Docker using [Docker compose](https://docs.docker.com/compose/)
-
-## Contents
-
-+ A `Dockerfile` for extending a base image and using a custom [Docker image](https://github.com/urre/wordpress-nginx-docker-compose-image) with an [automated build on Docker Hub](https://cloud.docker.com/repository/docker/urre/wordpress-nginx-docker-compose-image)
-+ PHP 8.1
-+ Custom domain and HTTPS support. So you can use for example [https://my-website.local](https://my-website.local)
-+ Custom nginx config in `./nginx`
-+ Custom PHP `php.ini` config in `./config`
-+ Volumes for `nginx`, `wordpress` and `mariadb`
-+ [Bedrock](https://roots.io/bedrock/) - modern development tools, easier configuration, and an improved secured folder structure for WordPress
-+ Composer
-+ [WP-CLI](https://wp-cli.org/) - WP-CLI is the command-line interface for WordPress.
-+ [MailHog](https://github.com/mailhog/MailHog) - An email testing tool for developers. Configure your outgoing SMTP server and view your outgoing email in a web UI.
-+ [PhpMyAdmin](https://www.phpmyadmin.net/) - free and open source administration tool for MySQL and MariaDB
-	- PhpMyAdmin config in `./config`
-+ CLI script to create a SSL certificate
+This opinionated starter leverages many modern WordPress development tools:
+- [Bedrock](https://roots.io/bedrock/) - a popular WordPress boilerplate with Composer, easier configuration, and an improved folder structure, enabling:
+  - Separate configs per environment
+  - Environment variables
+  - Custom wp-content directory
+  - [Composer](https://getcomposer.org/) (a PHP dependency manager) for managing WordPress core, plugins, and themes installation -- enabling better Git integration
+  - mu-plugins autoloader
+  - Enhanced WordPress security (folder structure limits access to non-public files and offers more secure passwords through [wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt))
+  - Gets WordPress 80% of the way towards becoming a proper [Twelve-Factor App](http://12factor.net/)
+- [Docker + Docker Compose](https://docs.docker.com/compose/) for quickly spinning up your WordPress site locally in a consistent environment closely matching your production environment. It includes the following services and configuration options:
+  - PHP 8.1 (you have control over the version)
+  - Custom PHP `php.ini` config in `./config`
+  - Nginx server (custom config in `./nginx`),
+  - MariaDB (popular MySQL fork),
+  - [WP-CLI](https://wp-cli.org/) - WP-CLI is the command-line interface for WordPress.
+  - [PhpMyAdmin](https://www.phpmyadmin.net/) - free and open source administration tool for MySQL and MariaDB (PhpMyAdmin config in `./config`)
+  - [MailHog](https://github.com/mailhog/MailHog) - an email testing tool for developers -- configure your outgoing SMTP server and view your outgoing email in a web UI.
+- An opinionated collection of WordPress plugins pre-installed that enable/improve the headless WordPress experience, obviously including the CloakWP Plugin and Theme, plus a production-ready child theme with all kinds of goodies related to registering/configuring CPTs, taxonomies, ACF Blocks, and ACF Field Groups via code -- the best-practice way.
 
 ## Instructions
 
@@ -29,65 +26,93 @@ Use WordPress locally with Docker using [Docker compose](https://docs.docker.com
  <summary>Requirements</summary>
 
 + [Docker](https://www.docker.com/get-started)
-+ [mkcert](https://github.com/FiloSottile/mkcert) for creating the SSL cert.
-
-Install mkcert:
-
-```
-brew install mkcert
-brew install nss # if you use Firefox
-```
 
 </details>
 
 <details>
- <summary>Setup</summary>
-
- ### Setup Environment variables
+ <summary>Env Variables</summary>
 
 Both step 1. and 2. below are required:
 
-#### 1. For Docker and the CLI script (Required step)
+#### 1. For Docker (required step)
 
 Copy `.env.example` in the project root to `.env` and edit your preferences.
 
 Example:
 
 ```dotenv
-IP=127.0.0.1
+# DOCKER ENVIRONMENT VARIABLES
+# ----------------------------
+
+# change the following to be unique for your project:
 APP_NAME=my-website
-DOMAIN="my-website.local"
-DB_HOST=mysql
-DB_NAME=my-website
-DB_ROOT_PASSWORD=password
+DOMAIN=localhost:80
+DB_ROOT_PASSWORD=db_root_password
 DB_TABLE_PREFIX=wp_
+
+# make sure DB_NAME is the same name you use for your production DB
+DB_NAME=my-website
+
+# add a non-root DB user with the same credentials as your production DB's user -- if you experience a DB connection error, you can test whether these creds are working by running `docker compose up`, and logging into PHPMyAdmin at http://127.0.0.1:8082/
+DB_USER=db_username
+DB_PASSWORD=db_password
+
+# leave the following as-is unless you know what you're doing
+IP=127.0.0.1
+DB_HOST=mysql
 ```
 
-#### 2. For WordPress (Required step)
+#### 2. For WordPress (required step)
 
-Edit `./src/.env.example` to your needs. During the `composer create-project` command described below, an `./src/.env` will be created.
+Edit `./src/.env.example` to your needs. During the `composer create-project` command described below (which also gets run automatically when you run `pnpm install` from the root), a `./src/.env` will be created from your `./src/.env.example`.
 
 Example:
 
 ```dotenv
+# Make sure the following DB credentials work with your Docker MySQL and your web host's DB instance (or provide custom creds specifically for Docker in .env.local)
 DB_NAME='my-website'
-DB_USER='root'
-DB_PASSWORD='password'
+DB_USER='db_username'
+DB_PASSWORD='db_password'
 
 # Optionally, you can use a data source name (DSN)
 # When using a DSN, you can remove the DB_NAME, DB_USER, DB_PASSWORD, and DB_HOST variables
 # DATABASE_URL='mysql://database_user:database_password@database_host:database_port/database_name'
 
 # Optional variables
-DB_HOST='mysql'
+DB_HOST='localhost'
 # DB_PREFIX='wp_'
 
-WP_ENV='development'
-WP_HOME='https://my-website.local'
-WP_SITEURL="${WP_HOME}/wp"
-WP_DEBUG_LOG=/path/to/debug.log
+# Note: leave this as "production", and create .env.local file with WP_ENV='development' in order for Docker to run in development mode
+WP_ENV='production'
 
-# Generate your keys here: https://roots.io/salts.html
+# Add your production URL below, and use .env.local to override with your local Docker URL while working locally
+WP_HOME='https://my-website.com'
+WP_SITEURL="${WP_HOME}/wp"
+
+WP_DEBUG_LOG='/debug.log'
+
+# Configuration options for the CloakWP Plugin (update .env.local for local development overrides):
+CLOAKWP_FRONTEND_URL='https://demo.cloakwp.com'
+CLOAKWP_PREVIEW_SECRET='8=[OEcY#MImU2YhLe-D1Wwetg1B]-2!-#,m06Lwej'
+CLOAKWP_ENABLE_DEV_MODE=false
+CLOAKWP_ENABLE_ISR=true
+CLOAKWP_OVERRIDE_VIEW_POST_LINK=true
+CLOAKWP_OVERRIDE_PREVIEW_POST_LINK=true
+CLOAKWP_YOAST_USE_FRONTEND_URL=true
+CLOAKWP_ENABLE_FAVICON=true
+CLOAKWP_JWT_NO_EXPIRY=true
+CLOAKWP_ENABLE_PREVIEW_POST=true
+
+# Optionally customize your frontend's CloakWP-related API routes (if different than the defaults):
+# CLOAKWP_PREVIEW_API_ROUTE=
+# CLOAKWP_REVALIDATE_API_ROUTE=
+# CLOAKWP_LOGIN_API_ROUTE=
+# CLOAKWP_LOGOUT_API_ROUTE=
+
+# For certain web hosts, like SpinupWP, you should disable WP cron in favour of the host's own cron solution
+# DISABLE_WP_CRON=true
+
+# Generate your own unique keys here: https://roots.io/salts.html
 AUTH_KEY='generateme'
 SECURE_AUTH_KEY='generateme'
 LOGGED_IN_KEY='generateme'
@@ -101,90 +126,18 @@ NONCE_SALT='generateme'
 </details>
 
 <details>
- <summary>Option 1). Use HTTPS with a custom domain</summary>
-
-1. Create a SSL cert:
-
-```shell
-cd cli
-./create-cert.sh
-```
-
-This script will create a locally-trusted development certificates. It requires no configuration.
-
-> mkcert needs to be installed like described in Requirements. Read more for [Windows](https://github.com/FiloSottile/mkcert#windows) and [Linux](https://github.com/FiloSottile/mkcert#linux)
-
-1b. Make sure your `/etc/hosts` file has a record for used domains. On Windows the hosts file can be find at `C:\Windows\System32\drivers\etc`. Make sure to open it with admin rights.
-
-```
-sudo nano /etc/hosts
-```
-
-Add your selected domain like this:
-
-```
-127.0.0.1 my-website.local
-```
-
-2. Continue on the Install step below
-
-</details>
-
-<details>
- <summary>Option 2). Use a simple config</summary>
-
-1. Edit `nginx/default.conf.conf` to use this simpler config (without using a cert and HTTPS)
-
-```shell
-server {
-    listen 80;
-
-    root /var/www/html/web;
-    index index.php;
-
-    access_log /var/log/nginx/access.log;
-    error_log /var/log/nginx/error.log;
-
-    client_max_body_size 100M;
-
-    location / {
-        try_files $uri $uri/ /index.php?$args;
-    }
-
-    location ~ \.php$ {
-        try_files $uri =404;
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass wordpress:9000;
-        fastcgi_index index.php;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param PATH_INFO $fastcgi_path_info;
-    }
-}
-
-```
-
-2. Edit the nginx service in `docker-compose.yml` to use port 80. 443 is not needed now.
-
-```shell
-  nginx:
-    image: nginx:latest
-    container_name: ${APP_NAME}-nginx
-    ports:
-      - '80:80'
-
-```
-
-3. Continue on the Install step below
-
-</details>
-
-<details>
  <summary>Install</summary>
+Run the following at the project root:
 
 ```shell
-docker-compose run composer create-project
+pnpm install
 ```
+Or alternatively, cd into the root of the backend folder and manually run:
+
+```shell
+pnpm composer create-project
+```
+The former simply runs the latter for you, but from the monorepo root.
 
 </details>
 
@@ -192,10 +145,10 @@ docker-compose run composer create-project
  <summary>Run</summary>
 
 ```shell
-docker-compose up
+pnpm dev
 ```
 
-Docker Compose will now start all the services for you:
+This runs `docker-compose up`, and Docker Compose will now start all the services:
 
 ```shell
 Starting my-website-mysql    ... done
@@ -206,7 +159,7 @@ Starting my-website-nginx      ... done
 Starting my-website-mailhog    ... done
 ```
 
-🚀 Open [https://my-website.local](https://my-website.local) in your browser
+🚀 Open [http://localhost](http://localhost) in your browser
 
 ## PhpMyAdmin
 
@@ -221,32 +174,35 @@ MailHog comes installed as a service in docker-compose.
 🚀 Open [http://0.0.0.0:8025/](http://0.0.0.0:8025/) in your browser
 
 </details>
-
 <details>
  <summary>Tools</summary>
 
+----
 ### Update WordPress Core and Composer packages (plugins/themes)
 
-```shell
-docker-compose run composer update
-```
+First, cd into the backend root (where the Dockerfile lives), then run:
 
-#### Use WP-CLI
+```shell
+pnpm composer update
+```
+---
+### Use WP-CLI
+
+First, login to the container:
 
 ```shell
 docker exec -it my-website-wordpress bash
 ```
+... where `my-website-wordpress` is the name of your WordPress Docker container/service.
 
-Login to the container
+Then, run a wp-cli command:
 
 ```shell
 wp search-replace https://olddomain.com https://newdomain.com --allow-root
 ```
 
-Run a wp-cli command
-
-> You can use this command first after you've installed WordPress using Composer as the example above.
-
+> You can use this command after you've installed WordPress using Composer (see example above).
+---
 ### Update plugins and themes from wp-admin?
 
 You can, but I recommend to use Composer for this only. But to enable this edit `./src/config/environments/development.php` (for example to use it in Dev)
@@ -255,7 +211,7 @@ You can, but I recommend to use Composer for this only. But to enable this edit 
 Config::define('DISALLOW_FILE_EDIT', false);
 Config::define('DISALLOW_FILE_MODS', false);
 ```
-
+---
 ### Useful Docker Commands
 
 When making changes to the Dockerfile, use:
@@ -299,53 +255,4 @@ Rebuild docker container when Dockerfile has changed
 ```shell
 docker-compose up -d --force-recreate --build
 ```
-</details>
-
-<details>
- <summary>Changelog</summary>
-
-#### 2022-05-28
-- Use PHP 8.1 [Dockerfile](https://github.com/urre/wordpress-nginx-docker-compose-image/blob/master/Dockerfile) is updated.
-#### 2022-05-28
-- Use php:8.0-fpm-alpine as the base image on the image in Dockerfile [](https://hub.docker.com/repository/registry-1.docker.io/urre/wordpress-nginx-docker-compose-image/general)
-#### 2022-05-28
-- Updated the Docker image to use PHP 8
-#### 2021-08-04
-- Updated to WordPress 5.8.0
-#### 2021-03-16
-- Changed root `.env-example` to `.env.example` to match the git ignore patterns. Thanks [@scottnunemacher](https://github.com/scottnunemacher)
-#### 2021-03-05
-- Clarify steps in the readme
-#### 2021-03-02
-- Fixed a misstake so instead of `./src/.env-example`, it should be `./src/.env.example`.
-- Redirect HTTP to HTTPS. Thanks [@humblecoder](https://github.com/humblecoder)
-#### 2021-01-02
-- Use `NGINX_ENVSUBST_TEMPLATE_SUFFIX`. Use a template and better substution of ENV variables in nginx config.
-#### 2020-10-04
-- Added mariadb-client (Solves [#54](https://github.com/urre/wordpress-nginx-docker-compose/issues/54))
-#### 2020-09-15
-- Updated Bedrock. Update WordPress to 5.5.1 and other composer updates.
-#### 2020-07-12
-- Added Mailhog. Thanks [@mortensassi](https://github.com/mortensassi)
-#### 2020-05-03
-- Added nginx gzip compression
-#### 2020-04-19
-- Added Windows support for creating SSH cert, trusting it and setting up the host file entry. Thanks to [@styssi](https://github.com/styssi)
-#### 2020-04-12
-- Remove port number from `DB_HOST`. Generated database connection error in macOS Catalina. Thanks to [@nirvanadev](https://github.com/nirvanadev)
-- Add missing ENV variable from mariadb Thanks to [@vonwa](https://github.com/vonwa)
-#### 2020-03-26
-- Added phpMyAdmin config.Thanks to [@titoffanton](https://github.com/titoffanton)
-#### 2020-02-06
-- Readme improvements. Explain `/etc/hosts` better
-#### 2020-01-30
-- Use `Entrypoint` command in Docker Compose to replace the domain name in the nginx config. Removing the need to manually edit the domain name in the nginx conf. Now using the `.env` value `DOMAIN`
-- Added APP_NAME in `.env-example` Thanks to [@Dave3o3](https://github.com/Dave3o3)
-#### 2020-01-11
-- Added `.env` support for specifying your own app name, domain etc in Docker and cli scripts.
-- Added phpMyAdmin. Visit [http://127.0.0.1:8080/](http://127.0.0.1:8080/)
-
-#### 2019-08-02
-- Added Linux support. Thanks to [@faysal-ishtiaq](https://github.com/faysal-ishtiaq).
-
 </details>
