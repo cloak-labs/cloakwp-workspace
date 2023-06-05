@@ -24,15 +24,13 @@ Define your CloakWP Plugin settings here
 */
 
 # Main Settings
-define('CLOAKWP_FRONTEND_URL', '');
-define('CLOAKWP_PREVIEW_SECRET', '');
+define('CLOAKWP_FRONTEND_URL', 'https://example.com');
+define('CLOAKWP_PREVIEW_SECRET', '1234_CUSTOMIZE_ME');
 define('CLOAKWP_ENABLE_DEV_MODE', TRUE);
 
-# API Routes
-define('CLOAKWP_LOGIN_API_ROUTE', '');
-define('CLOAKWP_LOGOUT_API_ROUTE', '');
-define('CLOAKWP_PREVIEW_API_ROUTE', '');
-define('CLOAKWP_REVALIDATE_API_ROUTE', '');
+# API Route
+define('CLOAKWP_API_BASE_PATH', 'custom'); // defaults to "cloakwp", must match your CloakWP dynamic API route folder name
+
 ```
 3. Install & configure the [CloakWP NPM package](https://www.npmjs.com/package/cloakwp) on your NextJS front-end
 4. Profit

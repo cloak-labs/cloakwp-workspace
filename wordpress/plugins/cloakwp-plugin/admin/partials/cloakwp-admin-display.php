@@ -67,10 +67,7 @@ function cloakwp_settings_row($name)
     cloakwp_settings_row('CLOAKWP_ENABLE_FAVICON');
     cloakwp_settings_row('CLOAKWP_JWT_NO_EXPIRY');
     cloakwp_settings_row('CLOAKWP_ENABLE_PREVIEW_POST');
-    cloakwp_settings_row('CLOAKWP_PREVIEW_API_ROUTE');
-    cloakwp_settings_row('CLOAKWP_REVALIDATE_API_ROUTE');
-    cloakwp_settings_row('CLOAKWP_LOGIN_API_ROUTE');
-    cloakwp_settings_row('CLOAKWP_LOGOUT_API_ROUTE');
+    cloakwp_settings_row('CLOAKWP_API_BASE_PATH');
     ?>
   </tbody>
 </table>

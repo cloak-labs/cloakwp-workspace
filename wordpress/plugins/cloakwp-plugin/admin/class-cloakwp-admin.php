@@ -202,10 +202,7 @@ class Admin
         self::settings_row('CLOAKWP_FRONTEND_URL');
         self::settings_row('CLOAKWP_PREVIEW_SECRET');
         self::settings_row('CLOAKWP_ENABLE_DEV_MODE');
-        self::settings_row('CLOAKWP_PREVIEW_API_ROUTE');
-        self::settings_row('CLOAKWP_REVALIDATE_API_ROUTE');
-        self::settings_row('CLOAKWP_LOGIN_API_ROUTE');
-        self::settings_row('CLOAKWP_LOGOUT_API_ROUTE'); ?>
+        self::settings_row('CLOAKWP_API_BASE_PATH'); ?>
       </tbody>
     </table>
 <?php

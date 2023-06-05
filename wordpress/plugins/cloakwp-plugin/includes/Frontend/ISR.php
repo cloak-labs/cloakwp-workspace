@@ -41,7 +41,7 @@ class ISR
    * 
    * @param int $post_ID
    * @param object $post
-   * @param bool CLOAKWP_REVALIDATE_API_ROUTE
+   * @param bool CLOAKWP_API_BASE_PATH
    * 
    * @return void
    * 
@@ -50,8 +50,9 @@ class ISR
   public static function revalidate_on_save($post_ID, $post)
   {
     $front_end_url = CloakWP::get_frontend_url();
-    $revalidate_api_route = \CLOAKWP_REVALIDATE_API_ROUTE;
-    // manually add environment URLs to this array if you wish to enable on-demand ISR for that environment (useful for testing one-off Vercel deployments or when running a production build locally) 
+    $cloakwp_api_base = \CLOAKWP_API_BASE_PATH;
+
+    // use this filter to add URLs for environments that you wish to enable on-demand ISR for (useful for testing one-off Vercel deployments or when running a production build locally) 
     $environments_to_revalidate = apply_filters('cloakwp/urls_to_revalidate', [$front_end_url, "http://localhost:3000"], $post_ID, $post);
     $slug = $post->post_name;
     $type = $post->post_type;
@@ -59,7 +60,7 @@ class ISR
     
     foreach ($environments_to_revalidate as $url) {
       try {
-        wp_remote_get("{$url}/api/{$revalidate_api_route}/{$slug}?post_type={$type}&secret={$secret}");
+        wp_remote_get("{$url}/api/{$cloakwp_api_base}/revalidate/{$slug}?post_type={$type}&secret={$secret}");
       } catch (Exception $e) {
         echo 'Error while regenerating static page for url "', $url, '" -- error message: ', $e->getMessage(), "\n";
       }

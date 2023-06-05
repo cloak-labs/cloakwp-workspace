@@ -38,7 +38,7 @@ class Preview
    * Request to NextJS API Route generates the frontend page using preview data and redirects to it
    * Requires a 'preview secret' as a query param to match on Wordpress and NextJS server
    * 
-   * @param bool CLOAKWP_PREVIEW_API_ROUTE
+   * @param bool CLOAKWP_API_BASE_PATH
    * @param string $preview_link
    * @param object $post
    * 
@@ -48,20 +48,20 @@ class Preview
    */
   public function get_preview_url($post)
   {
-    $preview_api_route = defined('CLOAKWP_PREVIEW_API_ROUTE') ? CLOAKWP_PREVIEW_API_ROUTE : 'preview';
+    $cloakwp_api_base = \CLOAKWP_API_BASE_PATH;
     $revisionId = $post->ID; // the ID of the post revision, not the master post
     $postId = $post->post_parent; // the revision's parent == the post we're previewing
     $postType = get_post_type($postId); // the master/parent post's post type --> important for cloakwp to retrieve the correct revision data  
     $secret = CloakWP::get_preview_secret();
     $front_end_url = CloakWP::get_frontend_url();
-    return "{$front_end_url}/api/{$preview_api_route}?revisionId={$revisionId}&postId={$postId}&postType={$postType}&secret={$secret}";
+    return "{$front_end_url}/api/{$cloakwp_api_base}/preview?revisionId={$revisionId}&postId={$postId}&postType={$postType}&secret={$secret}";
   }
 
   /** 
    * Redirect WP preview page to Next preview --> this is in addition to our 'preview_post_link' filter above that changes the preview link (which doesn't work all the time due to known bugs).
    * If somehow our 'preview_post_link' filter doesn't work and the admin user ends up on the default WP preview URL, this redirects them to our Next preview API route
    * 
-   * @param string CLOAKWP_PREVIEW_API_ROUTE
+   * @param string CLOAKWP_API_BASE_PATH
    * 
    * @return void
    * 
@@ -71,11 +71,11 @@ class Preview
   {
     if (isset($_GET["preview"]) && $_GET["preview"] == true) {
       $front_end_url = CloakWP::get_frontend_url();
-      $preview_api_route = defined('CLOAKWP_PREVIEW_API_ROUTE') ? CLOAKWP_PREVIEW_API_ROUTE : 'preview';
+      $cloakwp_api_base = \CLOAKWP_API_BASE_PATH;
       $secret = CloakWP::get_preview_secret();
       $postId = $_GET["p"];
       $postType = get_post_type($postId); // the master/parent post's post type --> important for cloakwp to retrieve the correct revision data  
-      wp_redirect("{$front_end_url}/api/{$preview_api_route}?postId={$postId}&postType={$postType}&secret={$secret}");
+      wp_redirect("{$front_end_url}/api/{$cloakwp_api_base}/preview?postId={$postId}&postType={$postType}&secret={$secret}");
       exit();
     }
   }

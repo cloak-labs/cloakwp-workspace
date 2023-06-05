@@ -3,8 +3,8 @@
 namespace CloakWP\Frontend;
 
 use CloakWP\CloakWP;
+use CloakWP\Utils;
 use Exception;
-use function CloakWP\Utils\write_log;
 
 /**
  * Fired during plugin activation
@@ -41,7 +41,7 @@ class Auth
    * CloakWP will read this cookie to determine when to show the AdminBar component. We use a redirect rather than
    * a GET request so that it also works while in local development (can't GET request localhost from WP) 
    *
-   * @param string CLOAKWP_LOGIN_API_ROUTE
+   * @param string CLOAKWP_API_BASE_PATH
    * 
    * @return void 
    */
@@ -49,13 +49,13 @@ class Auth
   {
     $url = CloakWP::get_frontend_url();
     $secret = CloakWP::get_preview_secret();
-    $login_api_route = defined('CLOAKWP_LOGIN_API_ROUTE') ? CLOAKWP_LOGIN_API_ROUTE : 'login';
+    $cloakwp_api_base = \CLOAKWP_API_BASE_PATH;
 
     try {
-      $res = wp_redirect("{$url}/api/{$login_api_route}?secret={$secret}");
+      wp_redirect("{$url}/api/{$cloakwp_api_base}/login?secret={$secret}");
       exit();
     } catch (Exception $e) {
-      echo "Error while logging in on front-end ({$url}). Error message: ", $e->getMessage(), "\n";
+      Utils::write_log("Error while logging in on front-end ({$url}). Error message: ", $e->getMessage(), "\n");
     }
   }
 
@@ -66,7 +66,7 @@ class Auth
    * CloakWP will read this cookie to determine when to show the AdminBar component. We use a redirect rather than
    * a GET request so that it also works while in local development (can't GET request localhost from WP) 
    *
-   * @param string CLOAKWP_LOGOUT_API_ROUTE
+   * @param string CLOAKWP_API_BASE_PATH
    * 
    * @return void
    */
@@ -74,13 +74,13 @@ class Auth
   {
     $url = CloakWP::get_frontend_url();
     $secret = CloakWP::get_preview_secret();
-    $logout_api_route = defined('CLOAKWP_LOGOUT_API_ROUTE') ? CLOAKWP_LOGOUT_API_ROUTE : 'logout';
+    $cloakwp_api_base = \CLOAKWP_API_BASE_PATH;
 
     try {
-      $res = wp_redirect("{$url}/api/{$logout_api_route}?secret={$secret}");
+      wp_redirect("{$url}/api/{$cloakwp_api_base}/logout?secret={$secret}");
       exit();
     } catch (Exception $e) {
-      write_log("Error while logging out on front-end ({$url}). Error message: ", $e->getMessage(), "\n");
+      Utils::write_log("Error while logging out on front-end ({$url}). Error message: ", $e->getMessage(), "\n");
     }
   }
 
