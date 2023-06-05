@@ -32,8 +32,4 @@ export { deepMerge } from './utils/deepMerge'
 export { classNames } from './utils/classNames'
 
 // API
-export { default as regenerateStaticPage } from './api/revalidate'
-export { default as enablePreviewMode } from './api/enablePreviewMode'
-export { default as exitPreviewMode } from './api/exitPreviewMode'
-export { default as setLoggedIn } from './api/setLoggedIn'
-export { default as setLoggedOut } from './api/setLoggedOut'
+export { default as apiRouter} from './api/apiRouter'
