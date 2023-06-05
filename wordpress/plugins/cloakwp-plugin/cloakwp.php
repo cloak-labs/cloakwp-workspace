@@ -30,8 +30,6 @@ use CloakWP\General\PluginActivator;
 use CloakWP\General\PluginDeactivator;
 use CloakWP\Utils;
 
-use function CloakWP\Utils\write_log;
-
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
   die;
@@ -51,10 +49,7 @@ define('CLOAKWP_VERSION', '0.6.0');
 if (!defined('CLOAKWP_FRONTEND_URL')) define('CLOAKWP_FRONTEND_URL', 'http://localhost:3000');
 if (!defined('CLOAKWP_PREVIEW_SECRET')) define('CLOAKWP_PREVIEW_SECRET', 'wefPWh8XDU43fgNUmi9IC9hjKOrvfvjijKNKNh8uf8');
 if (!defined('CLOAKWP_ENABLE_DEV_MODE')) define('CLOAKWP_ENABLE_DEV_MODE', FALSE);
-if (!defined('CLOAKWP_REVALIDATE_API_ROUTE')) define('CLOAKWP_REVALIDATE_API_ROUTE', 'revalidate');
-if (!defined('CLOAKWP_LOGIN_API_ROUTE')) define('CLOAKWP_LOGIN_API_ROUTE', 'login');
-if (!defined('CLOAKWP_LOGOUT_API_ROUTE')) define('CLOAKWP_LOGOUT_API_ROUTE', 'logout');
-if (!defined('CLOAKWP_PREVIEW_API_ROUTE')) define('CLOAKWP_PREVIEW_API_ROUTE', 'preview');
+if (!defined('CLOAKWP_API_BASE_PATH')) define('CLOAKWP_API_BASE_PATH', 'cloakwp');
 if (!defined('CLOAKWP_DEBUG')) define('CLOAKWP_DEBUG', TRUE);
 
 /**
@@ -144,7 +139,6 @@ register_deactivation_hook(__FILE__, 'deactivate_cloakwp');
  */
 function run_cloakwp()
 {
-  Utils::write_log('RUN CLOAKWP');
   $plugin = new CloakWP();
   $plugin->run();
 }
