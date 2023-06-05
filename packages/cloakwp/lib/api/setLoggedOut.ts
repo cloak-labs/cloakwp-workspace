@@ -5,8 +5,6 @@ export default async function setLoggedOut(req, res) {
   const config = await useGlobalConfig()
   
   const { secret } = req.query;
-
-  console.log({secret})
   
   // Check the secret and next parameters.
   // This secret should only be known by this API route

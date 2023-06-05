@@ -6,8 +6,6 @@ export default async function setLoggedIn(req, res) {
 
   const { secret } = req.query;
 
-  console.log({secret})
-
   // Check the secret and next parameters.
   // This secret should only be known by this API route
   if (!config.wpSecret){
