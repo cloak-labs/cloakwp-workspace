@@ -32,7 +32,7 @@ export function AdminBar({ previewParams, isPreview, alwaysVisible = false, page
         >
           <div className='w-full flex gap-x-2 sm:gap-x-6 mb-0 text-sm'>
             <a
-              href={`${config.wpUrl}${config.wpAdminUrl || 'wp-admin'}/edit.php`}
+              href={`${config.wpUrl}${config.adminPath || 'wp-admin'}/edit.php`}
               target="_blank"
               className='flex items-center'
             >
@@ -41,7 +41,7 @@ export function AdminBar({ previewParams, isPreview, alwaysVisible = false, page
             </a>
             {pageData &&
               <a
-                href={`${config.wpUrl}${config.wpAdminUrl || 'wp-admin'}/post.php?post=${pageData.id}&action=edit`}
+                href={`${config.wpUrl}${config.adminPath || 'wp-admin'}/post.php?post=${pageData.id}&action=edit`}
                 target="_blank"
                 className='flex items-center'
               >
