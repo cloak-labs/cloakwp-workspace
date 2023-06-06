@@ -36,7 +36,7 @@ class Widgets
    *
    * @return void
    */
-  public function wp_rest_blocks_init()
+  public function add_blocks_to_widget_rest_responses()
   {
     if (!function_exists('wp_use_widgets_block_editor') || !wp_use_widgets_block_editor()) {
       return;
@@ -137,6 +137,6 @@ class Widgets
    */
   private function bootstrap()
   {
-    add_action('rest_api_init', array($this, 'wp_rest_blocks_init'));
+    add_action('rest_api_init', array($this, 'add_blocks_to_widget_rest_responses'));
   }
 }
