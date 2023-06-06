@@ -57,7 +57,7 @@ class Posts
    *
    * @return void
    */
-  public function wp_rest_blocks_init()
+  public function add_blocks_to_rest_responses()
   {
     $types = $this->get_post_types_with_editor();
     if (!$types) {
@@ -92,50 +92,6 @@ class Posts
           'readonly'    => true,
         ],
       ]
-    );
-
-    // add custom 'featured_image' field in REST API responses which includes full data of featured image rather than just the image ID
-    register_rest_field(
-      $types,
-      'featured_image',
-      array(
-        'get_callback'    => array($this, 'ws_get_images_urls'),
-        'update_callback' => null,
-        'schema'          => null,
-      )
-    );
-  }
-
-  /**
-   * Include medium and large URLs for Posts' Featured Images in REST API, which otherwise only includes image ID
-   *
-   * @return array
-   */
-  public function ws_get_images_urls($object, $field_name, $request)
-  {
-    // Check type of object before accessing params
-    if (gettype($object) === "object") {
-      $id = get_post_thumbnail_id($object->id);
-    }
-    if (gettype($object) === "array") {
-      $id = get_post_thumbnail_id($object['id']);
-    }
-
-    // check that array is returned before accessing params
-    $medium = wp_get_attachment_image_src($id, 'medium');
-    $medium_url = false;
-    if (is_array($medium)) {
-      $medium_url = $medium['0'];
-    }
-    $large = wp_get_attachment_image_src($id, 'large');
-    $large_url = false;
-    if (is_array($large)) {
-      $large_url = $large['0'];
-    }
-
-    return array(
-      'medium' => $medium_url,
-      'large'  => $large_url,
     );
   }
 
@@ -174,7 +130,6 @@ class Posts
     if (isset($object['content']['raw'])) {
       return BlockTransformer::get_blocks($object['content']['raw'], $id);
     }
-    $id     = !empty($object['wp_id']) ? $object['wp_id'] : $object['id'];
     $post   = get_post($id);
     $output = [];
     if (!$post) {
@@ -183,6 +138,78 @@ class Posts
     return BlockTransformer::get_blocks($post->post_content, $post->ID);
   }
 
+  /**
+   * Global modifications to all post type's REST API responses
+   * 
+   * @return mixed
+   */
+  public function modify_all_post_rest_responses()
+  {
+    $all_post_types = get_post_types(['public' => true], 'names');
+
+    // Add custom 'featured_image' field in all post type REST API responses, which adds src URLs to the medium and large versions of the image rather than just the image ID (default behavior)
+    register_rest_field(
+      $all_post_types,
+      'featured_image',
+      array(
+        'get_callback'    => array($this, 'get_featured_image_urls'),
+        'update_callback' => null,
+        'schema'          => null,
+      )
+    );
+  }
+
+  /**
+   * Add blocksData to post revisions API responses
+   * 
+   * @return WP_REST_Response|WP_Error
+   */
+  public function modify_revisions_rest_responses($response, $post)
+  {
+    $data = $response->get_data();
+
+    $data['hasBlocks'] = has_blocks($post);
+    $data['blocksData'] = BlockTransformer::get_blocks($post->post_content, $post->ID);
+
+    // TODO: still need to confirm the below works -- do featured image URLs properly show up in revision REST responses?
+    $data['featured_image'] = $this->get_featured_image_urls(array( 'id' => $post->ID ));
+
+
+    return rest_ensure_response($data);
+  }
+
+  /**
+   * Include medium and large URLs for Posts' Featured Images in REST API, which otherwise only includes image ID
+   *
+   * @return array
+   */
+  public function get_featured_image_urls($object)
+  {
+    // Check type of object before accessing params
+    if (gettype($object) === "object") {
+      $id = get_post_thumbnail_id($object->id);
+    }
+    if (gettype($object) === "array") {
+      $id = get_post_thumbnail_id($object['id']);
+    }
+
+    // check that array is returned before accessing params
+    $medium = wp_get_attachment_image_src($id, 'medium');
+    $medium_url = false;
+    if (is_array($medium)) {
+      $medium_url = $medium['0'];
+    }
+    $large = wp_get_attachment_image_src($id, 'large');
+    $large_url = false;
+    if (is_array($large)) {
+      $large_url = $large['0'];
+    }
+
+    return array(
+      'medium' => $medium_url,
+      'large'  => $large_url,
+    );
+  }
 
   /**
    * Bootstrap filters and actions.
@@ -191,17 +218,14 @@ class Posts
    */
   private function bootstrap()
   {
-    add_action('rest_api_init', array($this, 'wp_rest_blocks_init'));
-    
-    // add support for fetching blocks on post revisions
-    add_filter('rest_prepare_revision', function ($response, $post) {
-      $data = $response->get_data();
+    add_action('rest_api_init', array($this, 'add_blocks_to_rest_responses'));
+    add_action('rest_api_init', array($this, 'modify_all_post_rest_responses'));
 
-      $data['hasBlocks'] = has_blocks($post);
-      $data['blocksData'] = BlockTransformer::get_blocks($post->post_content, $post->ID);
-
-      return rest_ensure_response($data);
-    }, 10, 2);
+    /**
+     * Note: revisions are not considered a "post type", so the register_rest_field method 
+     * of adding block data to its REST response will not work. This is why we have a separate 
+     * way of handling it using the "rest_prepare_revision" filter:
+     */
+    add_filter('rest_prepare_revision', array($this, 'modify_revisions_rest_responses'), 10, 2);
   }
-
 }
