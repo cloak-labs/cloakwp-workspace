@@ -10,5 +10,9 @@ if (process.env.NEXT_PUBLIC_CUSTOM_CLOAKWP_CONFIG_PATH) {
 
 export function useGlobalConfig() {
   if (!blockConfig) throw Error("You're missing a blockConfig object in your root-level cloakwp.config.js file.")
+
+  // set config defaults, if values are missing:
+  if (!blockConfig.adminPath) blockConfig.adminPath = 'wp-admin'
+
   return blockConfig
 }
