@@ -95,6 +95,11 @@ Config::define('CLOAKWP_ENABLE_FAVICON', env('CLOAKWP_ENABLE_FAVICON'));
 Config::define('CLOAKWP_JWT_NO_EXPIRY', env('CLOAKWP_JWT_NO_EXPIRY'));
 Config::define('CLOAKWP_ENABLE_PREVIEW_POST', env('CLOAKWP_ENABLE_PREVIEW_POST'));
 
+/**
+ * The signing secret required by the "JWT Authentication for WP REST API" plugin
+ */
+Config::define('JWT_AUTH_SECRET_KEY', env('JWT_AUTH_SECRET_KEY'));
+
 
 /**
  * Authentication Unique Keys and Salts
