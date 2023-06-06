@@ -157,25 +157,17 @@ class Posts
         'schema'          => null,
       )
     );
-  }
 
-  /**
-   * Add blocksData to post revisions API responses
-   * 
-   * @return WP_REST_Response|WP_Error
-   */
-  public function modify_revisions_rest_responses($response, $post)
-  {
-    $data = $response->get_data();
-
-    $data['hasBlocks'] = has_blocks($post);
-    $data['blocksData'] = BlockTransformer::get_blocks($post->post_content, $post->ID);
-
-    // TODO: still need to confirm the below works -- do featured image URLs properly show up in revision REST responses?
-    $data['featured_image'] = $this->get_featured_image_urls(array( 'id' => $post->ID ));
-
-
-    return rest_ensure_response($data);
+    // TODO: Add full pathname to all post/page API responses -- fixes slugModifier complexity on front-end
+    register_rest_field(
+      $all_post_types,
+      'pathname',
+      array(
+        'get_callback'    => array($this, 'get_post_pathname'),
+        'update_callback' => null,
+        'schema'          => null,
+      )
+    );
   }
 
   /**
@@ -209,6 +201,38 @@ class Posts
       'medium' => $medium_url,
       'large'  => $large_url,
     );
+  }
+
+  /**
+   * Gets the full relative URL pathname of a post
+   *
+   * @return array
+   */
+  public function get_post_pathname($object)
+  {
+    $id = !empty($object['wp_id']) ? $object['wp_id'] : $object['id'];
+    $pathname = parse_url(get_permalink($id), PHP_URL_PATH);
+
+    return $pathname;
+  }
+
+  /**
+   * Add blocksData to post revisions API responses
+   * 
+   * @return WP_REST_Response|WP_Error
+   */
+  public function modify_revisions_rest_responses($response, $post)
+  {
+    $data = $response->get_data();
+
+    $data['hasBlocks'] = has_blocks($post);
+    $data['blocksData'] = BlockTransformer::get_blocks($post->post_content, $post->ID);
+
+    // TODO: still need to confirm the below works -- do featured image URLs properly show up in revision REST responses?
+    $data['featured_image'] = $this->get_featured_image_urls(array('id' => $post->ID));
+
+
+    return rest_ensure_response($data);
   }
 
   /**
