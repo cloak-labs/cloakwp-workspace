@@ -6,8 +6,8 @@ import myBlockConfig from '@/config/myBlockConfig'
 
 export default function App({ Component, pageProps }) {
   return (
-    <BlockConfigProvider value={myBlockConfig}>
-      <Layout navBarData={pageProps.navBarData}>
+    <BlockConfigProvider blocks={myBlockConfig}>
+      <Layout {...pageProps}>
         <Component {...pageProps} />
       </Layout>
     </BlockConfigProvider>
