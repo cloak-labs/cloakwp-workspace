@@ -8,9 +8,9 @@ Author URI:   https://github.com/rnacken
 License:      MIT License
 */
 
-add_action( 'init', function() {
-    if (get_option('permalink_structure') == '') {
-        global $wp_rewrite;
-        $wp_rewrite->set_permalink_structure('/%postname%/');
-    }
-} );
+add_action('init', function () {
+  if (get_option('permalink_structure') == '') {
+    global $wp_rewrite;
+    $wp_rewrite->set_permalink_structure('/%postname%/');
+  }
+});
