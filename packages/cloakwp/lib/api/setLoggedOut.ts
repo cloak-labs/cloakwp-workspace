@@ -18,7 +18,7 @@ export default async function setLoggedOut(req, res) {
   setCookies('cloakwp-logged-in', 'false', { req, res });
   
   // console.log('log out and redirect back to wp-admin')
-  res.writeHead(307, { Location: `${config.wpUrl}/${config.wpAdminUrl || 'wp-admin'}` }).end()
+  res.writeHead(307, { Location: `${config.wpUrl}/${config.adminPath || 'wp-admin'}` }).end()
 
   // return res.status(200).json({ login: 'false' });
 }
