@@ -14,7 +14,8 @@ export default function ButtonBlock({block}) {
     let variant = 'solid'
     if(className.includes('is-style-outline')) variant = 'outline'
 
-    if(url.includes(config.wpUrl)) url = url.replace(config.wpUrl, '/')
+    const wpUrl = config.sources[block.dataSource].url
+    if(url.includes(wpUrl)) url = url.replace(wpUrl, '/')
 
     return <Button href={url} color={color} variant={variant} wpClasses={classes} style={styles}>{text}</Button>
 }

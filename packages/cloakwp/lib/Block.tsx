@@ -28,6 +28,7 @@ export default function Block({
 	containerCondition,	// dev has the ability to override the default condition that determines whether to wrap a block with a container -- this prop is only useful when dev is explicitly rendering <Block /> (not common) --> <Blocks /> does not pass 'container' to Block as prop, instead it uses context (see useBlockConfig() below)
   prevSibling, // the block data for the current block's previous sibling block
   nextSibling, // the block data for the current block's next sibling block
+  dataSource = 'default', // the key of the WP data source where this block's data came from -- we pass this into the Block's component so users can render things conditionally based on the data source  
 	...props
 }) {
 
@@ -171,7 +172,7 @@ export default function Block({
       condition={() => containerEnabled ? finalContainerCondition?.({block: blockObj, finalProps}) : false}
       wrapper={(children) => finalContainer?.({block: {...blockObj, rendered: children}, finalProps})}
     >
-      <Component block={blockObj} {...finalProps} />
+      <Component block={blockObj} dataSource={dataSource} {...finalProps} />
     </ConditionalWrapper>
   )
 }

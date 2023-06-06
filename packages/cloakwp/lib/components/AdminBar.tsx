@@ -7,6 +7,7 @@ import { classNames } from '../utils/classNames';
 export function AdminBar({ previewParams, isPreview, alwaysVisible = false, pageData, className, ...props }) {
   let { isLoggedIn = false } = useUser()
   const config = useGlobalConfig()
+  const { sources: { default: { url, adminPath }} } = config
 
   let href = '/api/exit-preview'
   if (previewParams) href = `/api/exit-preview?slug=${previewParams.postSlug}`
@@ -32,7 +33,7 @@ export function AdminBar({ previewParams, isPreview, alwaysVisible = false, page
         >
           <div className='w-full flex gap-x-2 sm:gap-x-6 mb-0 text-sm'>
             <a
-              href={`${config.wpUrl}${config.adminPath || 'wp-admin'}/edit.php`}
+              href={`${url + adminPath}/edit.php`}
               target="_blank"
               className='flex items-center'
             >
@@ -41,7 +42,7 @@ export function AdminBar({ previewParams, isPreview, alwaysVisible = false, page
             </a>
             {pageData &&
               <a
-                href={`${config.wpUrl}${config.adminPath || 'wp-admin'}/post.php?post=${pageData.id}&action=edit`}
+                href={`${url + adminPath}/post.php?post=${pageData.id}&action=edit`}
                 target="_blank"
                 className='flex items-center'
               >
