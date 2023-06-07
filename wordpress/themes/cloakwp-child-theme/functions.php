@@ -1,5 +1,7 @@
 <?php
 
+require_once get_stylesheet_directory() . '/models/testimonials.php';
+
 add_action('enqueue_block_editor_assets', 'gutenberg_editor_assets');
 function gutenberg_editor_assets()
 {
