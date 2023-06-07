@@ -91,7 +91,7 @@ class Auth
    */
   private function add_frontend_login()
   {
-    add_action('wp_login', array($this, 'logout_on_frontend'));
+    add_action('wp_login', array($this, 'login_on_frontend'));
   }
 
   /**
