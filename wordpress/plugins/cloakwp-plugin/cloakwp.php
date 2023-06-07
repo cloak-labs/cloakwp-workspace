@@ -13,9 +13,9 @@
  * @package           CloakWP
  *
  * @wordpress-plugin
- * Plugin Name:       CloakWP - NextJS Addons
+ * Plugin Name:       CloakWP - Headless WordPress
  * Plugin URI:        https://https://github.com/cloak-labs/cloakwp-plugin
- * Description:       Adds NextJS specific utilities to the CloakWP Plugin.
+ * Description:       Adds the missing pieces required for headless projects. Designed for use alongside the CloakWP suite of open-source tooling. 
  * Version:           0.6.0
  * Author:            Cloak Labs
  * Author URI:        https://https://github.com/cloak-labs
@@ -28,7 +28,6 @@
 use CloakWP\CloakWP;
 use CloakWP\General\PluginActivator;
 use CloakWP\General\PluginDeactivator;
-use CloakWP\Utils;
 
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
