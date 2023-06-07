@@ -13,5 +13,5 @@ export default async function validateAuthRequest (req, res) {
     return { error: res.status(401).json({ message: 'Invalid secret token -- pass in a valid secret via a "secret" parameter that matches the secret you supplied as "sources.default.secret" in your cloakwp.config.js file.' }) };
   }
 
-  return { redirectUrlBase: `${url}${adminPath || 'wp-admin'}`}
+  return { redirectUrlBase: `${url}${adminPath}`}
 }
