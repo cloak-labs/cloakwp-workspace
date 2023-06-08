@@ -45,7 +45,7 @@ define('CLOAKWP_VERSION', '0.6.0');
 /**
  * Define PHP Constant defaults.
  */
-if (!defined('CLOAKWP_FRONTEND_URL')) define('CLOAKWP_FRONTEND_URL', 'http://localhost:3000');
+if (!defined('CLOAKWP_FRONTEND_URL')) define('CLOAKWP_FRONTEND_URL', 'http://localhost:5000');
 if (!defined('CLOAKWP_PREVIEW_SECRET')) define('CLOAKWP_PREVIEW_SECRET', 'wefPWh8XDU43fgNUmi9IC9hjKOrvfvjijKNKNh8uf8');
 if (!defined('CLOAKWP_ENABLE_DEV_MODE')) define('CLOAKWP_ENABLE_DEV_MODE', FALSE);
 if (!defined('CLOAKWP_API_BASE_PATH')) define('CLOAKWP_API_BASE_PATH', 'cloakwp');
