@@ -1,6 +1,6 @@
 {
-    "name": "acf/cardfeature",
-    "title": "Cards Feature",
+    "name": "acf/cards",
+    "title": "Cards",
     "description": "A custom block for displaying pages/posts/manual data as cards.",
     "category": "widgets",
     "icon": "admin-page",
