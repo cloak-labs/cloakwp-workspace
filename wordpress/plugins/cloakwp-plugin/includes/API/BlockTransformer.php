@@ -50,7 +50,7 @@ class BlockTransformer
     $blocks = parse_blocks($content);
 
     foreach ($blocks as $block) {
-      $block_data = BlockTransformer::convert_block_to_object($block, $post_id);
+      $block_data = self::convert_block_to_object($block, $post_id);
       if ($block_data) {
         $output[] = $block_data;
       }
@@ -178,7 +178,7 @@ class BlockTransformer
             // we wait until all fields have been processed above, and if any repeaters were found in the process, now we clean up how their subfields get formatted in the API response
             if ($repeaterFieldsFound) {
               foreach ($repeaterFieldsFound as $repeater) { // loop through repeaters (each one being a full ACF field object)
-                $modifiedData = BlockTransformer::fix_acf_repeater_fields($repeater, $modifiedData);
+                $modifiedData = self::fix_acf_repeater_fields($repeater, $modifiedData);
               }
             }
 
@@ -187,7 +187,7 @@ class BlockTransformer
 
           // Regular attribute handling:
           if (!isset($attr[$key])) {
-            $attr[$key] = BlockTransformer::get_attribute($attribute, $block_object->inner_html, $post_id);
+            $attr[$key] = self::get_attribute($attribute, $block_object->inner_html, $post_id);
           }
         }
       }
@@ -200,7 +200,7 @@ class BlockTransformer
       $inner_blocks = $block['innerBlocks'];
       $block['innerBlocks'] = [];
       foreach ($inner_blocks as $_block) {
-        $block['innerBlocks'][] = BlockTransformer::convert_block_to_object($_block, $post_id);
+        $block['innerBlocks'][] = self::convert_block_to_object($_block, $post_id);
       }
     }
 
@@ -210,7 +210,7 @@ class BlockTransformer
   /**
    * Given an ACF object for a repeater field, and the current state of the API response data, this function fixes the formatting for repeater sub-fields so they're formatted in the API response as you'd expect
    */
-  private function fix_acf_repeater_fields($repeater, $apiData, $parentRepeaterName = '', $parentRepeaterIndex = '')
+  private static function fix_acf_repeater_fields($repeater, $apiData, $parentRepeaterName = '', $parentRepeaterIndex = '')
   {
     // return $apiData; // uncomment to test the default data response format for repeater fields
     $repeater_name = $repeater['name'];
@@ -231,7 +231,7 @@ class BlockTransformer
 
         if ($is_nested_repeater) {
           $nestedRepeater = $apiData[$repeater_name . '_' . $count . '_' . $sub_field_name];
-          $sub_field_object = $this->fix_acf_repeater_fields($nestedRepeater, $apiData, $repeater_name, $count);
+          $sub_field_object = self::fix_acf_repeater_fields($nestedRepeater, $apiData, $repeater_name, $count);
         } else {
           $sub_field_object = $apiData[$sub_field_api_default_name];
         }
@@ -279,7 +279,7 @@ class BlockTransformer
           $counter = 0;
           foreach ($nodes as $node) {
             foreach ($attribute['query'] as $key => $current_attribute) {
-              $current_value = BlockTransformer::get_attribute($current_attribute, $node->toString(), $post_id);
+              $current_value = self::get_attribute($current_attribute, $node->toString(), $post_id);
               if (null !== $current_value) {
                 $value[$counter][$key] = $current_value;
               }
