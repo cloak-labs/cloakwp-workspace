@@ -2,6 +2,8 @@
 
 namespace CloakWP;
 
+use Extended\ACF\Fields\Accordion;
+
 class Utils {
 
   /*
@@ -17,6 +19,22 @@ class Utils {
       error_log(print_r($log, true));
     } else {
       error_log($log);
+    }
+  }
+
+  public static function acfBlockWrapper($blockLabel, $fields) {
+    if (class_exists('Extended\ACF\Fields\Accordion')) {
+      return [
+        Accordion::make($blockLabel)
+          ->open()
+          ->multiExpand(), // Allow accordion to remain open when other accordions are opened.
+        ...$fields,
+        Accordion::make('Endpoint')
+          ->endpoint()
+          ->multiExpand(),
+      ];
+    } else {
+      throw new \Exception('The Extended ACF composer package does not appear to be installed.');
     }
   }
 
