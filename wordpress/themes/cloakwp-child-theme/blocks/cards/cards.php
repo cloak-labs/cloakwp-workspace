@@ -1,7 +1,9 @@
 <?php
 
+// require_once dirname(__DIR__, 2) . '/utils/acfBlockWrapper.php';
+
+use CloakWP\Utils;
 use Extended\ACF\ConditionalLogic;
-use Extended\ACF\Fields\Accordion;
 use Extended\ACF\Fields\Number;
 use Extended\ACF\Fields\Repeater;
 use Extended\ACF\Fields\Textarea;
@@ -19,18 +21,15 @@ register_block_type(__DIR__ . '/block.json');
 add_action('acf/init', function () {
   register_extended_field_group([
     'title' => 'Block: Cards',
-    'fields' => [
-      Accordion::make('Cards Block')
-        ->open()
-        ->multiExpand(), // Allow accordion to remain open when other accordions are opened.
-      // insert block fields here
-      Number::make('# of Columns!', 'num_columns')
+    'fields' => Utils::acfBlockWrapper('Cards Block', [
+      Number::make('# of Columns', 'num_columns')
         ->defaultValue(3)
         ->wrapper(['width' => '50%'])
         ->min(1)
         ->max(4),
-      TrueFalse::make('Manual Data?', 'data_type')
-        ->instructions('You can either choose from existing pages/posts to populate the cards, or manually enter the card data.')
+        TrueFalse::make('Manual Data?', 'data_type')
+        ->instructions('You can either choose from existing pages/posts to populate the cards, or manually enter the data for each card.')
+        ->wrapper(['width' => '50%'])
         ->stylisedUi(),
       Repeater::make('Manual Cards')
         ->fields([
@@ -70,10 +69,7 @@ add_action('acf/init', function () {
         ->conditionalLogic([
           ConditionalLogic::where('data_type', '==', 0) // available operators: ==, !=, >, <, ==pattern, ==contains, ==empty, !=empty
         ]),
-      Accordion::make('Endpoint')
-        ->endpoint()
-        ->multiExpand(),
-    ],
+    ]),
     'location' => [
       Location::where('block', 'acf/cards')
     ],
