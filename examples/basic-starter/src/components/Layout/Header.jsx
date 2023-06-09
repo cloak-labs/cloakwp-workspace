@@ -33,9 +33,7 @@ export function Header({ navBarData }) {
   }, [scrollY])
 
   const menuItems = useMemo(() => navBarData.menu_items.slice(0, -1), [navBarData.menu_items])
-  console.log({menuItems})
   const menuButton = useMemo(() => menuItems.pop(), [navBarData.menu_items])
-  console.log({menuButton})
   
   return (
     <motion.header initial={{y: -100, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{delay: 1, duration: 1.2}} className={classNames(

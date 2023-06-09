@@ -9,8 +9,6 @@ export async function getMenus(slug = '') {
     includeJwt: false
   });
 
-  console.log("Menu res: ", res)
-
   if(!Array.isArray(res)) res = [res]
 
   // convert internal links to relative paths to ensure menu links work across different environments
