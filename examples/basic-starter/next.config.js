@@ -9,10 +9,7 @@ module.exports = {
     },
   },
   images: {
-    domains: [ // TODO: change allowed image domains
-      '23.29.145.150',
-      'http://23.29.145.150',
-      'http://23.29.145.150/~lionheart',
+    domains: [ // TODO: add production WP URL to allowed image domains
       'localhost',
     ],
   },
