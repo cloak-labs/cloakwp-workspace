@@ -10,16 +10,18 @@ export default function Page({ data }) {
   return (
     <>
       <Head>
-        <title>{metatitle}</title>
+        {(metatitle && typeof metatitle == 'string') &&
+          <title>{metatitle}</title>
+        }
         <meta
           name="description"
           content={stripHtml(data?.excerpt?.rendered)}
         />
       </Head>
       <div>
-        <Hero heroData={data.acf} />
+        <Hero heroData={data?.acf} />
         <div>
-          <Blocks data={data.blocksData} />
+          <Blocks data={data?.blocksData} />
         </div>
       </div>
     </>
@@ -28,7 +30,7 @@ export default function Page({ data }) {
 
 export async function getStaticProps(context) {
   const { getPage, getPreviewData, getMenus } = await import('cloakwp');
-  
+  console.log({slug: context.params.slug})
   const page = await getPage({slug: context.params.slug});
   const navBarData = await getMenus('header-nav');
   let data = page.data;
@@ -58,8 +60,9 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
   const { getPaths } = await import('cloakwp')
   let paths = await getPaths()
-  const excludePaths = ['/blog', '/']
-  paths = paths.filter(path => !excludePaths.includes(path))
+  console.log({paths})
+  // const excludePaths = ['/blog', '/']
+  // paths = paths.filter(path => !excludePaths.includes(path))
 
   return {
     paths,
