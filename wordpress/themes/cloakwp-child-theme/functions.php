@@ -72,16 +72,16 @@ function register_menus()
 /*
   Register your custom Gutenberg/ACF blocks here
 */
-add_action('init', 'register_blocks');
-function register_blocks()
-{
-  register_block_type(get_template_directory() . '/blocks/postList/block.json');
-  register_block_type(get_template_directory() . '/blocks/pageHeader/block.json');
-  register_block_type(get_template_directory() . '/blocks/testimonial/block.json');
-  // register_block_type(get_template_directory() . '/blocks/cardFeature/block.json');
-  register_block_type(get_template_directory() . '/blocks/faq/block.json');
-  register_block_type(get_template_directory() . '/blocks/cta/block.json');
-}
+// add_action('init', 'register_blocks');
+// function register_blocks()
+// {
+//   register_block_type(get_template_directory() . '/blocks/postList/block.json');
+//   register_block_type(get_template_directory() . '/blocks/pageHeader/block.json');
+//   register_block_type(get_template_directory() . '/blocks/testimonial/block.json');
+//   register_block_type(get_template_directory() . '/blocks/cardFeature/block.json');
+//   register_block_type(get_template_directory() . '/blocks/faq/block.json');
+//   register_block_type(get_template_directory() . '/blocks/cta/block.json');
+// }
 
 
 
