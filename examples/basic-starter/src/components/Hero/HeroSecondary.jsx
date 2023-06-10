@@ -6,7 +6,7 @@ import { Button } from '@/components/Button';
 import { Eyebrow } from '@/components/Text';
 
 export const HeroSecondary = ({ data }) => {
-  const { secondary_background_color, eyebrow, h1, subtitle, cta_button, image = '/images/john_headshot.jpg' } = data;
+  const { backgroundColor, eyebrow, h1, subtitle, cta_button, image } = data;
 
   // TODO: configure hero color options below based on project colors
   let bgColor = 'bg-blue-900',
@@ -15,8 +15,8 @@ export const HeroSecondary = ({ data }) => {
     textColor = 'text-blue-200',
     logoOpacity = 'opacity-10';
 
-  switch (secondary_background_color) {
-    case 'gray':
+  switch (backgroundColor) {
+    case 'blue-900':
       bgColor = 'bg-gray-100'
       eyebrowColor = 'text-blue-700'
       headingColor = 'text-blue-900'
@@ -36,7 +36,7 @@ export const HeroSecondary = ({ data }) => {
     <section id="hero" className={classNames("relative overflow-hidden", bgColor)}>
       <div className="relative z-10 grid grid-cols-1 items-center gap-4 sm:grid-cols-7 lg:grid-cols-2">
         <div className='px-4 py-12 sm:py-20 sm:px-6 col-span-1 sm:col-span-4 lg:col-span-1 xl:pl-20 2xl:pl-40'>
-          <motion.div
+          <div
             className="max-w-xl relative z-10"
             variants={motionContainer}
             initial="hidden"
@@ -52,20 +52,20 @@ export const HeroSecondary = ({ data }) => {
               </Eyebrow>
             )}
             {h1 && (
-              <motion.h1
+              <h1
                 className={classNames('mt-3 2xl:mt-5', headingColor)}
                 variants={motionItem}
               >
                 {h1}
-              </motion.h1>
+              </h1>
             )}
             {subtitle && (
-              <motion.p
+              <p
                 className={classNames('mt-4 2xl:mt-6', textColor)}
                 variants={motionItem}
               >
                 {subtitle}
-              </motion.p>
+              </p>
             )}
             {(cta_button && cta_button.url && cta_button.title) && (
               <Button
@@ -79,7 +79,7 @@ export const HeroSecondary = ({ data }) => {
                 {cta_button.title}
               </Button>
             )}
-          </motion.div>
+          </div>
         </div>
         <div className="h-full col-span-1 sm:col-span-3 lg:col-span-1">
           <Image
