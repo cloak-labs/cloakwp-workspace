@@ -1,4 +1,3 @@
-import { Hero } from '@/components/Hero';
 import Head from 'next/head';
 import { Blocks } from 'cloakwp';
 import stripHtml from '@/utils/stripHtml';
@@ -19,10 +18,7 @@ export default function Page({ data }) {
         />
       </Head>
       <div>
-        <Hero heroData={data?.acf} />
-        <div>
-          <Blocks data={data?.blocksData} />
-        </div>
+        <Blocks data={data?.blocksData} />
       </div>
     </>
   )
