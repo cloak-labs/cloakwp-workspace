@@ -1,7 +1,7 @@
 {
-    "name": "acf/pageheader",
-    "title": "Page Header",
-    "description": "A custom block for page header/hero sections.",
+    "name": "acf/hero",
+    "title": "Hero",
+    "description": "A custom block for hero sections.",
     "category": "widgets",
     "icon": "cover-image",
     "keywords": ["header", "hero", "page header", "page hero"],
