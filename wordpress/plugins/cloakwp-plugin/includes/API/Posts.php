@@ -158,7 +158,6 @@ class Posts
       )
     );
 
-    // TODO: Add full pathname to all post/page API responses -- fixes slugModifier complexity on front-end
     register_rest_field(
       $all_post_types,
       'pathname',
