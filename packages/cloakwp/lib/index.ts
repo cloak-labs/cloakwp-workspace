@@ -27,7 +27,6 @@ export { getPaths } from './getters/getPaths';
 export { getMenus } from './getters/getMenus';
 
 // Utils
-export { slugModifier } from './utils/slugModifier';
 export { deepMerge } from './utils/deepMerge'
 export { classNames } from './utils/classNames'
 

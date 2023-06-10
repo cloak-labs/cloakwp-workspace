@@ -54,13 +54,12 @@ class ISR
 
     // use this filter to add URLs for environments that you wish to enable on-demand ISR for (useful for testing one-off Vercel deployments or when running a production build locally) 
     $environments_to_revalidate = apply_filters('cloakwp/urls_to_revalidate', [$front_end_url, "http://localhost:3000"], $post_ID, $post);
-    $slug = $post->post_name;
-    $type = $post->post_type;
+    $pathname = parse_url(get_permalink($post_ID), PHP_URL_PATH);
     $secret = CloakWP::get_preview_secret();
     
     foreach ($environments_to_revalidate as $url) {
       try {
-        wp_remote_get("{$url}/api/{$cloakwp_api_base}/revalidate/{$slug}?post_type={$type}&secret={$secret}");
+        wp_remote_get("{$url}/api/{$cloakwp_api_base}/revalidate/?pathname={$pathname}&secret={$secret}");
       } catch (Exception $e) {
         echo 'Error while regenerating static page for url "', $url, '" -- error message: ', $e->getMessage(), "\n";
       }

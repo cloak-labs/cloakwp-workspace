@@ -10,7 +10,7 @@ export function AdminBar({ previewParams, isPreview, alwaysVisible = false, page
   const { sources: { default: { url, adminPath }} } = config
 
   let href = '/api/exit-preview'
-  if (previewParams) href = `/api/exit-preview?slug=${previewParams.postSlug}`
+  if (previewParams) href = `/api/exit-preview?pathname=${previewParams.pathname}`
 
   const status = {
     publish: 'published',

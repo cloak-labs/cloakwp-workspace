@@ -29,33 +29,32 @@ export default async function enablePreviewMode(req, res) {
   else if(postType == 'post') postTypeRestEndpoint = 'posts'
 
   // Fetch WordPress to check if the provided `id` or `slug` exists
-  // Note: getPost calls slugModifier internally to correct slugs that need a sub-directory prepended.. so postSlug should equal the final front-end slug
-  const { data: {slug: postSlug} } = await getPost({
+  const { data: { pathname } } = await getPost({
     postType: postTypeRestEndpoint,
     id: postId
   });
   
   // If the post doesn't exist prevent preview mode from being enabled
-  if (!postSlug) {
+  if (!pathname) {
     return res.status(401).json({ message: `Post of type "${postType}" with ID "${postId}" was not found; therefore, we abandoned preview mode.` });
   }
     
   // Enable Preview Mode by setting the cookies
   res.setPreviewData({
     post: {
+      pathname,
       revisionId,
       postId,
-      postSlug,
       postType,
       postTypeRestEndpoint,
     },
   }, {
     maxAge: 60 * 60, // The preview mode cookies expire in 1 hour
-    path: `/${postSlug}`, // The preview mode cookies apply to the page we're previewing (visiting any other page turns off preview mode)
+    path: pathname, // The preview mode cookies apply to the page we're previewing (visiting any other page turns off preview mode)
   });
 
   // Redirect to the path from the fetched post
   // We don't redirect to `req.query.slug` as that might lead to open redirect vulnerabilities
-  res.writeHead(307, { Location: `/${postSlug}`});
+  res.writeHead(307, { Location: pathname });
   res.end();
 }

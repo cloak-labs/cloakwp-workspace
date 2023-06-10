@@ -1,5 +1,4 @@
 import { useGlobalConfig } from "./useGlobalConfig";
-import { slugModifier } from "../utils/slugModifier";
 
 export async function useFetchRestAPI(
   endpoint, // api URL endpoint that comes after `wp-json/wp/v2` (include first slash)
@@ -7,11 +6,10 @@ export async function useFetchRestAPI(
 ) {
   const {
     embed = true, // the embed param tells WordPress to return expanded data for certain things such as a page/post's full taxonomy data
-    modifyBaseSlugs = true, // when true, our custom hook, slugModifier, is used to prepend the page/post slugs returned from WP according to the package user's config
     convertToRelativeURLs = true, // when true, we search/replace all WordPress admin URLs found in data returned from WP with an empty string, except /wp-content URLs. This ensures internal linking always works (including across environments)
-    apiNamespace = "wp-json/wp/v2",
-    includeJwt = true,
-    dataSource = 'default', // optionally specify the WordPress dataSource key, matching your cloakwp.config.js, to fetch data from another WP instance
+    apiNamespace = "wp-json/wp/v2", // optionally override the default REST API URL namespace
+    includeJwt = true, // optionally exclude the JWT from requests that don't need it
+    dataSource = 'default', // optionally specify the WordPress dataSource key, matching your cloakwp.config.js "sources", to fetch data from another WP instance
   } = options
 
   if(!endpoint) throw new Error('You must pass in an endpoint to useFetchRestAPI')
@@ -39,7 +37,6 @@ export async function useFetchRestAPI(
   if(url.slice(-1) != "/") url += '/' // add trailing slash if missing
 
   const fetchUrl = `${url}${apiNamespace}${endpoint}${embedParam}`
-  // console.log('Fetch URL: ', fetchUrl)
 
   const res = await fetch(
     fetchUrl,
@@ -56,8 +53,6 @@ export async function useFetchRestAPI(
   if (res.status !== 200) {
     console.error(res.status, res.statusText);
   }
-
-  if(modifyBaseSlugs) posts = await slugModifier(posts) // adjust post slugs if necessary
 
   if(posts && convertToRelativeURLs){ // remove all references to WP URL in data
     let postsString = JSON.stringify(posts)

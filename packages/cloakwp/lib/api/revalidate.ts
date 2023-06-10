@@ -1,25 +1,21 @@
 import { useGlobalConfig } from "../hooks/useGlobalConfig";
-import { slugModifier } from "../utils/slugModifier";
 
 export default async function regenerateStaticPage(req, res){
-    const config = await useGlobalConfig()
-    const { slug, type, secret } = req.query;
-    const post = await slugModifier({slug, type})
+  const config = await useGlobalConfig()
+  const { pathname, secret } = req.query;
 
-    console.log('on-demand revalidate page: ', post.slug)
-
-    try {
-        if (secret !== config.wpSecret) {
-            throw 'Page Revalidation - Invalid preview secret';
-        }
-
-        await res.revalidate(`/${post.slug}`).catch((err) => {
-            throw `Page Revalidation - Can't revalidate slug '/${post.slug}'`;
-        });
-
-        return res.json({ page: `/${post.slug}`, revalidated: true });
-    } catch (error) {
-        console.error(new Error(error));
-        return res.status(500).send({ error: error, slug: `/${post.slug}` });
+  try {
+    if (secret !== config.wpSecret) {
+      throw 'Page Revalidation - Invalid preview secret';
     }
+
+    await res.revalidate(pathname).catch((err) => {
+      throw `Page Revalidation - Can't revalidate path '${pathname}'`;
+    });
+
+    return res.json({ page: pathname, revalidated: true });
+  } catch (error) {
+    console.error(new Error(error));
+    return res.status(500).send({ error: error, slug: pathname });
+  }
 }
