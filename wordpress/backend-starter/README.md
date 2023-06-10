@@ -103,11 +103,8 @@ CLOAKWP_ENABLE_FAVICON=true
 CLOAKWP_JWT_NO_EXPIRY=true
 CLOAKWP_ENABLE_PREVIEW_POST=true
 
-# Optionally customize your frontend's CloakWP-related API routes (if different than the defaults):
-# CLOAKWP_PREVIEW_API_ROUTE=
-# CLOAKWP_REVALIDATE_API_ROUTE=
-# CLOAKWP_LOGIN_API_ROUTE=
-# CLOAKWP_LOGOUT_API_ROUTE=
+# Optionally customize the CloakWP api route base path used in your frontend
+# CLOAKWP_API_BASE_PATH="cloakwp"
 
 # For certain web hosts, like SpinupWP, you should disable WP cron in favour of the host's own cron solution
 # DISABLE_WP_CRON=true
