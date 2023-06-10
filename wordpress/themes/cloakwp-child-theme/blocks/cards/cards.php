@@ -1,7 +1,5 @@
 <?php
 
-// require_once dirname(__DIR__, 2) . '/utils/acfBlockWrapper.php';
-
 use CloakWP\Utils;
 use Extended\ACF\ConditionalLogic;
 use Extended\ACF\Fields\Number;
@@ -27,7 +25,7 @@ add_action('acf/init', function () {
         ->wrapper(['width' => '50%'])
         ->min(1)
         ->max(4),
-        TrueFalse::make('Manual Data?', 'data_type')
+      TrueFalse::make('Manual Data?', 'data_type')
         ->instructions('You can either choose from existing pages/posts to populate the cards, or manually enter the data for each card.')
         ->wrapper(['width' => '50%'])
         ->stylisedUi(),
