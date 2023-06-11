@@ -126,7 +126,8 @@ class BlockTransformer
                       $field_value = array($field_value); // convert to array if it isn't already
                     }
 
-                    foreach ($field_value as $related_post_id) { // loop through array of related page/post IDs and retrieve their full data
+                    // loop through array of related page/post IDs and retrieve their full data
+                    foreach ($field_value as $related_post_id) {
                       $related_post = get_post($related_post_id);
                       $featured_image = get_the_post_thumbnail_url($related_post_id, 'full'); // add in the post's featured image (not included in post data by default)
                       $acf_fields = get_fields($related_post_id); // add in post's ACF data
