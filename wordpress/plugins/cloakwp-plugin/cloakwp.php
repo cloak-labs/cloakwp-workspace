@@ -47,7 +47,8 @@ define('CLOAKWP_VERSION', '0.6.0');
  */
 if (!defined('CLOAKWP_FRONTEND_URL')) define('CLOAKWP_FRONTEND_URL', 'http://localhost:5000');
 if (!defined('CLOAKWP_PREVIEW_SECRET')) define('CLOAKWP_PREVIEW_SECRET', 'wefPWh8XDU43fgNUmi9IC9hjKOrvfvjijKNKNh8uf8');
-if (!defined('CLOAKWP_ENABLE_DEV_MODE')) define('CLOAKWP_ENABLE_DEV_MODE', FALSE);
+if (!defined('CLOAKWP_ENABLE_DEV_MODE') ) define('CLOAKWP_ENABLE_DEV_MODE', FALSE);
+if (!defined('CLOAKWP_PREVIEW_BLOCK_PATHNAME') ) define('CLOAKWP_PREVIEW_BLOCK_PATHNAME', '/preview-block');
 if (!defined('CLOAKWP_API_BASE_PATH')) define('CLOAKWP_API_BASE_PATH', 'cloakwp');
 if (!defined('CLOAKWP_DEBUG')) define('CLOAKWP_DEBUG', TRUE);
 
@@ -65,19 +66,19 @@ function cloakwp_autoload($class_or_function)
   if ( 0 === strpos( $class_or_function, $plugin_namespace ) ) {
     // Remove the plugin namespace.
     $relative_path = str_replace( $plugin_namespace, '', $class_or_function );
-    error_log('AUTOLOADER - $relative_path: ' . $relative_path);
+    // error_log('AUTOLOADER - $relative_path: ' . $relative_path);
     
     // Convert namespace separators to directory separators.
     $relative_path = str_replace( '\\', DIRECTORY_SEPARATOR, $relative_path );
-    error_log('AUTOLOADER - $relative_path 2: ' . $relative_path);
+    // error_log('AUTOLOADER - $relative_path 2: ' . $relative_path);
     
     // Determine if it's a class or function based on the file name.
     $is_class = substr( $relative_path, -4 ) === '.php';
-    error_log('AUTOLOADER - $is_class: ' . $is_class);
+    // error_log('AUTOLOADER - $is_class: ' . $is_class);
     
     // Get the full path to the class or function file.
     $file_path = plugin_dir_path( __FILE__ ) . 'includes' . DIRECTORY_SEPARATOR . $relative_path . '.php';
-    error_log('AUTOLOADER - $file_path: ' . $file_path);
+    // error_log('AUTOLOADER - $file_path: ' . $file_path);
 
     // Check if the file exists and load it.
     if ( file_exists( $file_path ) ) {
