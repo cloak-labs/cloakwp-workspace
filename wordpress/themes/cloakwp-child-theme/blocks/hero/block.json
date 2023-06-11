@@ -12,7 +12,7 @@
     },
     "align": false,
     "supports": {
-        "mode": false,
+        "mode": true,
         "multiple": false,
         "align": false,
         "color": {
