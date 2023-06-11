@@ -1,0 +1,113 @@
+# The Cloak Client
+
+This is the spec for the CloakClient class. The goal is to use mirror the approach used by various client librarys, like [SupabaseJS](https://github.com/supabase/supabase-js).
+Instantiate a single client object in a file with configuration parameters, and import it where you need and use it's methods.
+
+## Benefits of Client Object Approach
+- Easier importing of functions/methods
+- Easier setting up of Wordpress config
+- Can check configuration params at object instantiation, no need to put checks afterwards, if the object exists it's configured
+- Removes errors involved with importing cloakwp.config.js from project inside of NPM package
+
+### Instantiation Params
+
+<Properties>
+  <Property name="wordpressUrl" type="string">
+    The URL for the Wordpress site.
+  </Property>
+  <Property name="wordpressSecret" type="string">
+    The preview secret set on the Wordpress site.
+  </Property>
+  <Property name="wordpressJwt" type="string">
+    The JSON Web Token set on the Wordpress site.
+  </Property>
+  <Property name="wordpressAdminPath" type="string">
+    The admin URL of the Wordpress site.
+  </Property>
+  <Property name="wordpressContentPath" type="string">
+    The content path of the Wordpress site.  
+    - `wp-content` on vanilla Wordpress 
+    - `app` on Bedrock installs.
+    - Defaults to `wp-content`.
+  </Property>
+</Properties>
+
+### Public Methods
+
+<Properties>
+  <Property name="post" type="string">
+    Retrieve a specific post.
+  </Property>
+  <Property name="page" type="string">
+    Retrieve a specific page.
+  </Property>
+  <Property name="paths" type="string">
+    Retrieve a group of post or page paths.
+  </Property>
+  <Property name="menu" type="string">
+    Retrieve a menu.
+  </Property>
+</Properties>
+
+## Example use
+
+```js
+// src/cloakClient.ts
+import { createClient } from 'cloakwp'
+
+// Create a single client for interacting with your Wordpress site
+export const cloak = createClient({
+  wordpressUrl: process.env.WORDPRESS_URL,
+  wordpressSecret: process.env.WORDPRESS_SECRET,
+  wordpressJwt: process.env.WORDPRESS_JWT,
+  wordpressAdminPath: process.env.WORDPRESS_ADMIN_PATH,
+  wordpressContentPath: process.env.WORDPRESS_CONTENT_PATH
+})
+```
+
+```js
+// Example use in getStaticProps
+export async function getStaticProps(context) {
+  const { cloak } = await import('../cloakClient');
+  
+  const page = await cloak.page({slug: context.params.slug});
+  const navBarData = await cloak.menu('header-nav');
+  
+  let data = page.data;
+  
+  let preview = {};
+  const { preview: isPreview, previewData } = context
+  
+  if (isPreview) {
+    preview = await cloak.preview(previewData);
+    data = preview.data;
+  }
+
+  const notFound = !data;
+
+  return {
+    props: {
+      data,
+      navBarData,
+      preview: context.preview ?? false,
+      previewParams: preview.context ?? null,
+    },
+    notFound,
+    revalidate: 10,
+  };
+}
+
+export async function getStaticPaths() {
+  const { cloak } = await import('../cloakClient')
+  
+  const excludePaths = ['/blog', '/']
+  
+  let paths = await cloak.paths({excludePaths})
+
+  return {
+    paths,
+    fallback: 'blocking', // ensures that when new pages get created in WP, they get server-side rendered the first time a user tries to visit them (and then they get statically served from there on out)
+  }
+}
+```
+
