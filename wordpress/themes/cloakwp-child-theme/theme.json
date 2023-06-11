@@ -139,8 +139,8 @@
     },
     "custom": {},
     "layout": {
-      "contentSize": "800px",
-      "wideSize": "1000px"
+      "contentSize": "900px",
+      "wideSize": "1100px"
     },
     "spacing": {
       "margin": true,
