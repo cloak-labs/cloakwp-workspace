@@ -56,6 +56,7 @@ add_action('acf/init', function () {
         ->conditionalLogic([
           ConditionalLogic::where('hero_style', '==', 'secondary') // available operators: ==, !=, >, <, ==pattern, ==contains, ==empty, !=empty
         ])
+        ->returnFormat('id')
         ->required(),
     ]),
     'location' => [
