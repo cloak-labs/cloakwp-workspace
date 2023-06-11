@@ -41,8 +41,8 @@ function add_custom_script_to_admin()
   //]]></script>';
 }
 
-add_action('enqueue_block_editor_assets', 'gutenberg_editor_assets');
-function gutenberg_editor_assets()
+add_action('enqueue_block_editor_assets', 'my_gutenberg_editor_assets');
+function my_gutenberg_editor_assets()
 {
   // Load our custom styles for the Gutenberg editor:
   wp_enqueue_style('my-gutenberg-editor-styles', get_theme_file_uri('/blocks/styles.css'), array(), filemtime('/blocks/styles.css'), 'all');
