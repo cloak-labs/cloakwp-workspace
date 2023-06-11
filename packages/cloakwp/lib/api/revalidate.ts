@@ -5,7 +5,7 @@ export default async function regenerateStaticPage(req, res){
   const { pathname, secret } = req.query;
 
   try {
-    if (secret !== config.wpSecret) {
+    if (secret !== config.sources.default.secret) {
       throw 'Page Revalidation - Invalid preview secret';
     }
 

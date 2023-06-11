@@ -13,11 +13,11 @@ export default async function enablePreviewMode(req, res) {
 
   // Check the secret and next parameters.
   // This secret should only be known by this API route
-  if (!config.wpSecret){
-    return res.status(401).json({ message: "You haven't supplied a secret via the 'wpSecret' prop in your cloakwp.config.js file." });
+  if (!config.sources.default.secret){
+    return res.status(401).json({ message: "You haven't supplied a secret via the 'sources.default.secret' prop in your cloakwp.config.js file." });
   }
-  if (secret !== config.wpSecret){
-    return res.status(401).json({ message: 'Invalid secret token -- pass in a valid secret via a "secret" parameter that matches the secret you supplied as "wpSecret" in your cloakwp.config.js file.' });
+  if (secret !== config.sources.default.secret){
+    return res.status(401).json({ message: 'Invalid secret token -- pass in a valid secret via a "secret" parameter that matches the secret you supplied as "sources.default.secret" in your cloakwp.config.js file.' });
   }
  
   // if (!revisionId) return res.status(401).json({ message: 'A post revision ID was not supplied -- pass it in via a "revisionId" parameter.' });
