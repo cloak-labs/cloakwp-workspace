@@ -1,5 +1,15 @@
 <?php
 
+add_action('enqueue_block_editor_assets', 'cloakwp_gutenberg_editor_assets');
+function cloakwp_gutenberg_editor_assets()
+{
+  // Load our custom CSS stylesheets for the Gutenberg editor:
+  wp_enqueue_style('cloakwp-gutenberg-editor-styles', get_theme_file_uri('/css/gutenberg-styles.css'), array(), filemtime('/css/gutenberg-styles.css'), 'all');
+
+  // Load our custom JS scripts for the Gutenberg editor:
+  wp_enqueue_script('acf-block-iframe-preview-js', get_theme_file_uri('/js/acf-block-iframe-preview.js'), array(), filemtime('/js/acf-block-iframe-preview.js'), true);
+}
+
 /*
   Expand ACF field data returned in REST API; eg. image fields return full image data rather than just an ID. More info: https://www.advancedcustomfields.com/resources/wp-rest-api-integration/
 */

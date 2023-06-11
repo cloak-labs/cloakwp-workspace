@@ -1,0 +1,5 @@
+
+/* Make ACF Block Previews full-width -- makes headless iFrame preview strategy better/more accurate */
+.wp-block.acf-block-preview {
+  max-width: none !important;
+}
