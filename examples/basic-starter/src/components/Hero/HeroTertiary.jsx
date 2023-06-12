@@ -3,7 +3,7 @@ import { motionItem, motionContainer } from '@/utils/motion';
 import classNames from '@/utils/classNames';
 import parse from 'html-react-parser';
 import { Container } from '@/components/Layout';
-import { Eyebrow } from '@/components/Text';
+import { Eyebrow } from '@/components/Typography';
 
 export const HeroTertiary = ({ data }) => {
   const { tertiary_background_color, alignment, eyebrow, h1, subtitle} = data;
