@@ -1,1 +1,0 @@
-export { Eyebrow } from './Eyebrow'

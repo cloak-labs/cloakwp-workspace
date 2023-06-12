@@ -1,4 +1,4 @@
-import { Eyebrow } from '@/components/Text'
+import { Eyebrow } from '@/components/Typography'
 import { useBlockStyleBuilder } from 'cloakwp'
 import classNames from '@/utils/classNames'
 
