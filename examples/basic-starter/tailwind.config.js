@@ -12,7 +12,7 @@ module.exports = {
   safelist: [ // this safelist ensures certain classes are ALWAYS included in the final tailwind build, which helps ensure cloakwp's dynamic block styling works as intended. 
     // TODO: update the color classes that always get included to match the project's colors
     {
-      pattern: /(bg|text)-(blue|gray|gray)-(50|100|200|300|400|500|600|700|800|900)/,
+      pattern: /(bg|text)-(blue|gray)-(50|100|200|300|400|500|600|700|800|900)/,
     },
     {
       pattern: /col-span-(1|2|3|4|5|6|7|8|9|10|11|12)/,
@@ -30,6 +30,7 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
+    typography: require('./typography'),
     screens: { // we add 'xs' and 'xmd' in with the default Tailwind breakpoints (order matters which is why 'xmd' is placed where it is)
       'xs': '475px',
       'sm': defaultTheme.screens.sm,
@@ -84,6 +85,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
     plugin(function ({ addUtilities }) {
       addUtilities({
         '.highlight-white-10': {
