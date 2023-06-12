@@ -24,18 +24,18 @@
 @tailwind base;
 
 /* Apply some default styling to certain elements -- useful for HTML being dynamically brought over from WordPress */
-@layer base {
+/* @layer base {
   html {
     @apply scroll-smooth
   }
   h1 {
-    @apply font-serif text-3xl leading-tight tracking-tight xs:text-4xl xs:leading-tight sm:text-5xl sm:leading-tight md:text-6xl md:leading-tightest lg:text-7xl lg:leading-tightest;
+    @apply font-sans text-3xl leading-tight tracking-tight xs:text-4xl xs:leading-tight sm:text-5xl sm:leading-tight md:text-6xl md:leading-tightest lg:text-7xl lg:leading-tightest;
   }
   h2 {
-    @apply font-serif text-3xl leading-tightest tracking-tight sm:text-4xl sm:leading-tightest md:text-5xl md:leading-tightest lg:text-6xl lg:leading-tightest;
+    @apply font-sans text-3xl leading-tightest tracking-tight sm:text-4xl sm:leading-tightest md:text-5xl md:leading-tightest lg:text-6xl lg:leading-tightest;
   }
   h3 {
-    @apply font-serif text-lg;
+    @apply font-sans text-lg;
   }
   p, li {
     @apply mb-2 text-base sm:text-lg lg:text-xl 2xl:text-2xl;
@@ -68,7 +68,7 @@
   }
   pre {
     @apply p-5 mb-4 overflow-auto;
-    background: #f5f2f0; /* for consistency with Prismjs theme */
+    background: #f5f2f0;
   }
   code {
     @apply p-1 text-sm font-bold bg-gray-100 rounded-sm;
@@ -89,7 +89,7 @@
     @apply my-4;
   }
 }
-
+ */
 @tailwind components;
 @tailwind utilities;
 
