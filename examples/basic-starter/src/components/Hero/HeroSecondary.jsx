@@ -1,9 +1,7 @@
 import Image from 'next/future/image';
 import classNames from '@/utils/classNames';
-import { motion } from 'framer-motion';
-import { motionItem, motionContainer } from '@/utils/motion';
 import { Button } from '@/components/Button';
-import { Eyebrow } from '@/components/Text';
+import { Eyebrow, H1, P } from '@/components/Typography';
 
 export const HeroSecondary = ({ data }) => {
   const { backgroundColor, eyebrow, h1, subtitle, cta_button, image } = data;
@@ -36,36 +34,21 @@ export const HeroSecondary = ({ data }) => {
     <section id="hero" className={classNames("relative overflow-hidden", bgColor)}>
       <div className="relative z-10 grid grid-cols-1 items-center gap-4 sm:grid-cols-7 lg:grid-cols-2">
         <div className='px-4 py-12 sm:py-20 sm:px-6 col-span-1 sm:col-span-4 lg:col-span-1 xl:pl-20 2xl:pl-40'>
-          <div
-            className="max-w-xl relative z-10"
-            variants={motionContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
+          <div className="max-w-xl relative z-10">
             {eyebrow && (
-              <Eyebrow 
-                className={eyebrowColor} 
-                variants={motionItem}
-              >
+              <Eyebrow className={eyebrowColor}>
                 {eyebrow}
               </Eyebrow>
             )}
             {h1 && (
-              <h1
-                className={classNames('mt-3 2xl:mt-5', headingColor)}
-                variants={motionItem}
-              >
+              <H1 className={classNames('mt-3', headingColor)}>
                 {h1}
-              </h1>
+              </H1>
             )}
             {subtitle && (
-              <p
-                className={classNames('mt-4 2xl:mt-6', textColor)}
-                variants={motionItem}
-              >
+              <P className={classNames('mt-4 2xl:mt-6', textColor)}>
                 {subtitle}
-              </p>
+              </P>
             )}
             {(cta_button && cta_button.url && cta_button.title) && (
               <Button
@@ -74,17 +57,16 @@ export const HeroSecondary = ({ data }) => {
                 icon="chat-bubble-left-right"
                 trailingIcon={true}
                 className="mt-6 2xl:mt-8"
-                variants={motionItem}
               >
                 {cta_button.title}
               </Button>
             )}
           </div>
         </div>
-        <div className="h-full col-span-1 sm:col-span-3 lg:col-span-1">
+        <div className="sm:h-full col-span-1 sm:col-span-3 lg:col-span-1">
           <Image
             src={image}
-            className="h-full max-h-[30vh] w-full scale-[1.02] object-cover xs:max-h-[35vh] sm:max-h-[86vh] lg:max-h-[80vh] xl:max-h-[80vh] 2xl:max-h-[70vh]"
+            className="h-full max-h-[30vh] xs:max-h-[37vh] sm:max-h-none w-full object-cover"
             width={800}
             height={800}
             alt={`hero section image`}
