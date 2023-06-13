@@ -27,7 +27,7 @@
     "attributes": {
         "backgroundColor": {
             "type": "string",
-            "default": "blue-900"
+            "default": "gray-100"
         },
         "style": {
             "type": "object",
