@@ -47,6 +47,7 @@ jQuery(document).ready(function ($) {
           console.log('set height to ', event.data)
           // Set the height of the <iframe> element to the content height
           iframe.style.height = event.data + 'px';
+          iframe.parentNode.style.height = event.data + 'px';
         }
       });
 
