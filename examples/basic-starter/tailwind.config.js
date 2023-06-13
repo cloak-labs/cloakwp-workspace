@@ -12,7 +12,7 @@ module.exports = {
   safelist: [ // this safelist ensures certain classes are ALWAYS included in the final tailwind build, which helps ensure cloakwp's dynamic block styling works as intended. 
     // TODO: update the color classes that always get included to match the project's colors
     {
-      pattern: /(bg|text)-(blue|gray)-(50|100|200|300|400|500|600|700|800|900)/,
+      pattern: /(bg|text)-(blue|gray)-(50|100|200|300|400|500|600|700|800|900)\/(|60|70|80|90)/,
     },
     {
       pattern: /col-span-(1|2|3|4|5|6|7|8|9|10|11|12)/,
@@ -58,7 +58,8 @@ module.exports = {
     extend: {
       colors: ({ colors }) => ({
         gray: colors.slate, // we want to maintain a convention across projects where we always have a "gray" family, but maybe we want to use another built-in color family like "gray" for our grays, which is why we do this.. or you can provide custom gray colors like below
-        blue: { // recommendation: if designer doesn't provide you with Tailwind-style palette, use https://uicolors.app/create to create a tailwind palette that you can easily export/copy into here
+        blue: colors.cyan,
+        /* custom: { // recommendation: if designer doesn't provide you with Tailwind-style palette, use https://uicolors.app/create to create a tailwind palette that you can easily export/copy into here
           '50': '#f2f7fd',
           '100': '#dbe9fb',
           '200': '#bbd8f7',
@@ -69,7 +70,7 @@ module.exports = {
           '700': '#294fa8',
           '800': '#26438c',
           '900': '#1e315c',
-        },
+        }, */
       }),
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
@@ -81,6 +82,9 @@ module.exports = {
       listStyleType: {
         circle: 'circle',
       },
+      maxWidth: {
+        '8xl': '88rem',
+      }
     },
   },
   plugins: [
