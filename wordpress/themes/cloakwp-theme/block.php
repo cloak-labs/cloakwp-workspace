@@ -56,6 +56,7 @@ $formattedData = [
   'attrs' => [
     'align' => $block['align'],
     'style' => $block['style'],
+    'backgroundColor' => $block['backgroundColor'],
     'data' => $first_render === 1 ? $data : $field_values,
   ]
 ];
