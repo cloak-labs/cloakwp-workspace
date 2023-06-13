@@ -15,119 +15,119 @@
           "color": "rgba(0,0,0,0)"
         },
         {
-          "slug": "blue-50",
-          "name": "blue-50",
-          "color": "#E3F5FC"
-        },
-        {
-          "slug": "blue-100",
-          "name": "blue-100",
-          "color": "#B5E3F7"
-        },
-        {
-          "slug": "blue-200",
-          "name": "blue-200",
-          "color": "#79CCF1"
-        },
-        {
-          "slug": "blue-300",
-          "name": "blue-300",
-          "color": "#148EC4"
-        },
-        {
-          "slug": "blue-400",
-          "name": "blue-400",
-          "color": "#135BAF"
-        },
-        {
-          "slug": "blue-500",
-          "name": "blue-500",
-          "color": "#1F5799"
-        },
-        {
-          "slug": "blue-600",
-          "name": "blue-600",
-          "color": "#173E87"
-        },
-        {
-          "slug": "blue-700",
-          "name": "blue-700",
-          "color": "#0A2E72"
-        },
-        {
-          "slug": "blue-800",
-          "name": "blue-800",
-          "color": "#2A335A"
-        },
-        {
-          "slug": "blue-900",
-          "name": "blue-900",
-          "color": "#000D3E"
-        },
-        {
           "slug": "white",
           "name": "white",
           "color": "#FFFFFF"
         },
         {
+          "slug": "blue-50",
+          "name": "blue-50",
+          "color": "#ecfeff"
+        },
+        {
+          "slug": "blue-100",
+          "name": "blue-100",
+          "color": "#cffafe"
+        },
+        {
+          "slug": "blue-200",
+          "name": "blue-200",
+          "color": "#a5f3fc"
+        },
+        {
+          "slug": "blue-300",
+          "name": "blue-300",
+          "color": "#67e8f9"
+        },
+        {
+          "slug": "blue-400",
+          "name": "blue-400",
+          "color": "#22d3ee"
+        },
+        {
+          "slug": "blue-500",
+          "name": "blue-500",
+          "color": "#06b6d4"
+        },
+        {
+          "slug": "blue-600",
+          "name": "blue-600",
+          "color": "#0891b2"
+        },
+        {
+          "slug": "blue-700",
+          "name": "blue-700",
+          "color": "#0e7490"
+        },
+        {
+          "slug": "blue-800",
+          "name": "blue-800",
+          "color": "#155e75"
+        },
+        {
+          "slug": "blue-900",
+          "name": "blue-900",
+          "color": "#164e63"
+        },
+        {
+          "slug": "blue-950",
+          "name": "blue-950",
+          "color": "#083344"
+        },
+        {
           "slug": "gray-50",
           "name": "gray-50",
-          "color": "#EFF1F4"
+          "color": "#f8fafc"
         },
         {
           "slug": "gray-100",
           "name": "gray-100",
-          "color": "#e8e8e8"
+          "color": "#f1f5f9"
         },
         {
           "slug": "gray-200",
           "name": "gray-200",
-          "color": "#d4d4d4"
+          "color": "#e2e8f0"
         },
         {
           "slug": "gray-300",
           "name": "gray-300",
-          "color": "#bababa"
+          "color": "#cbd5e1"
         },
         {
           "slug": "gray-400",
           "name": "gray-400",
-          "color": "#969696"
+          "color": "#94a3b8"
         },
         {
           "slug": "gray-500",
           "name": "gray-500",
-          "color": "#737373"
+          "color": "#64748b"
         },
         {
           "slug": "gray-600",
           "name": "gray-600",
-          "color": "#545454"
+          "color": "#475569"
         },
         {
           "slug": "gray-700",
           "name": "gray-700",
-          "color": "#363636"
+          "color": "#334155"
         },
         {
           "slug": "gray-800",
           "name": "gray-800",
-          "color": "#1c1c1c"
+          "color": "#1e293b"
         },
         {
           "slug": "gray-900",
           "name": "gray-900",
-          "color": "#080808"
+          "color": "#0f172a"
         },
         {
-          "slug": "green-100",
-          "name": "green-100",
-          "color": "#68B164"
-        },
-        {
-          "slug": "green-200",
-          "name": "green-200",
-          "color": "#A7D470"
+          "slug": "gray-950",
+          "name": "gray-950",
+          "color": "#020617"
         }
       ]
     },
@@ -289,17 +289,12 @@
             {
               "slug": "blue-800",
               "name": "blue-800",
-              "color": "#2A335A"
+              "color": "#155e75"
             },
             {
               "slug": "blue-900",
               "name": "blue-900",
-              "color": "#000D3E"
-            },
-            {
-              "slug": "green-100",
-              "name": "green-100",
-              "color": "#68B164"
+              "color": "#164e63"
             }
           ]
         },
@@ -310,54 +305,49 @@
           }
         }
       },
-      "acf/pageheader": {
+      "acf/hero": {
         "color": {
           "palette": [
             {
-              "slug": "transparent",
-              "name": "transparent",
-              "color": "rgba(0,0,0,0)"
+              "slug": "white",
+              "name": "white",
+              "color": "#FFFFFF"
             },
             {
-              "slug": "blue-300",
-              "name": "blue-300",
-              "color": "#148EC4"
+              "slug": "gray-100",
+              "name": "gray-100",
+              "color": "#f1f5f9"
             },
             {
-              "slug": "blue-400",
-              "name": "blue-400",
-              "color": "#135BAF"
+              "slug": "gray-200",
+              "name": "gray-200",
+              "color": "#e2e8f0"
             },
             {
-              "slug": "blue-500",
-              "name": "blue-500",
-              "color": "#1F5799"
+              "slug": "gray-300",
+              "name": "gray-300",
+              "color": "#cbd5e1"
             },
             {
-              "slug": "blue-600",
-              "name": "blue-600",
-              "color": "#173E87"
+              "slug": "gray-700",
+              "name": "gray-700",
+              "color": "#334155"
             },
             {
-              "slug": "blue-700",
-              "name": "blue-700",
-              "color": "#0A2E72"
+              "slug": "gray-800",
+              "name": "gray-800",
+              "color": "#1e293b"
             },
             {
-              "slug": "blue-800",
-              "name": "blue-800",
-              "color": "#2A335A"
+              "slug": "gray-900",
+              "name": "gray-900",
+              "color": "#0f172a"
             },
             {
-              "slug": "blue-900",
-              "name": "blue-900",
-              "color": "#000D3E"
-            },
-            {
-              "slug": "green-100",
-              "name": "green-100",
-              "color": "#68B164"
-            }
+              "slug": "gray-950",
+              "name": "gray-950",
+              "color": "#020617"
+            }   
           ]
         }
       },
@@ -372,47 +362,47 @@
             {
               "slug": "blue-50",
               "name": "blue-50",
-              "color": "#E3F5FC"
+              "color": "#ecfeff"
             },
             {
               "slug": "blue-100",
               "name": "blue-100",
-              "color": "#B5E3F7"
+              "color": "#cffafe"
             },
             {
               "slug": "blue-200",
               "name": "blue-200",
-              "color": "#79CCF1"
+              "color": "#a5f3fc"
             },
             {
               "slug": "blue-400",
               "name": "blue-400",
-              "color": "#135BAF"
+              "color": "#22d3ee"
             },
             {
               "slug": "blue-500",
               "name": "blue-500",
-              "color": "#1F5799"
+              "color": "#06b6d4"
             },
             {
               "slug": "blue-600",
               "name": "blue-600",
-              "color": "#173E87"
+              "color": "#0891b2"
             },
             {
               "slug": "blue-700",
               "name": "blue-700",
-              "color": "#0A2E72"
+              "color": "#0e7490"
             },
             {
               "slug": "blue-800",
               "name": "blue-800",
-              "color": "#2A335A"
+              "color": "#155e75"
             },
             {
               "slug": "blue-900",
               "name": "blue-900",
-              "color": "#000D3E"
+              "color": "#164e63"
             },
             {
               "slug": "white",
@@ -422,37 +412,37 @@
             {
               "slug": "gray-50",
               "name": "gray-50",
-              "color": "#EFF1F4"
+              "color": "#f8fafc"
             },
             {
               "slug": "gray-100",
               "name": "gray-100",
-              "color": "#e8e8e8"
+              "color": "#f1f5f9"
             },
             {
               "slug": "gray-200",
               "name": "gray-200",
-              "color": "#d4d4d4"
+              "color": "#e2e8f0"
             },
             {
               "slug": "gray-600",
               "name": "gray-600",
-              "color": "#545454"
+              "color": "#475569"
             },
             {
               "slug": "gray-700",
               "name": "gray-700",
-              "color": "#363636"
+              "color": "#374151"
             },
             {
               "slug": "gray-800",
               "name": "gray-800",
-              "color": "#1c1c1c"
+              "color": "#1e293b"
             },
             {
               "slug": "gray-900",
               "name": "gray-900",
-              "color": "#080808"
+              "color": "#0f172a"
             }
           ]
         }
@@ -463,42 +453,37 @@
             {
               "slug": "blue-300",
               "name": "blue-300",
-              "color": "#148EC4"
+              "color": "#67e8f9"
             },
             {
               "slug": "blue-400",
               "name": "blue-400",
-              "color": "#135BAF"
+              "color": "#22d3ee"
             },
             {
               "slug": "blue-500",
               "name": "blue-500",
-              "color": "#1F5799"
+              "color": "#06b6d4"
             },
             {
               "slug": "blue-600",
               "name": "blue-600",
-              "color": "#173E87"
+              "color": "#0891b2"
             },
             {
               "slug": "blue-700",
               "name": "blue-700",
-              "color": "#0A2E72"
+              "color": "#0e7490"
             },
             {
               "slug": "blue-800",
               "name": "blue-800",
-              "color": "#2A335A"
+              "color": "#155e75"
             },
             {
               "slug": "blue-900",
               "name": "blue-900",
-              "color": "#000D3E"
-            },
-            {
-              "slug": "green-100",
-              "name": "green-100",
-              "color": "#68B164"
+              "color": "#164e63"
             }
           ]
         }
@@ -509,32 +494,27 @@
             {
               "slug": "blue-300",
               "name": "blue-300",
-              "color": "#148EC4"
+              "color": "#67e8f9"
             },
             {
               "slug": "blue-400",
               "name": "blue-400",
-              "color": "#135BAF"
+              "color": "#22d3ee"
             },
             {
               "slug": "blue-500",
               "name": "blue-500",
-              "color": "#1F5799"
+              "color": "#06b6d4"
             },
             {
               "slug": "blue-600",
               "name": "blue-600",
-              "color": "#173E87"
+              "color": "#0891b2"
             },
             {
               "slug": "blue-800",
               "name": "blue-800",
-              "color": "#2A335A"
-            },
-            {
-              "slug": "green-100",
-              "name": "green-100",
-              "color": "#68B164"
+              "color": "#155e75"
             }
           ]
         }
