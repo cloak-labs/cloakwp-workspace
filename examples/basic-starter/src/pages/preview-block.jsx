@@ -16,9 +16,7 @@ export default function BlockPreviewPage({ blockData }) {
     setTimeout(() => {
       // Get the content height and send it to the parent website
       console.log('send height to parent, documentElement: ', document.documentElement)
-      // const docHeight = document.documentElement.clientHeight;
       const contentHeight = document.querySelector('#previewBlock').clientHeight;
-      // window.parent?.postMessage(Math.min(docHeight, contentHeight), '*');
       window.parent?.postMessage(contentHeight, '*');
     }, 500)
   };
