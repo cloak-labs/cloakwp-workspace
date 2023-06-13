@@ -11,10 +11,11 @@ const baseStyles = {
 
 const variantStyles = {
   solid: {
-    gray: 'relative overflow-hidden bg-gray-300 border-top border-gray-200 text-blue-800 before:absolute before:inset-0 active:before:bg-transparent hover:before:bg-white/10 active:bg-gray-400 active:text-blue-800/80 before:transition-colors dark:highlight-gray',
-    navy: 'bg-blue-800 text-gray-100 hover:bg-blue-900 active:bg-blue-800 active:text-white/80 dark:highlight-white-10',
+    'light-gray': 'relative overflow-hidden bg-gray-300 border-top border-gray-300 text-gray-700 before:absolute before:inset-0 active:before:bg-transparent hover:bg-gray-400 hover:text-gray-800 active:bg-gray-400 active:text-gray-700/80 before:transition-colors highlight-white-20',
+    gray: 'relative overflow-hidden bg-gray-800 border-top border-gray-800 text-gray-100 before:absolute before:inset-0 active:before:bg-transparent hover:before:bg-white/10 active:bg-gray-700 active:text-gray-200/80 before:transition-colors highlight-white-20',
     white: 'bg-white text-blue-900 hover:bg-white/90 active:bg-white/90 active:text-blue-900/70',
-    black: 'bg-blue-900 text-gray-100 hover:bg-blue-800 active:bg-blue-900 active:text-white/80 dark:highlight-white-10',
+    blue: 'bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700 active:text-white/80 highlight-white-10',
+    black: 'bg-gray-950 text-gray-100 hover:bg-gray-800 active:bg-gray-900 active:text-white/80 highlight-white-10',
   },
   outline: {
     navy: 'border-blue-700 text-blue-800 hover:border-blue-900 active:bg-blue-100 active:text-blue-700/80',
