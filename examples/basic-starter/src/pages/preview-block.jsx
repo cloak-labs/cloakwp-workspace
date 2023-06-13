@@ -13,9 +13,14 @@ export default function BlockPreviewPage({ blockData }) {
   const router = useRouter();
 
   const sendHeightToParent = () => {
-    // Get the content height and send it to the parent website
-    const height = document.documentElement.scrollHeight;
-    window.parent?.postMessage(height, '*');
+    setTimeout(() => {
+      // Get the content height and send it to the parent website
+      console.log('send height to parent, documentElement: ', document.documentElement)
+      // const docHeight = document.documentElement.clientHeight;
+      const contentHeight = document.querySelector('#previewBlock').clientHeight;
+      // window.parent?.postMessage(Math.min(docHeight, contentHeight), '*');
+      window.parent?.postMessage(contentHeight, '*');
+    }, 500)
   };
 
   // when parent sends message, handleIframeMessage() handles it
@@ -33,9 +38,9 @@ export default function BlockPreviewPage({ blockData }) {
   }
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // prevents running the following client code on server
-      // don't wait for parent to ask for iframe height, just send it
+    if (typeof window !== 'undefined') { // prevents running the following client code on server
+      console.log('initial render of block preview')
+      // don't wait for parent to ask for iframe height, just send it (only on initial render)
       sendHeightToParent();
 
       // Add a message event listener to receive messages from the parent website (i.e. WordPress Gutenberg Editor)
@@ -57,7 +62,9 @@ export default function BlockPreviewPage({ blockData }) {
       <Head>
         <title>{`Preview Block: ${blockData.blockName}`}</title>
       </Head>
-      <Blocks data={[blockData]} blocks={{}} container={{}} />
+      <div id="previewBlock">
+        <Blocks data={[blockData]} blocks={{}} container={{}} />
+      </div>
     </>
   );
 }
