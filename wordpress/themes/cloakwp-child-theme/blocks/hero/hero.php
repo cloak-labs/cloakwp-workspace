@@ -20,11 +20,11 @@ add_action('acf/init', function () {
       RadioButton::make('Hero Style')
         ->instructions('Select the style of the hero section.')
         ->choices([
-          'primary' => 'Primary',
-          'secondary' => 'Secondary',
-          'tertiary' => 'Tertiary',
+          'image_right' => 'Image Right',
+          'bg_image' => 'Background Image',
+          'no_image' => 'No image',
         ])
-        ->defaultValue('primary')
+        ->defaultValue('image_right')
         ->layout('horizontal')
         ->wrapper(['width' => '50%']),
       Text::make('Eyebrow')
@@ -40,10 +40,10 @@ add_action('acf/init', function () {
           'center' => 'Center',
           'left' => 'Left',
         ])
-        ->defaultValue('center')
+        ->defaultValue('left')
         ->wrapper(['width' => '50%'])
         ->conditionalLogic([
-          ConditionalLogic::where('hero_style', '==', 'tertiary') // available operators: ==, !=, >, <, ==pattern, ==contains, ==empty, !=empty
+          ConditionalLogic::where('hero_style', '!=', 'image_right') // available operators: ==, !=, >, <, ==pattern, ==contains, ==empty, !=empty
         ]),
       Link::make('CTA Button')
         ->wrapper(['width' => '50%'])
@@ -51,10 +51,9 @@ add_action('acf/init', function () {
       Image::make('Image')
         ->instructions('Upload/select an image to show on the right of the hero text.')
         ->previewSize('medium')
-        ->width(500, 1100)
         ->wrapper(['width' => '50%'])
         ->conditionalLogic([
-          ConditionalLogic::where('hero_style', '==', 'secondary') // available operators: ==, !=, >, <, ==pattern, ==contains, ==empty, !=empty
+          ConditionalLogic::where('hero_style', '!=', 'no_image') // available operators: ==, !=, >, <, ==pattern, ==contains, ==empty, !=empty
         ])
         ->returnFormat('id')
         ->required(),
