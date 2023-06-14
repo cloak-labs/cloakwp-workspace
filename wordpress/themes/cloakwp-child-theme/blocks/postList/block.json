@@ -1,38 +1,52 @@
 {
-    "name": "acf/postlist",
-    "title": "Posts List",
-    "description": "A custom block for displaying an archive of posts (or custom post types).",
-    "category": "widgets",
-    "icon": "admin-page",
-    "keywords": ["cards", "posts", "pages", "tiles", "list"],
-    "acf": {
-        "mode": "edit",
-        "renderTemplate": "block.php"
-    },
+  "name": "acf/postlist",
+  "title": "Posts List",
+  "description": "A custom block for displaying an archive of posts (or custom post types).",
+  "textdomain": "cloakwp",
+  "category": "widgets",
+  "icon": "admin-page",
+  "keywords": [
+    "cards",
+    "posts",
+    "pages",
+    "tiles",
+    "list"
+  ],
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "block.php"
+  },
+  "align": false,
+  "supports": {
+    "anchor": true,
+    "mode": true,
     "align": false,
-    "supports": {
-        "mode": false,
-        "align": false,
-        "spacing": {
-            "margin": ["top", "bottom"]
-        },
-        "color": {
-            "background": false,
-            "gradients": false,
-            "text": false
-        }
+    "html": false,
+    "reusable": false,
+    "lock": false,
+    "spacing": {
+      "margin": [
+        "top",
+        "bottom"
+      ]
     },
-    "attributes": {
-        "style": {
-            "type": "object",
-            "default": {
-                "spacing": {
-                    "margin": {
-                        "top": "80px",
-                        "bottom": "80px"
-                    }
-                }
-            }
-        }
+    "color": {
+      "background": false,
+      "gradients": false,
+      "text": false
     }
+  },
+  "attributes": {
+    "style": {
+      "type": "object",
+      "default": {
+        "spacing": {
+          "margin": {
+            "top": "80px",
+            "bottom": "80px"
+          }
+        }
+      }
+    }
+  }
 }

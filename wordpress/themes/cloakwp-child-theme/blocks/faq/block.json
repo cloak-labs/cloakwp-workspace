@@ -1,43 +1,60 @@
 {
-    "name": "acf/faq",
-    "title": "FAQs",
-    "description": "A custom block for displaying a list of FAQs.",
-    "category": "widgets",
-    "icon": "format-chat",
-    "keywords": ["faqs", "frequently", "questions", "q&a", "answers"],
-    "acf": {
-        "mode": "edit",
-        "renderTemplate": "block.php"
-    },
+  "name": "acf/faq",
+  "title": "FAQs",
+  "description": "A custom block for displaying a list of FAQs.",
+  "textdomain": "cloakwp",
+  "category": "widgets",
+  "icon": "format-chat",
+  "keywords": [
+    "faqs",
+    "frequently",
+    "questions",
+    "q&a",
+    "answers"
+  ],
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "block.php"
+  },
+  "align": false,
+  "supports": {
+    "anchor": true,
+    "mode": true,
     "align": false,
-    "supports": {
-        "mode": false,
-        "align": false,
-        "spacing": {
-            "margin": ["top", "bottom"],
-            "padding": ["top", "bottom"]
-        },
-        "color": {
-            "background": true,
-            "gradients": false,
-            "text": false
-        }
+    "html": false,
+    "reusable": false,
+    "lock": false,
+    "spacing": {
+      "margin": [
+        "top",
+        "bottom"
+      ],
+      "padding": [
+        "top",
+        "bottom"
+      ]
     },
-    "attributes": {
-        "style": {
-            "type": "object",
-            "default": {
-                "spacing": {
-                    "margin": {
-                        "top": "80px",
-                        "bottom": "80px"
-                    },
-                    "padding": {
-                        "top": "0px",
-                        "bottom": "0px"
-                    }
-                }
-            }
-        }
+    "color": {
+      "background": true,
+      "gradients": false,
+      "text": false
     }
+  },
+  "attributes": {
+    "style": {
+      "type": "object",
+      "default": {
+        "spacing": {
+          "margin": {
+            "top": "80px",
+            "bottom": "80px"
+          },
+          "padding": {
+            "top": "0px",
+            "bottom": "0px"
+          }
+        }
+      }
+    }
+  }
 }

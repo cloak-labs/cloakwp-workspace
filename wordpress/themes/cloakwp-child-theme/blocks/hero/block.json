@@ -1,43 +1,57 @@
 {
-    "name": "acf/hero",
-    "title": "Hero",
-    "description": "A custom block for hero sections.",
-    "category": "widgets",
-    "icon": "cover-image",
-    "keywords": ["header", "hero", "page header", "page hero"],
-    "acf": {
-        "mode": "edit",
-        "renderTemplate": "block.php",
-        "postTypes": ["page"]
-    },
+  "name": "acf/hero",
+  "title": "Hero",
+  "description": "A custom block for hero sections.",
+  "textdomain": "cloakwp",
+  "category": "widgets",
+  "icon": "cover-image",
+  "keywords": [
+    "header",
+    "hero",
+    "page header",
+    "page hero"
+  ],
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "block.php",
+    "postTypes": [
+      "page"
+    ]
+  },
+  "align": false,
+  "supports": {
+    "anchor": true,
+    "mode": true,
     "align": false,
-    "supports": {
-        "mode": true,
-        "multiple": false,
-        "align": false,
-        "color": {
-            "background": true,
-            "gradients": false,
-            "text": false
-        },
-        "spacing": {
-            "margin": ["bottom"]
-        }
+    "html": false,
+    "reusable": false,
+    "lock": false,
+    "multiple": false,
+    "color": {
+      "background": true,
+      "gradients": false,
+      "text": false
     },
-    "attributes": {
-        "backgroundColor": {
-            "type": "string",
-            "default": "gray-100"
-        },
-        "style": {
-            "type": "object",
-            "default": {
-                "spacing": {
-                    "margin": {
-                        "bottom": "80px"
-                    }
-                }
-            }
-        }
+    "spacing": {
+      "margin": [
+        "bottom"
+      ]
     }
+  },
+  "attributes": {
+    "backgroundColor": {
+      "type": "string",
+      "default": "gray-100"
+    },
+    "style": {
+      "type": "object",
+      "default": {
+        "spacing": {
+          "margin": {
+            "bottom": "80px"
+          }
+        }
+      }
+    }
+  }
 }
