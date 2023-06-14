@@ -167,6 +167,16 @@ class Posts
         'schema'          => null,
       )
     );
+
+    register_rest_field(
+      $all_post_types,
+      'taxonomies',
+      array(
+        'get_callback'    => array($this, 'get_post_taxonomies'),
+        'update_callback' => null,
+        'schema'          => null,
+      )
+    );
   }
 
   /**
@@ -214,6 +224,52 @@ class Posts
 
     return $pathname;
   }
+
+  /**
+   * Gets all taxonomies attached to a post, formatted for REST API
+   *
+   * @return array
+   */
+  public function get_post_taxonomies($object)
+  {
+    $post_id = !empty($object['wp_id']) ? $object['wp_id'] : $object['id'];
+  
+    // Get the post type associated with the post ID
+    $post_type = get_post_type($post_id);
+  
+    // Get all taxonomies attached to the post
+    $taxonomies = get_object_taxonomies($post_type);
+    $taxonomies_data = array();
+  
+    // Iterate through each taxonomy
+    foreach ($taxonomies as $taxonomy) {
+      // Get the terms for the current taxonomy
+      $terms = wp_get_post_terms($post_id, $taxonomy);
+      $terms_data = array();
+  
+      // Iterate through each term
+      foreach ($terms as $term) {
+        // Build the term data array
+        $term_data = array(
+          'name' => $term->name,
+          'slug' => $term->slug,
+          'id' => $term->term_id,
+        );
+  
+        // Add the term data to the terms array
+        $terms_data[] = $term_data;
+      }
+  
+      // Add the taxonomy slug to its own object
+      $taxonomies_data[$taxonomy]['slug'] = $taxonomy;
+  
+      // Add the terms data to the taxonomies data array
+      $taxonomies_data[$taxonomy]['terms'] = $terms_data;
+    }
+  
+    return $taxonomies_data;
+  }
+
 
   /**
    * Add blocksData to post revisions API responses
