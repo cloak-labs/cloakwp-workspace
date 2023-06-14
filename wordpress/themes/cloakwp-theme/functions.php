@@ -10,6 +10,8 @@ function cloakwp_gutenberg_editor_assets()
   wp_enqueue_script('acf-block-iframe-preview-js', get_theme_file_uri('/js/acf-block-iframe-preview.js'), array(), filemtime('/js/acf-block-iframe-preview.js'), true);
 }
 
+remove_theme_support( 'core-block-patterns' );
+
 /*
   Expand ACF field data returned in REST API; eg. image fields return full image data rather than just an ID. More info: https://www.advancedcustomfields.com/resources/wp-rest-api-integration/
 */
