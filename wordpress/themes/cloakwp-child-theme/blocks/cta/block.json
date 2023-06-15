@@ -12,7 +12,7 @@
   ],
   "acf": {
     "mode": "edit",
-    "renderTemplate": "block.php"
+    "renderTemplate": "block-preview.php"
   },
   "align": false,
   "supports": {

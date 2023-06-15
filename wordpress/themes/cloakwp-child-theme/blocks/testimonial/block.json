@@ -14,7 +14,7 @@
   ],
   "acf": {
     "mode": "edit",
-    "renderTemplate": "block.php",
+    "renderTemplate": "block-preview.php",
     "postTypes": [
       "page",
       "post"
