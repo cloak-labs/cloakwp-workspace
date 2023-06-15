@@ -32,3 +32,6 @@ export { classNames } from './utils/classNames'
 
 // API
 export { default as apiRouter} from './api/apiRouter'
+
+// Preview Block for iFrames
+export * from './preview-block'
