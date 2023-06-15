@@ -1,13 +1,10 @@
 jQuery(document).ready(function ($) {
 
-  setTimeout(() => { // wait 1 second to let Gutenberg editor finish rendering before we start any DOM manipulation:
-
     // if any blocks are in preview mode by default on page load, we manually adjust their heights here:
     const previewIframes = document.querySelectorAll('iframe.block-preview-iframe')
     previewIframes.forEach(iframe => {
       adjustIframeHeight(iframe);
     });
-
 
     MutationObserver = window.MutationObserver || window.WebKitMutationObserver;    
 
@@ -51,11 +48,8 @@ jQuery(document).ready(function ($) {
         }
       });
 
-      setTimeout(() => { // wait 1.5 second to let front-end preview render before requesting its height
-        // After the 1st time the block preview renders, this getHeight request becomes necessary in order to adjust the iframe's height for subsequent preview renders:
-        iframe.contentWindow.postMessage('getHeight', '*')
-      }, 1500)
+      // After the 1st time the block preview renders, this getHeight request becomes necessary in order to adjust the iframe's height for subsequent preview renders:
+      iframe.contentWindow.postMessage('getHeight', '*')
     }
 
-  }, 1000)
 });
