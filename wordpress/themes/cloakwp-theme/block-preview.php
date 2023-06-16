@@ -79,9 +79,6 @@ $url = CloakWP::get_frontend_url();
     title="Block Preview"
     width="100%"
     allow-same-origin
-    frameborder="0"
-    allowfullscreen
-    sandbox="allow-scripts"
   ></iframe>
 </div>
 
