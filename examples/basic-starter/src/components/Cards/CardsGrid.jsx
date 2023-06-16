@@ -7,19 +7,25 @@ export function CardsGrid({
   cta, // optional cta text to use on all cards
   limit = 3, // the maximum amount of cards to render
   cols = 3, // choose between 2 and 3 column layout
-  bgColor
+  bgColor,
+  style,
+  className = ''
 }) {
 
   return (
-    <div className={classNames(
-      "relative z-10 mx-auto grid gap-5 max-w-sm sm:max-w-none",
-      cols == 3 && 'xmd:grid-cols-3 sm:grid-cols-2',
-      cols == 2 && 'md:grid-cols-2',
-    )}>
+    <div
+      className={classNames(
+        "relative z-10 mx-auto grid gap-5 max-w-sm sm:max-w-none",
+        cols == 3 && 'xmd:grid-cols-3 sm:grid-cols-2',
+        cols == 2 && 'md:grid-cols-2',
+        className
+      )}
+      style={style}
+    >
       {posts?.slice(0, Math.min(limit, posts.length))?.map((post, i) => (
         <Fragment key={post.id || i}>
           <Card
-            image={post.imageUrl}
+            image={post.imageUrl || '/images/placeholder.png'}
             href={post.href}
             title={post.title}
             {...(post.date ? {date: post.date} : {})}
