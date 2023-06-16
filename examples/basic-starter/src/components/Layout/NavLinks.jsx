@@ -4,10 +4,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 export function NavLinks({ links }) {
   let [hoveredIndex, setHoveredIndex] = useState(null)
-  
-  return links?.map(({title, url}, index) => (
+  console.log({links})
+  return links?.map(({title, url, id}, index) => (
     <Link
-      key={title}
+      key={id}
       href={url}
       className="relative -my-2 -mx-3 rounded-full px-3 py-1 text-gray-800 text-lg transition-colors delay-150 hover:text-gray-100 hover:delay-[0ms]"
       onMouseEnter={() => setHoveredIndex(index)}
@@ -16,7 +16,7 @@ export function NavLinks({ links }) {
       <AnimatePresence>
         {hoveredIndex === index && (
           <motion.span
-            className="absolute inset-0 bg-blue-900 rounded-full"
+            className="absolute inset-0 bg-gray-900 rounded-full"
             layoutId="hoverBackground"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.15 } }}
