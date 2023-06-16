@@ -1,5 +1,6 @@
 jQuery(document).ready(function ($) {
 
+  setTimeout(() => {
     // if any blocks are in preview mode by default on page load, we manually adjust their heights here:
     const previewIframes = document.querySelectorAll('iframe.block-preview-iframe')
     previewIframes.forEach(iframe => {
@@ -51,5 +52,6 @@ jQuery(document).ready(function ($) {
       // After the 1st time the block preview renders, this getHeight request becomes necessary in order to adjust the iframe's height for subsequent preview renders:
       iframe.contentWindow.postMessage('getHeight', '*')
     }
+  }, 1000)
 
 });
