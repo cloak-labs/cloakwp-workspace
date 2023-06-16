@@ -25,7 +25,7 @@ const variantStyles = {
 export const Button = forwardRef(function Button(
   {
     variant = 'solid',
-    color = 'navy',
+    color = 'gray',
     className,
     href,
     icon,
