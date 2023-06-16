@@ -161,9 +161,6 @@ importers:
       react-player:
         specifier: ^2.11.0
         version: 2.11.0(react@18.2.0)
-      react-use-scroll-position:
-        specifier: ^2.0.0
-        version: 2.0.0(react@18.2.0)
       tailwind-merge:
         specifier: ^1.8.0
         version: 1.8.0
@@ -6294,14 +6291,6 @@ packages:
 
   /react-property@2.0.0:
     resolution: {integrity: sha512-kzmNjIgU32mO4mmH5+iUyrqlpFQhF8K2k7eZ4fdLSOPFrD1XgEuSBv9LDEgxRXTMBqMd8ppT0x6TIzqE5pdGdw==}
-    dev: false
-
-  /react-use-scroll-position@2.0.0(react@18.2.0):
-    resolution: {integrity: sha512-nQaWMPElzI8aN1vYTnqy0xV17pEhItgyWUBOtdmMEqsbY1mV3+iZMyTeAJ+oegsQIugYxBU4LnV2NosynN+KKA==}
-    peerDependencies:
-      react: '>=16.8.0'
-    dependencies:
-      react: 18.2.0
     dev: false
 
   /react@18.2.0:
