@@ -6,11 +6,12 @@ const CustomLink = ({
   href,
   ref,
   children,
+  openInNewTab = true,
   ...rest
 }) => {
   if(!href) return <span ref={ref} {...rest}>{children}</span>
 
-  const isInternalLink = href && href.startsWith('/')
+  const isInternalLink = href && href.startsWith('/') && !href.startsWith('/api/')
   const isAnchorLink = href && href.startsWith('#')
 
   if (isInternalLink) {
@@ -27,7 +28,7 @@ const CustomLink = ({
 
   if(!href.startsWith('/') && !href.startsWith('http') && !href.startsWith('mailto:') && !href.startsWith('tel:')) href = `https://${href}`
 
-  return <a target="_blank" rel="noopener noreferrer" ref={ref} href={href} {...rest}>{children}</a>
+  return <a target={openInNewTab ? "_blank" : ""} rel="noopener noreferrer" ref={ref} href={href} {...rest}>{children}</a>
 }
 
 export default CustomLink
