@@ -1,35 +1,14 @@
-import Head from 'next/head';
 import { Blocks } from 'cloakwp';
-import stripHtml from '@/utils/stripHtml';
-import { metaConfig } from '@/config/metaConfig';
 
-export default function Page({ data }) {
-  const metatitle = `${data?.title?.rendered || "Page"} | ${metaConfig.companyName}`
-
-  return (
-    <>
-      <Head>
-        {(metatitle && typeof metatitle == 'string') &&
-          <title>{metatitle}</title>
-        }
-        <meta
-          name="description"
-          content={stripHtml(data?.excerpt?.rendered)}
-        />
-      </Head>
-      <div>
-        <Blocks data={data?.blocksData} />
-      </div>
-    </>
-  )
+export default function Page({ pageData }) {
+  return <Blocks data={pageData?.blocksData} />
 }
 
 export async function getStaticProps(context) {
   const { getPage, getPreviewData, getMenus } = await import('cloakwp');
   console.log({slug: context.params.slug})
-  const page = await getPage({slug: context.params.slug});
+  let { data } = await getPage({slug: context.params.slug});
   const navBarData = await getMenus('header-nav');
-  let data = page.data;
 
   let preview = {};
   const { preview: isPreview, previewData } = context
@@ -43,7 +22,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      data,
+      pageData: data,
       navBarData,
       preview: context.preview ?? false,
       previewParams: preview.context ?? null,
