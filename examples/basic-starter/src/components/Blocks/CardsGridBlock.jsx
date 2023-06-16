@@ -4,7 +4,7 @@ import formatDate from '@/utils/formatDate';
 
 
 export function CardsGridBlock({block}) {
-  const { classes, styles } = useBlockStyleBuilder(block.data);
+  const { styles } = useBlockStyleBuilder(block.data);
   const { button_text, data_type, card_pages, num_columns, manual_cards } = block.data.attrs.data;
   const { backgroundColor}  = block.data.attrs;
     
@@ -35,14 +35,13 @@ export function CardsGridBlock({block}) {
   }
 
   return (
-    <div style={styles}>
-      <CardsGrid
-        cta={button_text}
-        cols={num_columns}
-        posts={posts}
-        limit={posts?.length}
-        bgColor={backgroundColor}
-      />
-    </div>
+    <CardsGrid
+      cta={button_text}
+      cols={num_columns}
+      posts={posts}
+      limit={posts?.length}
+      bgColor={backgroundColor}
+      style={styles}
+    />
   )
 }
