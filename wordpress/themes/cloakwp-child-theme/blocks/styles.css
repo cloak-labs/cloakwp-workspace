@@ -2,6 +2,10 @@ html :where(.editor-styles-wrapper) {
     font-family: var(--wp--preset--font-family--heading);
 }
 
+/* 
+  To-do: edit below button styles to utilize your project's button colors. These only affect the Gutenberg editor, 
+  intended to make the button blocks look as they will on your decoupled front-end.
+*/
 .editor-styles-wrapper .is-style-outline > .block-editor-rich-text__editable.wp-block-button__link{
     background-color: transparent !important;
     color: #2A335A !important;
@@ -14,4 +18,10 @@ html :where(.editor-styles-wrapper) {
 }
 .editor-styles-wrapper .is-style-outline > .block-editor-rich-text__editable.wp-block-button__link.has-green-100-background-color{
     border-color: var(--wp--preset--color--green-100) !important;
+}
+
+/* Other styles to make Gutenberg editor line up with decoupled front-end's styling. */
+
+.editor-styles-wrapper .wp-block.wp-block-acf-cards {
+  background-color: transparent !important;
 }
