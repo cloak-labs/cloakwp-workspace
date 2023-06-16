@@ -1,5 +1,4 @@
-import { useScrollYPosition } from 'react-use-scroll-position';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import classNames from '@/utils/classNames';
 import { Popover } from '@headlessui/react';
@@ -24,21 +23,26 @@ function MobileNavLink({ children, ...props }) {
 }
 
 export function Header({ navBarData }) {
-  const scrollY = useScrollYPosition();
-  const [isAtTop, setIsAtTop] = useState(scrollY == 0);
+  const [isTop, setIsTop] = useState(true);
   
   useEffect(() => {
-    if(scrollY == 0) setIsAtTop(true)
-    else if(isAtTop == true) setIsAtTop(false) // this condition is a huge performance boost (I think) -- ensures we don't reset state on every scroll pixel change
-  }, [scrollY])
+    const handleScroll = () => {
+      if (window.scrollY > 0 && isTop) setIsTop(false);
+      else if (window.scrollY === 0) setIsTop(true);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-  const menuItems = useMemo(() => navBarData.menu_items.slice(0, -1), [navBarData.menu_items])
-  const menuButton = useMemo(() => menuItems.pop(), [navBarData.menu_items])
+  const menuItems = navBarData.menu_items.slice(0, -1)
+  const menuButton = navBarData.menu_items[navBarData.menu_items.length - 1]
   
   return (
-    <motion.header initial={{y: -100, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{delay: 1, duration: 1.2}} className={classNames(
-      'fixed top-0 z-50 w-full transition-all ease-in-out',
-      isAtTop ? 'bg-white shadow-none' : 'bg-gray-100/90 shadow-xl shadow-gray-900/5 backdrop-blur-sm'
+    <header className={classNames(
+      'sticky top-0 z-50 w-full transition-all ease-in-out',
+      isTop ? 'bg-white shadow-none' : 'bg-white/90 shadow-xl shadow-gray-900/5 backdrop-blur-sm'
     )}>
       <nav className=''>
         <Container className="relative z-50 justify-between px-0 sm:px-0 md:px-0 xmd:px-4">
@@ -113,6 +117,6 @@ export function Header({ navBarData }) {
           </div>
         </Container>
       </nav>
-    </motion.header>
+    </header>
   )
 }
