@@ -19,7 +19,7 @@ export const Hero = ({ data }) => {
     'gray-800': 'darkBg',
     'gray-900': 'darkBg',
     'gray-950': 'blackBg',
-  }[backgroundColor]
+  }[backgroundColor] // user-selected backgroundColor determines the color theme
 
   const themes = {
     lightBg: {
@@ -40,7 +40,8 @@ export const Hero = ({ data }) => {
     })
   }
   
-  const theme = themes[themeName || 'lightBg']
+  const defaultTheme = 'lightBg'
+  const theme = themes[themeName || defaultTheme]
   const { eyebrowColor, headingColor, textColor, buttonColor } = typeof theme == "function" ? theme(themes) : theme
 
   const style = hasBgImage ? { backgroundImage: `url(${image.src})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}
