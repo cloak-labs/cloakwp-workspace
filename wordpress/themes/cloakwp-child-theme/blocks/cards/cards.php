@@ -2,12 +2,14 @@
 
 use CloakWP\Utils;
 use Extended\ACF\ConditionalLogic;
+use Extended\ACF\Fields\Checkbox;
 use Extended\ACF\Fields\Number;
 use Extended\ACF\Fields\Repeater;
 use Extended\ACF\Fields\Textarea;
 use Extended\ACF\Fields\TrueFalse;
 use Extended\ACF\Fields\Image;
 use Extended\ACF\Fields\Link;
+use Extended\ACF\Fields\Message;
 use Extended\ACF\Fields\Relationship;
 use Extended\ACF\Fields\Text;
 use Extended\ACF\Location;
@@ -67,6 +69,22 @@ add_action('acf/init', function () {
         ->conditionalLogic([
           ConditionalLogic::where('data_type', '==', 0) // available operators: ==, !=, >, <, ==pattern, ==contains, ==empty, !=empty
         ]),
+      Text::make('CTA Text')
+        ->instructions('Optionally add a CTA element to all cards.')
+        ->placeholder('eg. Read More')
+      ,
+      Checkbox::make('Post Meta')
+        ->choices([
+            'post_date' => 'Published Date',
+            'post_modified' => 'Modified Date',
+            'post_author' => 'Author'
+          ])
+        ->conditionalLogic([
+          ConditionalLogic::where('data_type', '==', 0) // available operators: ==, !=, >, <, ==pattern, ==contains, ==empty, !=empty
+        ]),
+      Message::make('Subtitle')
+        ->message("To add a small subtitle below each card title, you must edit each selected post's 'excerpt' field.")
+        ->escapeHtml(),
     ]),
     'location' => [
       Location::where('block', 'acf/cards')

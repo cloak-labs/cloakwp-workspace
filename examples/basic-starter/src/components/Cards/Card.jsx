@@ -1,106 +1,131 @@
-import Image from 'next/future/image'
-import classNames from "@/utils/classNames"
-import { motion } from 'framer-motion'
-import { motionItem, motionContainer } from '@/utils/motion'
-import { HeroIcon } from '@/components/Icons'
-import { Link } from '@/components/Link'
+import Image from 'next/future/image';
+import classNames from '@/utils/classNames';
+import { HeroIcon } from '@/components/Icons';
+import { Link } from '@/components/Link';
 
-export function Card({ title, image, description, date, className, bgColor, href, cta }) {
+export function Card({
+  title,
+  image,
+  description,
+  className,
+  backgroundColor,
+  href,
+  cta,
+  post,
+  postMeta,
+}) {
+  const themeName = {
+    white: 'lightBg',
+    'gray-50': 'lightBg',
+    'gray-300': 'lightBg',
+    'gray-600': 'darkBg',
+    'gray-700': 'darkBg',
+    'gray-800': 'darkBg',
+    'gray-900': 'darkBg',
+    'gray-950': 'blackBg',
+  }[backgroundColor]; // user-selected backgroundColor determines the color theme
 
-  let backgroundColor = 'bg-blue-900',
-    primaryTextColor = 'text-gray-100',
-    secondaryTextColor = 'text-blue-200',
-    iconColor = 'text-blue-100';
+  const themes = {
+    lightBg: {
+      primaryTextColor: 'text-gray-800 group-hover:text-blue-700',
+      secondaryTextColor: 'text-gray-600',
+      ctaTextColor: 'text-blue-600 hover:text-blue-700',
+      metaTextColor: 'text-gray-400',
+    },
+    darkBg: {
+      primaryTextColor: 'text-gray-200',
+      secondaryTextColor: 'text-gray-50',
+    },
+    blackBg: (themes) => ({
+      ...themes.darkBg,
+    }),
+  };
 
-  switch (bgColor) { // TODO: configure card color options below based on project colors
-    case 'blue-900':
-      backgroundColor = 'bg-blue-900';
-      primaryTextColor = 'text-gray-300';
-      secondaryTextColor = 'text-blue-500';
-      iconColor = 'text-blue-100';
-      break;
-    case 'blue-300':
-      backgroundColor = 'bg-blue-300';
-      primaryTextColor = 'text-blue-900';
-      secondaryTextColor = 'text-blue-900';
-      iconColor = 'text-blue-900';
-      break;
-    case 'gray-200':
-      backgroundColor = 'bg-gray-200';
-      primaryTextColor = 'text-blue-800';
-      secondaryTextColor = 'text-blue-800';
-      iconColor = 'text-blue-900';
-      break;
-  }
+  const defaultTheme = 'lightBg';
+  const theme = themes[themeName || defaultTheme];
+  const { primaryTextColor, secondaryTextColor, ctaTextColor, metaTextColor } =
+    typeof theme == 'function' ? theme(themes) : theme;
+
+  description = "Lorem ipsum item asam ipus. Lorem ipsum item asam ipus. Lorem ipsum item asam ipus." // to test descriptions
 
   return (
     <Link href={href}>
-      <motion.article
+      <article
         className={classNames(
-          "rounded-lg overflow-hidden border border-blue-800 h-full relative",
-          cta ? 'pb-16' : 'pb-6',
+          'group rounded-lg border border-gray-400/30 shadow-sm hover:border-gray-400',
           className,
-          backgroundColor
+          `bg-${backgroundColor}`
         )}
-        variants={motionContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
       >
-        <div className={classNames("flex flex-col h-full", !image && "justify-center")}>
-          <div>
-            {image &&
-              <Image
-                className="w-full aspect-[4/3] object-cover"
-                width="320"
-                height="240"
-                src={image}
-                alt={`featured image for ${title}`}
-              />
-            }
-            <div className="px-4 pt-5">
-              {title &&
-                <motion.h3
-                  variants={motionItem}
-                  className={classNames("mb-4 text-3xl break-words", primaryTextColor)}
-                >
-                  {title}
-                </motion.h3>
-              }
-              {date &&
-                <motion.figcaption
-                  variants={motionItem}
-                  className={classNames("mb-3 text-sm sm:text-base", secondaryTextColor)}
-                >
-                  {date}
-                </motion.figcaption>
-              }
-              {description && 
-                <motion.span
-                  variants={motionItem}
-                  className={classNames("mb-4 text-lg leading-tight", secondaryTextColor)}
-                >
-                  {description}
-                </motion.span>
-              }
-            </div>
-          </div>
-          {cta &&
-            <div className="flex gap-2 px-4 pb-4 absolute bottom-0">
-              <motion.p
-                variants={motionItem}
-                className={classNames("uppercase text-lg font-bold bg-no-repeat", secondaryTextColor)}
+        <div
+          className={classNames(
+            'flex flex-col',
+            !image && 'justify-center'
+          )}
+        >
+          {image && (
+            <Image
+              className="w-full aspect-video object-cover rounded-t-lg"
+              width="320"
+              height="240"
+              src={image}
+              alt={`featured image for ${title}`}
+            />
+          )}
+          <div className={classNames('flex flex-col gap-3 relative px-4 pt-5', cta ? 'pb-16' : 'pb-5')}>
+            {title && (
+              <h3
+                className={classNames(
+                  'text-xl font-semibold break-words',
+                  primaryTextColor
+                )}
               >
-                {cta}
-              </motion.p>
-              <HeroIcon
-                icon="arrow-long-right"
-                className={classNames("w-8 h-8", iconColor)}
-              />
+                {title}
+              </h3>
+            )}
+            {description && (
+              <span
+                className={classNames(
+                  'text-base leading-snug',
+                  secondaryTextColor
+                )}
+              >
+                {description}
+              </span>
+            )}
+            {cta && (
+              <div
+                className={classNames(
+                  'flex gap-2 items-center absolute bottom-4',
+                  ctaTextColor
+                )}
+              >
+                <p className="uppercase text-sm font-semibold">{cta}</p>
+                <HeroIcon icon="arrow-long-right" className="w-6 h-6" />
+              </div>
+            )}
+          </div>
+          {postMeta.length > 0 && (
+            <div
+              className={classNames(
+                'flex gap-3 items-center border-t border-gray-200 py-2.5 px-4 text-sm font-medium',
+                metaTextColor
+              )}
+            >
+              {postMeta.map((meta, i) => (
+                <>
+                  {post[meta] && (
+                    <>
+                      <figcaption>{post[meta]}</figcaption>
+                      {i < postMeta.length - 1 && <span>|</span>}
+                    </>
+                  )}
+                </>
+              ))}
             </div>
-          }
+          )}
         </div>
-      </motion.article>
+      </article>
     </Link>
-  )
+  );
 }

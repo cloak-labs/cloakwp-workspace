@@ -9,7 +9,8 @@ export function CardsGrid({
   cols = 3, // choose between 2 and 3 column layout
   bgColor,
   style,
-  className = ''
+  className = '',
+  postMeta
 }) {
 
   return (
@@ -28,10 +29,11 @@ export function CardsGrid({
             image={post.imageUrl || '/images/placeholder.png'}
             href={post.href}
             title={post.title}
-            {...(post.date ? {date: post.date} : {})}
             {...(post.cta? {cta: post.cta} : cta ? {cta} : {})}
             description={post.description}
-            bgColor={bgColor}
+            backgroundColor={bgColor}
+            post={post}
+            postMeta={postMeta}
           />
         </Fragment>
       ))}
