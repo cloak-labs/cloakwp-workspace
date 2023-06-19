@@ -2,6 +2,8 @@
 
 namespace CloakWP\API;
 
+use CloakWP\Utils;
+
 /**
  * Fired during plugin activation
  *
@@ -220,8 +222,7 @@ class Posts
   public function get_post_pathname($object)
   {
     $id = !empty($object['wp_id']) ? $object['wp_id'] : $object['id'];
-    $pathname = parse_url(get_permalink($id), PHP_URL_PATH);
-
+    $pathname = Utils::get_post_pathname($id);
     return $pathname;
   }
 

@@ -4,7 +4,8 @@ namespace CloakWP;
 
 use Extended\ACF\Fields\Accordion;
 
-class Utils {
+class Utils
+{
 
   /*
     Helper function used by the CloakWP plugin to log errors or other details to the WP error log
@@ -14,7 +15,7 @@ class Utils {
     if (!CLOAKWP_DEBUG) {
       return;
     }
-  
+
     if (is_array($log) || is_object($log)) {
       error_log(print_r($log, true));
     } else {
@@ -22,7 +23,8 @@ class Utils {
     }
   }
 
-  public static function acfBlockWrapper($blockLabel, $fields) {
+  public static function acfBlockWrapper($blockLabel, $fields)
+  {
     if (class_exists('Extended\ACF\Fields\Accordion')) {
       return [
         Accordion::make($blockLabel)
@@ -38,4 +40,9 @@ class Utils {
     }
   }
 
+  public static function get_post_pathname($post_id)
+  {
+    $pathname = parse_url(get_permalink($post_id), PHP_URL_PATH);
+    return $pathname;
+  }
 }

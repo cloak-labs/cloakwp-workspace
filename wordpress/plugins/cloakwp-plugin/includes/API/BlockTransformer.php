@@ -2,6 +2,7 @@
 
 namespace CloakWP\API;
 
+use CloakWP\Utils;
 use WP_Block;
 use pQuery;
 
@@ -135,6 +136,7 @@ class BlockTransformer
                       // $slug = basename(get_permalink($related_post_id)); 
                       // $related_post->slug_test = $slug; // for testing purposes to see if post_name always matches the real slug.. can remove this later
 
+                      $related_post->pathname = Utils::get_post_pathname($related_post_id);
                       $related_post->featured_image = $featured_image;
                       $related_post->acf = $acf_fields;
                       $related_posts[] = $related_post;
