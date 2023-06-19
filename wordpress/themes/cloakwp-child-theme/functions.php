@@ -45,10 +45,10 @@ add_action('enqueue_block_editor_assets', 'my_gutenberg_editor_assets');
 function my_gutenberg_editor_assets()
 {
   // Load our custom styles for the Gutenberg editor:
-  wp_enqueue_style('my-gutenberg-editor-styles', get_theme_file_uri('/blocks/styles.css'), array(), filemtime('/blocks/styles.css'), 'all');
+  wp_enqueue_style('my-gutenberg-editor-styles', get_theme_file_uri('/blocks/gutenberg-styles.css'), array(), filemtime('/blocks/gutenberg-styles.css'), 'all');
 
   // Load our custom JS scripts that modify/strip the Gutenberg editor in opinionated ways:
-  wp_enqueue_script('gutenberg-editor-js', get_theme_file_uri('/blocks/scripts.js'), array(), filemtime('/blocks/scripts.js'), true);
+  wp_enqueue_script('my-gutenberg-editor-js', get_theme_file_uri('/blocks/gutenberg-scripts.js'), array(), filemtime('/blocks/gutenberg-scripts.js'), true);
 
 }
 
@@ -68,22 +68,6 @@ function register_menus()
     )
   );
 }
-
-/*
-  Register your custom Gutenberg/ACF blocks here
-*/
-// add_action('init', 'register_blocks');
-// function register_blocks()
-// {
-//   register_block_type(get_template_directory() . '/blocks/postList/block.json');
-//   register_block_type(get_template_directory() . '/blocks/pageHeader/block.json');
-//   register_block_type(get_template_directory() . '/blocks/testimonial/block.json');
-//   register_block_type(get_template_directory() . '/blocks/cardFeature/block.json');
-//   register_block_type(get_template_directory() . '/blocks/faq/block.json');
-//   register_block_type(get_template_directory() . '/blocks/cta/block.json');
-// }
-
-
 
 
 /*

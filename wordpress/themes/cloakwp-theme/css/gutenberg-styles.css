@@ -3,3 +3,25 @@
 .wp-block.acf-block-preview {
   max-width: none !important;
 }
+.cloakwp-block-preview-ctnr{
+  position: relative;
+}
+.cloakwp-block-selector {
+  display: none;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  padding: 6px;
+  z-index: 50;
+  color: white;
+  cursor: pointer;
+  background-color: #007cba;
+  border-bottom-right-radius: 3px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+}
+.cloakwp-block-selector:hover {
+  background-color: #006ba1;
+}
+.wp-block:not(.is-selected) .cloakwp-block-preview-ctnr:hover .cloakwp-block-selector {
+  display: block;
+}
