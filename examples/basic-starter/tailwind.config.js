@@ -12,7 +12,7 @@ module.exports = {
   safelist: [ // this safelist ensures certain classes are ALWAYS included in the final tailwind build, which helps ensure cloakwp's dynamic block styling works as intended. 
     // TODO: update the color classes that always get included to match the project's colors
     {
-      pattern: /(bg|text)-(blue|gray)-(50|100|200|300|400|500|600|700|800|900)\/(|60|70|80|90)/,
+      pattern: /(bg|text)-(blue|gray)-(50|100|200|300|400|500|600|700|800|900)(\/\d{2})?/,
     },
     {
       pattern: /col-span-(1|2|3|4|5|6|7|8|9|10|11|12)/,
