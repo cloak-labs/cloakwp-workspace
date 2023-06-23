@@ -6,5 +6,5 @@
   "linked": [],
   "access": "public",
   "updateInternalDependencies": "patch",
-  "ignore": ["@cloakwp/docs"]
+  "ignore": ["@cloakwp/docs", "@cloakwp/eslint-config", "@cloakwp/backend-starter"]
 }
