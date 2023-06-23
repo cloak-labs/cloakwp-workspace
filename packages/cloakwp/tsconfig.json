@@ -5,6 +5,8 @@
     "rootDir": "lib",
     "outDir": "dist",
     "jsx": "react-jsx",
+    "strict": false,
+    "noEmit": true,
   },
   "include": ["lib/**/*"],
 }
