@@ -5,7 +5,7 @@ import { Eyebrow, H1, P } from '@/components/Typography';
 import { ConditionalWrapper, Container } from '@/components/Layout';
 
 export const Hero = ({ data }) => {
-  const { backgroundColor, eyebrow, h1, subtitle, cta_button, image, alignment, hero_style } = data;
+  const { backgroundColor, eyebrow, h1, subtitle, cta_button, image, content_alignment, hero_style } = data;
 
   let bgColor = `bg-${backgroundColor}`
   const hasBgImage = hero_style == 'bg_image'
@@ -82,7 +82,7 @@ export const Hero = ({ data }) => {
               </Container>
             )}
           >
-            <div className={classNames("flex flex-col h-full w-full relative z-10", alignment == 'center' && "sm:items-center text-center")}>
+            <div className={classNames("flex flex-col h-full w-full relative z-10", content_alignment == 'center' && "sm:items-center text-center")}>
               {eyebrow && (
                 <Eyebrow className={eyebrowColor}>
                   {eyebrow}
