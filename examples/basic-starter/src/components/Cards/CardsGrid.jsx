@@ -24,18 +24,17 @@ export function CardsGrid({
       style={style}
     >
       {posts?.slice(0, Math.min(limit, posts.length))?.map((post, i) => (
-        <Fragment key={post.id || i}>
-          <Card
-            image={post.imageUrl || '/images/placeholder.png'}
-            href={post.href}
-            title={post.title}
-            {...(post.cta? {cta: post.cta} : cta ? {cta} : {})}
-            description={post.description}
-            backgroundColor={bgColor}
-            post={post}
-            postMeta={postMeta}
-          />
-        </Fragment>
+        <Card
+          key={post.id || i}
+          image={post.imageUrl || '/images/placeholder.png'}
+          href={post.href}
+          title={post.title}
+          {...(post.cta? {cta: post.cta} : cta ? {cta} : {})}
+          description={post.description}
+          backgroundColor={bgColor}
+          post={post}
+          postMeta={postMeta}
+        />
       ))}
     </div>
   );
