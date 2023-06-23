@@ -8,7 +8,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "turbo run build --no-check --filter=cloakwp... && changeset publish",
+    "release": "turbo run build --filter=cloakwp... && changeset publish",
     "wp-env": "wp-env"
   },
   "devDependencies": {
