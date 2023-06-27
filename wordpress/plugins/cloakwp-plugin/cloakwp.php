@@ -16,7 +16,7 @@
  * Plugin Name:       CloakWP - Headless WordPress
  * Plugin URI:        https://https://github.com/cloak-labs/cloakwp-plugin
  * Description:       Adds the missing pieces required for headless projects. Designed for use alongside the CloakWP suite of open-source tooling. 
- * Version:           0.6.0
+ * Version:           1.0.0
  * Author:            Cloak Labs
  * Author URI:        https://https://github.com/cloak-labs
  * License:           GPL-2.0+
@@ -75,9 +75,12 @@ function cloakwp_autoload($class_or_function)
     // Determine if it's a class or function based on the file name.
     $is_class = substr( $relative_path, -4 ) === '.php';
     // error_log('AUTOLOADER - $is_class: ' . $is_class);
+
+    $directory = 'includes';
+    if ($relative_path == 'Admin') $directory = 'admin';
     
     // Get the full path to the class or function file.
-    $file_path = plugin_dir_path( __FILE__ ) . 'includes' . DIRECTORY_SEPARATOR . $relative_path . '.php';
+    $file_path = plugin_dir_path( __FILE__ ) . $directory . DIRECTORY_SEPARATOR . $relative_path . '.php';
     // error_log('AUTOLOADER - $file_path: ' . $file_path);
 
     // Check if the file exists and load it.
