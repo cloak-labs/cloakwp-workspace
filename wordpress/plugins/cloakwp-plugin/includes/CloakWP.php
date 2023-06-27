@@ -4,7 +4,7 @@ namespace CloakWP;
 
 use CloakWP\General\i18n;
 use CloakWP\General\PluginLoader;
-use CloakWP\Admin\Admin;
+use CloakWP\Admin;
 use CloakWP\API\BlockTransformer;
 use CloakWP\API\Frontpage;
 use CloakWP\API\Menus;
@@ -13,7 +13,6 @@ use CloakWP\API\Widgets;
 use CloakWP\Frontend\Auth;
 use CloakWP\Frontend\ISR;
 use CloakWP\Frontend\Preview;
-use CloakWP_Public;
 
 /**
  * The file that defines the core plugin class
@@ -90,93 +89,20 @@ class CloakWP
       $this->version = '0.6.0';
     }
     $this->plugin_name = 'cloakwp';
+    $this->loader = new PluginLoader();
 
-    $this->load_dependencies();
+    new Auth();
+    new Preview();
+    new Posts();
+    new Widgets();
+    new Menus();
+    new Frontpage();
+    new BlockTransformer();
+    new ISR();
+
     $this->set_locale();
     $this->define_admin_hooks();
-    $this->define_public_hooks();
-  }
-
-  /**
-   * Load the required dependencies for this plugin.
-   *
-   * Include the following files that make up the plugin:
-   *
-   * - PluginLoader. Orchestrates the hooks of the plugin.
-   * - i18n. Defines internationalization functionality.
-   * - Admin. Defines all hooks for the admin area.
-   * - CloakWP_Public. Defines all hooks for the public side of the site.
-   *
-   * Create an instance of the loader which will be used to register the hooks
-   * with WordPress.
-   *
-   * @since    0.6.0
-   * @access   private
-   */
-  private function load_dependencies()
-  {
-
-    /**
-     * The class responsible for orchestrating the actions and filters of the
-     * core plugin.
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) . 'includes/General/PluginLoader.php';
-
-    /**
-     * The class responsible for defining internationalization functionality
-     * of the plugin.
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) . 'includes/General/i18n.php';
-    
-    
-    /**
-     * The class responsible for defining all actions that occur in the admin area.
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-cloakwp-admin.php';
-    
-    /**
-     * The class responsible for defining all actions that occur in the public-facing
-     * side of the site.
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-cloakwp-public.php';
-    
-    /**
-     * The class responsible for defining all on-demand ISR functionality
-     * 
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) . 'includes/Frontend/ISR.php';
-
-    /**
-     * The class responsible for defining all headless preview mode functionality
-     * 
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) . 'includes/Frontend/Preview.php';
-
-    /**
-     * The class responsible for defining all headless login/logout functionality
-     * 
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) . 'includes/Frontend/Auth.php';
-
-    /**
-     * The class responsible for defining all REST API modifications for posts
-     * 
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) . 'includes/API/Posts.php';
-
-    /**
-     * The class responsible for defining all REST API modifications for widgets
-     * 
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) . 'includes/API/Widgets.php';
-
-    /**
-     * The class responsible for defining all functionality related to converting Gutenberg Block data to JSON for the REST API
-     * 
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) . 'includes/API/BlockTransformer.php';
-
-    $this->loader = new PluginLoader();
+    $this->define_theme_support();
   }
 
   /**
@@ -191,7 +117,6 @@ class CloakWP
   private function set_locale()
   {
     $plugin_i18n = new i18n();
-
     $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
   }
 
@@ -205,34 +130,28 @@ class CloakWP
   private function define_admin_hooks()
   {
     $plugin_admin = new Admin($this->get_plugin_name(), $this->get_version());
-
-    new Auth();
-    new Preview();
-    new ISR();
-
     $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
     $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+    $this->loader->add_action('enqueue_block_editor_assets', $plugin_admin, 'enqueue_gutenberg_assets');
+    $this->loader->add_action('admin_head', $plugin_admin, 'add_to_admin_head');
+    $this->loader->add_action('init', $plugin_admin, 'register_menus');
+    $this->loader->add_action('admin_menu', $plugin_admin, 'add_plugin_menu');
+    $this->loader->add_action('admin_menu', $plugin_admin, 'remove_admin_pages');
+    $this->loader->add_action('wp_before_admin_bar_render', $plugin_admin, 'remove_admin_toolbar_options');
+    $this->loader->add_action('admin_init', $plugin_admin, 'allow_menu_editing_for_editors');
   }
 
   /**
-   * Register all of the hooks related to the public-facing functionality
-   * of the plugin.
+   * Remove and add certain theme support
    *
    * @since    0.6.0
    * @access   private
    */
-  private function define_public_hooks()
+  private function define_theme_support()
   {
-    $plugin_public = new CloakWP_Public($this->get_plugin_name(), $this->get_version());
-    
-    new Widgets();
-    new Posts();
-    new Menus();
-    new Frontpage();
-    new BlockTransformer();
-
-    $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
-    $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+    remove_theme_support('core-block-patterns'); // disable default Gutenberg Patterns
+    add_theme_support('post-thumbnails'); // enable featured images
+    add_post_type_support('page', 'excerpt'); // enable page excerpts
   }
 
   /**
