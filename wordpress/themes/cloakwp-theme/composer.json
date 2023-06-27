@@ -4,6 +4,6 @@
   "type": "wordpress-theme",
   "version": "1.0.0",
   "require": {
-      "composer/installers": "^2.2"
+    "composer/installers": "^2.2"
   }
 }
