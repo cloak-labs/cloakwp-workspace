@@ -22,6 +22,6 @@ html :where(.editor-styles-wrapper) {
 
 /* Other styles to make Gutenberg editor line up with decoupled front-end's styling. */
 
-.editor-styles-wrapper .wp-block.wp-block-acf-cards {
+.editor-styles-wrapper .block-editor-block-list__block.wp-block.wp-block-acf-cards {
   background-color: transparent !important;
 }
