@@ -1,5 +1,7 @@
 <?php
 
+use CloakWP\ACF\Fields\Alignment;
+use CloakWP\ACF\Fields\ThemeColorPicker;
 use CloakWP\Utils;
 use Extended\ACF\ConditionalLogic;
 use Extended\ACF\Fields\Link;
@@ -27,6 +29,17 @@ add_action('acf/init', function () {
         ->defaultValue('image_right')
         ->layout('horizontal')
         ->wrapper(['width' => '50%']),
+      Alignment::make('Content Alignment')
+        // ->include(['left', 'center'])
+        ->defaultValue('left')
+        ->wrapper(['width' => '50%'])
+        ->conditionalLogic([
+          ConditionalLogic::where('hero_style', '!=', 'image_right') // available operators: ==, !=, >, <, ==pattern, ==contains, ==empty, !=empty
+        ]),
+      ThemeColorPicker::make('Button Background')
+        ->include(['gray-600', 'gray-700'])
+        // ->exclude(['blue-600', 'blue-700', 'blue-800', 'blue-900', 'blue-950'])
+        ->defaultValue('gray-700'),
       Text::make('Eyebrow')
         ->instructions('1-3 words above H1.')
         ->wrapper(['width' => '50%']),
@@ -34,17 +47,6 @@ add_action('acf/init', function () {
         ->instructions('Main title of page.'),
       Textarea::make('Subtitle')
         ->instructions('1-3 sentences below the H1.'),
-      RadioButton::make('Alignment')
-        ->instructions("A tertiary hero's text can be centered or left-aligned.")
-        ->choices([
-          'center' => 'Center',
-          'left' => 'Left',
-        ])
-        ->defaultValue('left')
-        ->wrapper(['width' => '50%'])
-        ->conditionalLogic([
-          ConditionalLogic::where('hero_style', '!=', 'image_right') // available operators: ==, !=, >, <, ==pattern, ==contains, ==empty, !=empty
-        ]),
       Link::make('CTA Button')
         ->wrapper(['width' => '50%'])
         ->instructions("Select a page to link to, followed by the CTA button's text."),
