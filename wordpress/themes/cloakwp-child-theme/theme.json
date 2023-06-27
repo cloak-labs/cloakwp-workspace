@@ -351,6 +351,72 @@
           ]
         }
       },
+      "acf/cards": {
+        "color": {
+          "palette": [
+            {
+              "slug": "white",
+              "name": "white",
+              "color": "#FFFFFF"
+            },
+            {
+              "slug": "blue-50",
+              "name": "blue-50",
+              "color": "#ecfeff"
+            },
+            {
+              "slug": "blue-700",
+              "name": "blue-700",
+              "color": "#0e7490"
+            },
+            {
+              "slug": "blue-800",
+              "name": "blue-800",
+              "color": "#155e75"
+            },
+            {
+              "slug": "blue-900",
+              "name": "blue-900",
+              "color": "#164e63"
+            },
+            {
+              "slug": "blue-950",
+              "name": "blue-950",
+              "color": "#083344"
+            },    
+            {
+              "slug": "gray-50",
+              "name": "gray-50",
+              "color": "#f8fafc"
+            },
+            {
+              "slug": "gray-100",
+              "name": "gray-100",
+              "color": "#f1f5f9"
+            },
+            {
+              "slug": "gray-200",
+              "name": "gray-200",
+              "color": "#e2e8f0"
+            },
+            {
+              "slug": "gray-800",
+              "name": "gray-800",
+              "color": "#1e293b"
+            },
+            {
+              "slug": "gray-900",
+              "name": "gray-900",
+              "color": "#0f172a"
+            },
+            {
+              "slug": "gray-950",
+              "name": "gray-950",
+              "color": "#020617"
+            }
+          ]
+        }
+      },
       "acf/faq": {
         "color": {
           "palette": [
