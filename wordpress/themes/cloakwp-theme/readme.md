@@ -1,4 +1,5 @@
 # CloakWP Theme
-Building a headless WordPress project? This is a barebones theme that contains many functions necessary for stripping down Gutenberg and the WordPress admin dashboard, sets you up with some pre-built ACF blocks, a fine-tuned Gutenberg theme.json file, and more.
+This is a super barebones theme for headless WordPress projects (or more specifically [CloakWP](https://github.com/cloak-labs/cloakwp) projects). It is built primarily just to meet the WordPress requirement of having an active theme; it doesn't actually provide any headless functionality -- for that, check out the [CloakWP Plugin](https://github.com/cloak-labs/cloakwp/tree/main/wordpress/plugins/cloakwp-plugin).
 
-This theme is ideally used in conjunction with the [CloakWP NPM package](https://github.com/kaelansmith/cloakwp) and its corresponding [CloakWP WordPress plugin](https://github.com/Stikky-Media/cloakwp-plugins/).
+Features:
+- All non-admin routes redirect to wp-admin (essentially turning off the traditional WordPress front-end)
