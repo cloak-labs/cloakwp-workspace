@@ -1,8 +1,9 @@
 <?php
 
-namespace CloakWP\Admin;
+namespace CloakWP;
 
 use CloakWP\CloakWP;
+use CloakWP\Utils;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -17,8 +18,8 @@ use CloakWP\CloakWP;
 /**
  * The admin-specific functionality of the plugin.
  *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
+ * Defines the plugin name, version, enqueues the admin-specific stylesheet and JavaScript,
+ * strips down wp-admin for headless, removes certain options for editor roles, etc.
  *
  * @package    CloakWP
  * @subpackage CloakWP/admin
@@ -59,7 +60,8 @@ class Admin
     $this->add_frontend_links();
     $this->add_frontend_view_links();
     $this->settings_init();
-    $this->add_menu_item();
+    $this->modify_acf_rest_api_format();
+    $this->modify_jwt_issuer();
   }
 
 
@@ -221,7 +223,7 @@ class Admin
 
     add_settings_section(
       'config_section',
-      __('Configuration Variables', 'cloakwp'),
+      __('PHP Constants', 'cloakwp'),
       array($this, 'cloakwp_config_section_callback'),
       'cloakwp_settings'
     );
@@ -235,7 +237,7 @@ class Admin
    *
    * @since    0.6.0
    */
-  public function add_admin_menu()
+  public function add_plugin_menu()
   {
     add_menu_page(
       'CloakWP',
@@ -257,18 +259,6 @@ class Admin
   private function settings_init()
   {
     add_action('admin_init', array($this, 'cloakwp_settings_init'));
-  }
-
-  /**
-   * Override the href for the site name & view site links
-   * 
-   * @return void
-   *
-   * @since    0.6.0
-   */
-  private function add_menu_item()
-  {
-    add_action('admin_menu', array($this, 'add_admin_menu'));
   }
 
 
@@ -305,19 +295,6 @@ class Admin
    */
   public function enqueue_styles()
   {
-
-    /**
-     * This function is provided for demonstration purposes only.
-     *
-     * An instance of this class should be passed to the run() function
-     * defined in CloakWP_Loader as all of the hooks are defined
-     * in that particular class.
-     *
-     * The CloakWP_Loader will then create the relationship
-     * between the defined hooks and the functions defined in this
-     * class.
-     */
-
     wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/cloakwp-admin.css', array(), $this->version, 'all');
   }
 
@@ -328,19 +305,180 @@ class Admin
    */
   public function enqueue_scripts()
   {
-
-    /**
-     * This function is provided for demonstration purposes only.
-     *
-     * An instance of this class should be passed to the run() function
-     * defined in CloakWP_Loader as all of the hooks are defined
-     * in that particular class.
-     *
-     * The CloakWP_Loader will then create the relationship
-     * between the defined hooks and the functions defined in this
-     * class.
-     */
-
     wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/cloakwp-admin.js', array('jquery'), $this->version, false);
+  }
+
+  /* 
+    Add CSS styling and JS for ACF Block iframe previews, among other future Gutenberg customizations:
+  */
+  public function enqueue_gutenberg_assets()
+  {
+    // Load our custom CSS stylesheets for the Gutenberg editor:
+    $cssFile = plugin_dir_url(__FILE__) . 'css/gutenberg-styles.css';
+    wp_enqueue_style(
+      'cloakwp-gutenberg-editor-styles',
+      $cssFile,
+      array(),
+      filemtime($cssFile),
+      'all'
+    );
+
+    // Load our custom JS scripts for the Gutenberg editor:
+    $jsFile = plugin_dir_url(__FILE__) . 'js/acf-block-iframe-preview.js';
+    wp_enqueue_script(
+      'acf-block-iframe-preview-js',
+      $jsFile,
+      array(),
+      filemtime($jsFile),
+      true
+    );
+  }
+
+  // Add stuff to wp-admin's <head>
+  public function add_to_admin_head()
+  {
+    $this->inject_theme_color_picker_css();
+    $this->inject_browser_sync_script();
+    $this->restrict_appearance_menu_for_editors();
+  }
+
+  // Add browserSync script to wp-admin <head> to enable live reloading upon saving theme files
+  public function inject_browser_sync_script()
+  {
+    echo '<script id="__bs_script__">//<![CDATA[
+      (function() {
+        try {
+          console.log("adding BrowserSync script");
+          var script = document.createElement("script");
+          if ("async") {
+            script.async = true;
+          }
+          script.src = "http://localhost:3000/browser-sync/browser-sync-client.js?v=2.29.3";
+          if (document.body) {
+            document.body.appendChild(script);
+          } else if (document.head) {
+            document.head.appendChild(script);
+          }
+        } catch (e) {
+          console.error("Browsersync: could not append script tag", e);
+        }
+      })()
+    //]]></script>';
+  }
+
+  /**
+   * Add dynamically-generated CSS to wp-admin's <head>, to style our ThemeColorPicker custom ACF Field using our theme.json's colors
+   *
+   * @since    0.6.0
+   */
+  public function inject_theme_color_picker_css()
+  {
+    $themeColorPickerCSS = '';
+    $color_palette = Utils::get_theme_color_palette();
+    if (!empty($color_palette)) {
+      foreach ($color_palette as $color) {
+        $themeColorPickerCSS .= ".cloakwp-theme-color-picker .acf-radio-list li label input[type='radio'][value='{$color['slug']}'] { background-color: var(--wp--preset--color--{$color['slug']}); }";
+      }
+    }
+    echo "<style id='themeColorPickerACF'>{$themeColorPickerCSS}</style>";
+  }
+
+  /*
+    Add ability for "editor" user role to edit WP Menus, but hide all other submenus under Appearance (for editors only) -- eg. we don't want clients to be able to switch/deactivate theme 
+  */
+  public function restrict_appearance_menu_for_editors()
+  {
+    $role_object = get_role('editor');
+    if (!$role_object->has_cap('edit_theme_options')) {
+      $role_object->add_cap('edit_theme_options');
+    }
+
+    if (current_user_can('editor')) { // remove certain Appearance > Sub-pages
+      remove_submenu_page('themes.php', 'themes.php'); // hide the theme selection submenu
+      remove_submenu_page('themes.php', 'widgets.php'); // hide the widgets submenu
+
+      // special handling for removing "Customize" submenu (above method doesn't work due to its URL structure) --> snippet taken from https://stackoverflow.com/a/50912719/8297151
+      global $submenu;
+      if (isset($submenu['themes.php'])) {
+        foreach ($submenu['themes.php'] as $index => $menu_item) {
+          foreach ($menu_item as $value) {
+            if (strpos($value, 'customize') !== false) {
+              unset($submenu['themes.php'][$index]);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /*
+    This is required in order for WP Admin > Appearance > Menus page 
+    to be visible for new Block themes such as this one. 
+  */
+  public function register_menus()
+  {
+    register_nav_menus(
+      array(
+        'nav' => __(''), // this creates a menu location that doesn't serve a purpose other than to get the "Menus" page to become visible in wp-admin
+      )
+    );
+  }
+
+  /*
+  Expand ACF field data returned in REST API; eg. image fields return full image data rather than just an ID. More info: https://www.advancedcustomfields.com/resources/wp-rest-api-integration/
+  */
+  public function modify_acf_rest_api_format()
+  {
+    add_filter('acf/settings/rest_api_format', function () {
+      return 'standard';
+    });
+  }
+
+  /*
+  Change the JWT token issuer:
+  */
+  public function modify_jwt_issuer()
+  {
+    // Note: 06/26/2023 I can't remember why this filter was added or if it's really needed
+    add_filter('jwt_auth_iss', function () {
+      // Default value is get_bloginfo( 'url' );
+      return site_url();
+    });
+  }
+
+  // Give editors access to the Menu tab
+  public function allow_menu_editing_for_editors()
+  {
+    $role = get_role('editor');
+    $role->add_cap('edit_theme_options');
+  }
+
+  /*
+    Remove "Comments" from wp-admin sidebar for all roles.
+    Remove "Tools", "Dashboard", and "Yoast SEO" for non-admins
+  */
+  public function remove_admin_pages()
+  {
+    remove_menu_page('edit-comments.php');
+
+    if (!current_user_can('administrator')) { // remove certain pages for non-administrators
+      remove_menu_page('tools.php'); // remove "Tools"
+      remove_menu_page('index.php'); // remove "Dashboard"
+
+      // remove Yoast SEO
+      remove_menu_page('wpseo_dashboard');
+      remove_menu_page('wpseo_workouts');
+    }
+  }
+
+  /*
+    Function to remove various options in wp-admin top toolbar (not sidebar)
+    Currently used to remove the "Comments" and "View Posts" menu items
+  */
+  public function remove_admin_toolbar_options()
+  {
+    global $wp_admin_bar;
+    $wp_admin_bar->remove_menu('comments');
+    $wp_admin_bar->remove_menu('archive');
   }
 }
