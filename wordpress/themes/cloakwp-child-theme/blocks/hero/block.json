@@ -13,7 +13,7 @@
   ],
   "acf": {
     "mode": "edit",
-    "renderTemplate": "block-preview.php",
+    "renderCallback": "render_acf_block_iframe_preview",
     "postTypes": [
       "page"
     ]
