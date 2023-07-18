@@ -13,7 +13,7 @@
  * @package           CloakWP
  *
  * @wordpress-plugin
- * Plugin Name:       CloakWP - Headless WordPress
+ * Plugin Name:       CloakWP - Headless WP Framework
  * Plugin URI:        https://https://github.com/cloak-labs/cloakwp-plugin
  * Description:       Adds the missing pieces required for headless projects. Designed for use alongside the CloakWP suite of open-source tooling. 
  * Version:           1.0.0
