@@ -1,0 +1,6 @@
+export { ButtonBlock } from './ButtonBlock'
+export { CardsGridBlock } from './CardsGridBlock'
+export { FaqsBlock } from './FaqsBlock'
+export { TestimonialBlock } from './TestimonialBlock'
+export { H4Block } from './H4Block'
+export { HeroBlock } from './HeroBlock'
