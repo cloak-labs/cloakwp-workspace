@@ -1,9 +1,0 @@
-{
-  "name": "cloak-labs/cloakwp-child-theme",
-  "description": "A child theme of CloakWP that comes with many commonly used ACF Blocks + Field Groups, CPTs, taxonomies, and Gutenberg theme customizations.",
-  "type": "wordpress-theme",
-  "version": "1.0.0",
-  "require": {
-    "composer/installers": "^2.2"
-  }
-}
