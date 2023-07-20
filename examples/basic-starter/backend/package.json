@@ -1,0 +1,16 @@
+{
+  "prviate": true,
+  "name": "@basic-starter/backend",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "dev": "spinup-local-wp dc up",
+    "stop": "spinup-local-wp dc down",
+    "composer": "spinup-local-wp dc run composer",
+    "postinstall": "pnpm composer create-project",
+    "spinup-local-wp": "spinup-local-wp"
+  },
+  "dependencies": {
+    "@cloakwp/spinup-local-wp": "^0.0.1"
+  }
+}
