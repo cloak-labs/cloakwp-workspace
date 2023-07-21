@@ -10,7 +10,7 @@ This opinionated starter leverages many modern WordPress development tools:
   - mu-plugins autoloader
   - Enhanced WordPress security (folder structure limits access to non-public files and offers more secure passwords through [wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt))
   - Gets WordPress 80% of the way towards becoming a proper [Twelve-Factor App](http://12factor.net/)
-- [Spinup Local WP](https://github.com/cloak-labs/cloakwp/tree/feat/localwp/packages/spinup-local-wp) - another NPM package by the CloakWP team that acts as a simple abstraction layer over [Docker + Docker Compose](https://docs.docker.com/compose/), enabling you to quickly spin up your WordPress site locally while in development with zero effort. It includes the following services and configuration options:
+- [Spinup Local WP](https://github.com/cloak-labs/cloakwp/tree/feat/localwp/packages/spinup-local-wp) - another NPM package by the CloakWP team that acts as a simple abstraction layer over [Docker + Docker Compose](https://docs.docker.com/compose/), enabling you to quickly spin up your WordPress site locally while in development with zero effort. It includes the following:
   - PHP 8.1,
   - Nginx server,
   - MariaDB (popular MySQL fork),
@@ -24,8 +24,11 @@ This opinionated starter leverages many modern WordPress development tools:
 <details>
  <summary>Requirements</summary>
 
-+ [Docker](https://www.docker.com/get-started)
-+ Node
+- Composer
+- PHP >= 8.0
+- [Docker](https://www.docker.com/get-started) + Docker Compose + Docker Desktop
+- PNPM
+- Node.js
 
 </details>
 
@@ -96,82 +99,5 @@ MailHog comes installed as a service in docker-compose.
 <details>
  <summary>Tools</summary>
 
-----
-### Update WordPress Core and Composer packages (plugins/themes)
-
-First, cd into the backend root (where the Dockerfile lives), then run:
-
-```shell
-pnpm composer update
-```
----
-### Use WP-CLI
-
-First, login to the container:
-
-```shell
-docker exec -it new-website-wordpress bash
-```
-... where `new-website-wordpress` is the name of your WordPress Docker container/service.
-
-Then, run a wp-cli command:
-
-```shell
-wp search-replace https://olddomain.com https://newdomain.com --allow-root
-```
-
-> You can use this command after you've installed WordPress using Composer (see example above).
----
-### Update plugins and themes from wp-admin?
-
-You can, but I recommend to use Composer for this only. But to enable this edit `./src/config/environments/development.php` (for example to use it in Dev)
-
-```shell
-Config::define('DISALLOW_FILE_EDIT', false);
-Config::define('DISALLOW_FILE_MODS', false);
-```
----
-### Useful Docker Commands
-
-When making changes to the Dockerfile, use:
-
-```bash
-docker-compose up -d --force-recreate --build
-```
-
-Login to the docker container
-
-```shell
-docker exec -it new-website-wordpress bash
-```
-
-Stop
-
-```shell
-docker-compose stop
-```
-
-Down (stop and remove)
-
-```shell
-docker-compose down
-```
-
-Cleanup
-
-```shell
-docker-compose rm -v
-```
-
-Recreate
-
-```shell
-docker-compose up -d --force-recreate
-```
-
-Rebuild docker container when Dockerfile has changed
-
-```shell
-docker-compose up -d --force-recreate --build
-```
+[Read more](https://github.com/cloak-labs/cloakwp/tree/feat/localwp/packages/spinup-local-wp) about the CLI tools made available to you via the Spinup Local WP package, such as using WP-CLI, or running Docker/Composer commands. 
 </details>
