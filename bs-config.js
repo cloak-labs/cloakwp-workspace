@@ -1,12 +1,12 @@
 module.exports = {
   files: [
-    "./wordpress/themes/**/*.php",
-    "./wordpress/themes/**/*.json",
-    "./wordpress/themes/**/*.css",
-    "./wordpress/themes/**/*.js",
-    "./wordpress/plugins/**/*.php",
-    "./wordpress/plugins/**/*.css",
-    "./wordpress/plugins/**/*.js",
+    "./themes/**/*.php",
+    "./themes/**/*.json",
+    "./themes/**/*.css",
+    "./themes/**/*.js",
+    "./plugins/**/*.php",
+    "./plugins/**/*.css",
+    "./plugins/**/*.js",
     // Add more directories as needed
   ],
 };

@@ -9,7 +9,7 @@ This is a monorepo containing all CloakWP packages/plugins/themes/starters/examp
 - Open the Docker Desktop app on your local machine
 - Run `pnpm dev` to build and run everything in development mode -- it runs the `dev` script defined in each sub-package's `package.json`. It spins up the following (which are all linked together):
   - [WordPress Backend Starter](./wordpress/backend-starter/) (http://localhost/wp/wp-admin), using `Docker` (make sure to open the `Docker Desktop` app before running `pnpm dev`)
-    - Which installs the CloakWP [Plugin](./wordpress/plugins/cloakwp-plugin/) + [Themes](./wordpress/themes/) via local file paths with `Composer`, so you can work on those with real-time updates in the running WP instance
+    - Which installs the CloakWP [Plugin](./plugins/cloakwp-plugin/) + [Themes](./themes/) via local file paths with `Composer`, so you can work on those with real-time updates in the running WP instance
   - [Next.js Front-end Starter](./examples/basic-starter/) (http://localhost:5000)
   - Builds the [CloakWP NPM package](./packages/cloakwp/) in watch mode, which the front-end starter installs locally, meaning you get real-time package updates in the running front-end
   - [CloakWP Docs site](./docs/) (http://localhost:8888)

@@ -1,2 +1,0 @@
-- Look into using Extended ACF as preferred way to register ACF field groups (https://github.com/vinkla/extended-acf) -- it provides a nice OOP way of registering them
-  - Same idea for CPTs using the Extended CPTs library: https://github.com/johnbillion/extended-cpts/

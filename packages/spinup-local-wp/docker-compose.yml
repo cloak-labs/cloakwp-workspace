@@ -7,12 +7,12 @@ services:
       - '80:80'
     volumes:
       - "./nginx/:/etc/nginx/templates/"
-      - ./src:/var/www/html:rw,cached
-      - ../plugins:/var/www/html/local-plugins
-      - ../themes:/var/www/html/local-themes
+      - "${VOLUME_WORDPRESS_PATH}:/var/www/html:rw,cached"
+      - "${VOLUME_LOCAL_PLUGINS_PATH}:/var/www/html/local-plugins"
+      - "${VOLUME_LOCAL_THEMES_PATH}:/var/www/html/local-themes"
     environment:
       - "NGINX_ENVSUBST_TEMPLATE_SUFFIX=.conf"
-      - "DOMAIN=${DOMAIN}"
+      - "DOMAIN=${LOCAL_DOMAIN}"
     depends_on:
       - wordpress
     restart: always
@@ -38,10 +38,10 @@ services:
       dockerfile: Dockerfile
     container_name: ${APP_NAME}-wordpress
     volumes:
-      - ./src:/var/www/html:rw,cached
       - ./config/php.ini:/usr/local/etc/php/conf.d/php.ini
-      - ../plugins:/var/www/html/local-plugins
-      - ../themes:/var/www/html/local-themes
+      - "${VOLUME_WORDPRESS_PATH}:/var/www/html:rw,cached"
+      - "${VOLUME_LOCAL_PLUGINS_PATH}:/var/www/html/local-plugins"
+      - "${VOLUME_LOCAL_THEMES_PATH}:/var/www/html/local-themes"
     depends_on:
       - mysql
     restart: always
@@ -73,6 +73,6 @@ services:
     working_dir: /var/www/html
     restart: 'no'
     volumes:
-      - ./src:/var/www/html:rw,cached
-      - ../plugins:/var/www/html/local-plugins
-      - ../themes:/var/www/html/local-themes
+      - "${VOLUME_WORDPRESS_PATH}:/var/www/html:rw,cached"
+      - "${VOLUME_LOCAL_PLUGINS_PATH}:/var/www/html/local-plugins"
+      - "${VOLUME_LOCAL_THEMES_PATH}:/var/www/html/local-themes"

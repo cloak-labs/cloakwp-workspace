@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/cloak-labs/cloakwp.git"
   },
-  "keywords": [],
+  "keywords": ["wordpress", "wp", "cloakwp", "cloak", "headless", "nextjs", "next", "decoupled"],
   "author": "",
   "license": "ISC",
   "bugs": {
