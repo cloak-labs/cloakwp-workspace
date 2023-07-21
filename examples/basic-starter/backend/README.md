@@ -1,115 +1,177 @@
-<p align="center">
-  <a href="https://roots.io/bedrock/">
-    <img alt="Bedrock" src="https://cdn.roots.io/app/uploads/logo-bedrock.svg" height="100">
-  </a>
-</p>
+# CloakWP WordPress Backend Starter
+This is the official WordPress backend starter for CloakWP (headless WordPress) projects. It's an opinionated, modern approach to WordPress development. However, it isn't a required piece of the CloakWP stack -- you can opt-out and use your own preferred WordPress development stack while still leveraging the CloakWP Plugin + NPM package + front-end starter.
 
-<p align="center">
-  <a href="LICENSE.md">
-    <img alt="MIT License" src="https://img.shields.io/github/license/roots/bedrock?color=%23525ddc&style=flat-square" />
-  </a>
+This opinionated starter leverages many modern WordPress development tools:
+- [Bedrock](https://roots.io/bedrock/) - a popular WordPress boilerplate with Composer, easier configuration, and an improved folder structure, enabling:
+  - Separate configs per environment
+  - Environment variables
+  - Custom wp-content directory
+  - [Composer](https://getcomposer.org/) (a PHP dependency manager) for managing WordPress core, plugins, and themes installation -- enabling better version-control via Git
+  - mu-plugins autoloader
+  - Enhanced WordPress security (folder structure limits access to non-public files and offers more secure passwords through [wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt))
+  - Gets WordPress 80% of the way towards becoming a proper [Twelve-Factor App](http://12factor.net/)
+- [Spinup Local WP](https://github.com/cloak-labs/cloakwp/tree/feat/localwp/packages/spinup-local-wp) - another NPM package by the CloakWP team that acts as a simple abstraction layer over [Docker + Docker Compose](https://docs.docker.com/compose/), enabling you to quickly spin up your WordPress site locally while in development with zero effort. It includes the following services and configuration options:
+  - PHP 8.1,
+  - Nginx server,
+  - MariaDB (popular MySQL fork),
+  - [WP-CLI](https://wp-cli.org/) - the command-line interface for WordPress,
+  - [PhpMyAdmin](https://www.phpmyadmin.net/) - free and open source administration tool for MySQL and MariaDB
+  - [MailHog](https://github.com/mailhog/MailHog) - an email testing tool for developers -- configure your outgoing SMTP server and view your outgoing email in a web UI.
+- An opinionated collection of WordPress plugins pre-installed that enable/improve the headless WordPress experience, obviously including the CloakWP Plugin and Theme, plus a production-ready child theme with all kinds of goodies related to registering/configuring CPTs, taxonomies, ACF Blocks, and ACF Field Groups via code -- the best-practice way you'll learn to love.
 
-  <a href="https://packagist.org/packages/roots/bedrock">
-    <img alt="Packagist" src="https://img.shields.io/packagist/v/roots/bedrock.svg?style=flat-square" />
-  </a>
+## Instructions
 
-  <a href="https://circleci.com/gh/roots/bedrock">
-    <img alt="Build Status" src="https://img.shields.io/circleci/build/gh/roots/bedrock?style=flat-square" />
-  </a>
+<details>
+ <summary>Requirements</summary>
 
-  <a href="https://twitter.com/rootswp">
-    <img alt="Follow Roots" src="https://img.shields.io/twitter/follow/rootswp.svg?style=flat-square&color=1da1f2" />
-  </a>
-</p>
++ [Docker](https://www.docker.com/get-started)
++ Node
 
-<p align="center">
-  <strong>A modern WordPress stack</strong>
-  <br />
-  Built with ❤️
-</p>
+</details>
 
-<p align="center">
-  <a href="https://roots.io">Official Website</a> | <a href="https://roots.io/docs/bedrock/master/installation/">Documentation</a> | <a href="CHANGELOG.md">Change Log</a>
-</p>
+<details>
+ <summary>Env Variables</summary>
 
-## Supporting
+Edit `.env.example` to your needs (there are many comments explaining things). During the `composer create-project` command described below (which also gets run automatically when you run `pnpm install` from the project root), a `.env` will automatically be created from `.env.example` -- so it's important to treat `.env.example` as the source of truth.
 
-**Bedrock** is an open source project and completely free to use.
+</details>
 
-However, the amount of effort needed to maintain and develop new features and products within the Roots ecosystem is not sustainable without proper financial backing. If you have the capability, please consider donating using the links below:
+<details>
+ <summary>ACF Pro</summary>
 
-<div align="center">
+ It is highly recommended to purchase an Advanced Custom Fields (ACF) Pro license [here](https://www.advancedcustomfields.com/pro/#pricing-table), as this enables content-modelling features that most headless sites will require, such as repeater fields, ACF blocks, options pages, the gallery field, and more.
 
-[![Donate via Patreon](https://img.shields.io/badge/donate-patreon-orange.svg?style=flat-square&logo=patreon")](https://www.patreon.com/rootsdev)
-[![Donate via PayPal](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square&logo=paypal)](https://www.paypal.me/rootsdev)
+ Installing ACF Pro via composer requires a couple extra steps, since they need to validate your license. Follow [this article](https://www.advancedcustomfields.com/resources/installing-acf-pro-with-composer/) to create an `auth.json` file within the root backend folder (i.e. alongside `composer.json`).
+</details>
 
-</div>
+<details>
+ <summary>Install</summary>
+Run the following at the project root:
 
-## Overview
+```shell
+pnpm install
+```
+Or alternatively, cd into the root of the backend folder and manually run:
 
-Bedrock is a modern WordPress stack that helps you get started with the best development tools and project structure.
+```shell
+pnpm composer create-project
+```
+The former simply runs the latter for you, but from the monorepo root.
 
-Much of the philosophy behind Bedrock is inspired by the [Twelve-Factor App](http://12factor.net/) methodology including the [WordPress specific version](https://roots.io/twelve-factor-wordpress/).
+</details>
 
-## Features
+<details>
+ <summary>Run</summary>
 
-- Better folder structure
-- Dependency management with [Composer](https://getcomposer.org)
-- Easy WordPress configuration with environment specific files
-- Environment variables with [Dotenv](https://github.com/vlucas/phpdotenv)
-- Autoloader for mu-plugins (use regular plugins as mu-plugins)
-- Enhanced security (separated web root and secure passwords with [wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt))
+```shell
+pnpm dev
+```
 
-## Requirements
+This runs `docker-compose up`, and Docker Compose will now start all the services:
 
-- PHP >= 7.1
-- Composer - [Install](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
+```shell
+Starting new-website-mysql    ... done
+Starting new-website-composer ... done
+Starting new-website-phpmyadmin ... done
+Starting new-website-wordpress  ... done
+Starting new-website-nginx      ... done
+Starting new-website-mailhog    ... done
+```
 
-## Installation
+🚀 Open [http://localhost](http://localhost) in your browser
 
-1. Create a new project:
-   ```sh
-   $ composer create-project roots/bedrock
-   ```
-2. Update environment variables in the `.env` file. Wrap values that may contain non-alphanumeric characters with quotes, or they may be incorrectly parsed.
+## PhpMyAdmin
 
-- Database variables
-  - `DB_NAME` - Database name
-  - `DB_USER` - Database user
-  - `DB_PASSWORD` - Database password
-  - `DB_HOST` - Database host
-  - Optionally, you can define `DATABASE_URL` for using a DSN instead of using the variables above (e.g. `mysql://user:password@127.0.0.1:3306/db_name`)
-- `WP_ENV` - Set to environment (`development`, `staging`, `production`)
-- `WP_HOME` - Full URL to WordPress home (https://example.com)
-- `WP_SITEURL` - Full URL to WordPress including subdirectory (https://example.com/wp)
-- `AUTH_KEY`, `SECURE_AUTH_KEY`, `LOGGED_IN_KEY`, `NONCE_KEY`, `AUTH_SALT`, `SECURE_AUTH_SALT`, `LOGGED_IN_SALT`, `NONCE_SALT`
-  - Generate with [wp-cli-dotenv-command](https://github.com/aaemnnosttv/wp-cli-dotenv-command)
-  - Generate with [our WordPress salts generator](https://roots.io/salts.html)
+PhpMyAdmin comes installed as a service in docker-compose.
 
-3. Add theme(s) in `web/app/themes/` as you would for a normal WordPress site
-4. Set the document root on your webserver to Bedrock's `web` folder: `/path/to/site/web/`
-5. Access WordPress admin at `https://example.com/wp/wp-admin/`
+🚀 Open [http://127.0.0.1:8082/](http://127.0.0.1:8082/) in your browser
 
-## Documentation
+## MailHog
 
-Bedrock documentation is available at [https://roots.io/docs/bedrock/master/installation/](https://roots.io/docs/bedrock/master/installation/).
+MailHog comes installed as a service in docker-compose.
 
-## Contributing
+🚀 Open [http://0.0.0.0:8025/](http://0.0.0.0:8025/) in your browser
 
-Contributions are welcome from everyone. We have [contributing guidelines](https://github.com/roots/guidelines/blob/master/CONTRIBUTING.md) to help you get started.
+</details>
+<details>
+ <summary>Tools</summary>
 
-## Bedrock sponsors
+----
+### Update WordPress Core and Composer packages (plugins/themes)
 
-Help support our open-source development efforts by [becoming a patron](https://www.patreon.com/rootsdev).
+First, cd into the backend root (where the Dockerfile lives), then run:
 
-<a href="https://kinsta.com/?kaid=OFDHAJIXUDIV"><img src="https://cdn.roots.io/app/uploads/kinsta.svg" alt="Kinsta" width="200" height="150"></a> <a href="https://k-m.com/"><img src="https://cdn.roots.io/app/uploads/km-digital.svg" alt="KM Digital" width="200" height="150"></a> <a href="https://carrot.com/"><img src="https://cdn.roots.io/app/uploads/carrot.svg" alt="Carrot" width="200" height="150"></a>
+```shell
+pnpm composer update
+```
+---
+### Use WP-CLI
 
-## Community
+First, login to the container:
 
-Keep track of development and community news.
+```shell
+docker exec -it new-website-wordpress bash
+```
+... where `new-website-wordpress` is the name of your WordPress Docker container/service.
 
-- Participate on the [Roots Discourse](https://discourse.roots.io/)
-- Follow [@rootswp on Twitter](https://twitter.com/rootswp)
-- Read and subscribe to the [Roots Blog](https://roots.io/blog/)
-- Subscribe to the [Roots Newsletter](https://roots.io/subscribe/)
-- Listen to the [Roots Radio podcast](https://roots.io/podcast/)
+Then, run a wp-cli command:
+
+```shell
+wp search-replace https://olddomain.com https://newdomain.com --allow-root
+```
+
+> You can use this command after you've installed WordPress using Composer (see example above).
+---
+### Update plugins and themes from wp-admin?
+
+You can, but I recommend to use Composer for this only. But to enable this edit `./src/config/environments/development.php` (for example to use it in Dev)
+
+```shell
+Config::define('DISALLOW_FILE_EDIT', false);
+Config::define('DISALLOW_FILE_MODS', false);
+```
+---
+### Useful Docker Commands
+
+When making changes to the Dockerfile, use:
+
+```bash
+docker-compose up -d --force-recreate --build
+```
+
+Login to the docker container
+
+```shell
+docker exec -it new-website-wordpress bash
+```
+
+Stop
+
+```shell
+docker-compose stop
+```
+
+Down (stop and remove)
+
+```shell
+docker-compose down
+```
+
+Cleanup
+
+```shell
+docker-compose rm -v
+```
+
+Recreate
+
+```shell
+docker-compose up -d --force-recreate
+```
+
+Rebuild docker container when Dockerfile has changed
+
+```shell
+docker-compose up -d --force-recreate --build
+```
+</details>
