@@ -25,11 +25,11 @@
     "cloakwp",
     "cloak"
   ],
-  "author": "",
+  "author": "CloakWP",
   "bugs": {
     "url": "https://github.com/cloak-labs/cloakwp/issues"
   },
-  "homepage": "https://github.com/cloak-labs/cloakwp#readme",
+  "homepage": "https://github.com/cloak-labs/cloakwp/tree/main/packages/spinup-local-wp#readme",
   "dependencies": {
     "dotenv": "^16.3.1",
     "yargs": "^17.7.2"
