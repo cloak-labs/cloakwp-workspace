@@ -1,6 +1,6 @@
 {
   "name": "@cloakwp/spinup-local-wp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Spin up your local WordPress/Bedrock instance with zero-config, using Docker under the hood.",
   "license": "MIT",
   "scripts": {
