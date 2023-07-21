@@ -1,204 +1,73 @@
-# CloakWP WordPress Backend Starter
-This is the official WordPress backend starter for CloakWP (headless WordPress) projects. It uses Docker Compose to spin up a local WP instance with all kinds of goodies, sensible defaults, and optimizations for headless WordPress projects. You can easily deploy your WP instance to production, leveraging Git and modern CI/CD workflows.
+# Spinup Local WP
+Made by the [CloakWP](https://github.com/cloak-labs/cloakwp) team.
 
-This opinionated starter leverages many modern WordPress development tools:
-- [Bedrock](https://roots.io/bedrock/) - a popular WordPress boilerplate with Composer, easier configuration, and an improved folder structure, enabling:
-  - Separate configs per environment
-  - Environment variables
-  - Custom wp-content directory
-  - [Composer](https://getcomposer.org/) (a PHP dependency manager) for managing WordPress core, plugins, and themes installation -- enabling better Git integration
-  - mu-plugins autoloader
-  - Enhanced WordPress security (folder structure limits access to non-public files and offers more secure passwords through [wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt))
-  - Gets WordPress 80% of the way towards becoming a proper [Twelve-Factor App](http://12factor.net/)
-- [Docker + Docker Compose](https://docs.docker.com/compose/) for quickly spinning up your WordPress site locally in a consistent environment closely matching your production environment. It includes the following services and configuration options:
-  - PHP 8.1 (you have control over the version)
-  - Custom PHP `php.ini` config in `./config`
-  - Nginx server (custom config in `./nginx`),
+Spinup Local WP makes local WordPress development easy for projects using the [Bedrock](https://roots.io/bedrock/) boilerplate by Roots (currently untested with regular WordPress) -- which is designed for developers who want to manage their projects with Git and Composer. It works similarly to how `@wordpress/env` abstracts the complexity of managing your own Docker setup, providing a set of simple commands to magically spin up your local WordPress instance; however, unlike `@wordpress/env`, Spinup Local WP isn't designed to only handle transient dev environments solely for the purpose of testing custom plugins/themes; it is meant to be used alongside your real, version-controlled WordPress instance.
+
+It's an NPM package that acts as an abstraction layer over a typical, best-practice [Docker + Docker Compose](https://docs.docker.com/compose/) setup for WordPress. It includes the following services/features:
+  - PHP 8.1,
+  - Nginx server,
   - MariaDB (popular MySQL fork),
-  - [WP-CLI](https://wp-cli.org/) - WP-CLI is the command-line interface for WordPress.
-  - [PhpMyAdmin](https://www.phpmyadmin.net/) - free and open source administration tool for MySQL and MariaDB (PhpMyAdmin config in `./config`)
+  - [WP-CLI](https://wp-cli.org/) - the command-line interface for WordPress,
+  - [PhpMyAdmin](https://www.phpmyadmin.net/) - free database administration tool
   - [MailHog](https://github.com/mailhog/MailHog) - an email testing tool for developers -- configure your outgoing SMTP server and view your outgoing email in a web UI.
-- An opinionated collection of WordPress plugins pre-installed that enable/improve the headless WordPress experience, obviously including the CloakWP Plugin and Theme, plus a production-ready child theme with all kinds of goodies related to registering/configuring CPTs, taxonomies, ACF Blocks, and ACF Field Groups via code -- the best-practice way.
 
-## Instructions
+# Getting Started
+## Requirements
+You must download/install the following:
+- Composer
+- PHP >= 8.0
+- [Docker](https://www.docker.com/get-started) + Docker Compose + Docker Desktop
+- NPM
+- Node.js
 
-<details>
- <summary>Requirements</summary>
+## Install
+1. Spin up a new WordPress project using [Bedrock](https://roots.io/bedrock/), via their CLI command `composer create-project roots/bedrock` (already have a WP install? skip to step #4).
+2. Run `cd bedrock` to enter the newly created project (and optionally run `code .` to open it in VS Code)
+3. Optionally follow the [other steps](https://roots.io/bedrock/docs/installation/) outlined in Bedrock's installation docs
+4. Run `npm init` and follow the prompts to generate a `package.json` file
+5. Run `npm install @cloakwp/spinup-local-wp`
+6. Add the following to your package.json's `scripts`:
+  ```json
+  "dev": "spinup-local-wp dc up",
+  "down": "spinup-local-wp dc down",
+  "stop": "spinup-local-wp dc stop",
+  "composer": "spinup-local-wp dc run composer",
+  "postinstall": "npm run composer create-project",
+  "generate-env": "php -r \"copy('.env.example', '.env');\""
+  "spinup-local-wp": "spinup-local-wp"
+  ```
+7. Edit `.env.example` and add/customize this variable: `APP_NAME='enter-project-name'`, and optionally add other env variables, as noted in the [example file here](https://github.com/cloak-labs/cloakwp/blob/feat/localwp/packages/spinup-local-wp/.env.example), to further customize Spinup Local WP's behavior (only necessary if you deviate from the default folder structure). Make sure to always run `npm run generate-env` after modifying `.env.example`, as this will generate the real `.env` file from it.
 
-+ [Docker](https://www.docker.com/get-started)
 
-</details>
-
-<details>
- <summary>Env Variables</summary>
-
-Both step 1. and 2. below are required:
-
-#### 1. For Docker (required step)
-
-Copy `.env.example` in the project root to `.env` and edit your preferences.
-
-Example:
-
-```dotenv
-# DOCKER ENVIRONMENT VARIABLES
-# ----------------------------
-
-# change the following to be unique for your project:
-APP_NAME=my-website
-DOMAIN=localhost:80
-DB_ROOT_PASSWORD=db_root_password
-DB_TABLE_PREFIX=wp_
-
-# make sure DB_NAME is the same name you use for your production DB
-DB_NAME=my-website
-
-# add a non-root DB user with the same credentials as your production DB's user -- if you experience a DB connection error, you can test whether these creds are working by running `docker compose up`, and logging into PHPMyAdmin at http://127.0.0.1:8082/
-DB_USER=db_username
-DB_PASSWORD=db_password
-
-# leave the following as-is unless you know what you're doing
-IP=127.0.0.1
-DB_HOST=mysql
-```
-
-#### 2. For WordPress (required step)
-
-Edit `./src/.env.example` to your needs. During the `composer create-project` command described below (which also gets run automatically when you run `pnpm install` from the root), a `./src/.env` will be created from your `./src/.env.example`.
-
-Example:
-
-```dotenv
-# Make sure the following DB credentials work with your Docker MySQL and your web host's DB instance (or provide custom creds specifically for Docker in .env.local)
-DB_NAME='my-website'
-DB_USER='db_username'
-DB_PASSWORD='db_password'
-
-# Optionally, you can use a data source name (DSN)
-# When using a DSN, you can remove the DB_NAME, DB_USER, DB_PASSWORD, and DB_HOST variables
-# DATABASE_URL='mysql://database_user:database_password@database_host:database_port/database_name'
-
-# Optional variables
-DB_HOST='localhost'
-# DB_PREFIX='wp_'
-
-# Note: leave this as "production", and create .env.local file with WP_ENV='development' in order for Docker to run in development mode
-WP_ENV='production'
-
-# Add your production URL below, and use .env.local to override with your local Docker URL while working locally
-WP_HOME='https://my-website.com'
-WP_SITEURL="${WP_HOME}/wp"
-
-WP_DEBUG_LOG='/debug.log'
-
-# Configuration options for the CloakWP Plugin (update .env.local for local development overrides):
-CLOAKWP_FRONTEND_URL='https://demo.cloakwp.com'
-CLOAKWP_PREVIEW_SECRET='8=[OEcY#MImU2YhLe-D1Wwetg1B]-2!-#,m06Lwej'
-CLOAKWP_ENABLE_DEV_MODE=false
-CLOAKWP_ENABLE_ISR=true
-CLOAKWP_OVERRIDE_VIEW_POST_LINK=true
-CLOAKWP_OVERRIDE_PREVIEW_POST_LINK=true
-CLOAKWP_YOAST_USE_FRONTEND_URL=true
-CLOAKWP_ENABLE_FAVICON=true
-CLOAKWP_JWT_NO_EXPIRY=true
-CLOAKWP_ENABLE_PREVIEW_POST=true
-
-# Optionally customize the CloakWP api route base path used in your frontend
-# CLOAKWP_API_BASE_PATH="cloakwp"
-
-# For certain web hosts, like SpinupWP, you should disable WP cron in favour of the host's own cron solution
-# DISABLE_WP_CRON=true
-
-# Generate your own unique keys here: https://roots.io/salts.html
-AUTH_KEY='generateme'
-SECURE_AUTH_KEY='generateme'
-LOGGED_IN_KEY='generateme'
-NONCE_KEY='generateme'
-AUTH_SALT='generateme'
-SECURE_AUTH_SALT='generateme'
-LOGGED_IN_SALT='generateme'
-NONCE_SALT='generateme'
-```
-
-</details>
-
-<details>
- <summary>ACF Pro</summary>
-
- It is highly recommended to purchase an Advanced Custom Fields (ACF) Pro license [here](https://www.advancedcustomfields.com/pro/#pricing-table), as this enables content-modelling features that most headless sites will require, such as repeater fields, ACF blocks, options pages, the gallery field, and more.
-
- Installing ACF Pro via composer requires a couple extra steps, since they need to validate your license. Follow [this article](https://www.advancedcustomfields.com/resources/installing-acf-pro-with-composer/) to create an `auth.json` file within the `src` folder of your WordPress instance.
-</details>
-
-<details>
- <summary>Install</summary>
-Run the following at the project root:
-
+## Run
+- open the Docker Desktop app, 
+- from your project root, run:
 ```shell
-pnpm install
-```
-Or alternatively, cd into the root of the backend folder and manually run:
+npm run dev
+``` 
+... assuming you configured the `dev` script from above, this will run `spinup-local-wp docker-compose up` for you.
+- access your local WordPress instance from http://localhost/wp/wp-admin
+- access PhpMyAdmin from http://127.0.0.1:8082/
+- access MailHog from http://0.0.0.0:8025/
 
-```shell
-pnpm composer create-project
-```
-The former simply runs the latter for you, but from the monorepo root.
+## Tools
 
-</details>
-
-<details>
- <summary>Run</summary>
-
-```shell
-pnpm dev
-```
-
-This runs `docker-compose up`, and Docker Compose will now start all the services:
-
-```shell
-Starting my-website-mysql    ... done
-Starting my-website-composer ... done
-Starting my-website-phpmyadmin ... done
-Starting my-website-wordpress  ... done
-Starting my-website-nginx      ... done
-Starting my-website-mailhog    ... done
-```
-
-🚀 Open [http://localhost](http://localhost) in your browser
-
-## PhpMyAdmin
-
-PhpMyAdmin comes installed as a service in docker-compose.
-
-🚀 Open [http://127.0.0.1:8082/](http://127.0.0.1:8082/) in your browser
-
-## MailHog
-
-MailHog comes installed as a service in docker-compose.
-
-🚀 Open [http://0.0.0.0:8025/](http://0.0.0.0:8025/) in your browser
-
-</details>
-<details>
- <summary>Tools</summary>
-
-----
 ### Update WordPress Core and Composer packages (plugins/themes)
 
-First, cd into the backend root (where the Dockerfile lives), then run:
+From your project root, run:
 
 ```shell
-pnpm composer update
+npm run composer update
 ```
 ---
 ### Use WP-CLI
 
-First, login to the container:
+First, login to the WordPress Docker container:
 
 ```shell
-docker exec -it my-website-wordpress bash
+docker exec -it {my-website}-wordpress bash
 ```
-... where `my-website-wordpress` is the name of your WordPress Docker container/service.
+... replacing {my-website} with the APP_NAME env variable value you set during the "Install" steps above.
 
 Then, run a wp-cli command:
 
@@ -206,58 +75,44 @@ Then, run a wp-cli command:
 wp search-replace https://olddomain.com https://newdomain.com --allow-root
 ```
 
-> You can use this command after you've installed WordPress using Composer (see example above).
----
-### Update plugins and themes from wp-admin?
-
-You can, but I recommend to use Composer for this only. But to enable this edit `./src/config/environments/development.php` (for example to use it in Dev)
-
-```shell
-Config::define('DISALLOW_FILE_EDIT', false);
-Config::define('DISALLOW_FILE_MODS', false);
-```
 ---
 ### Useful Docker Commands
-
-When making changes to the Dockerfile, use:
-
-```bash
-docker-compose up -d --force-recreate --build
-```
 
 Login to the docker container
 
 ```shell
-docker exec -it my-website-wordpress bash
+docker exec -it {container-name} bash
 ```
+
+To run Docker Compose commands, use the `spinup-local-wp` command followed by `docker-compose`, or `dc` for short, followed by the Docker Compose command you wish to run (eg. `stop`, `down`, etc.). Examples:
 
 Stop
 
 ```shell
-docker-compose stop
+spinup-local-wp dc stop
 ```
 
 Down (stop and remove)
 
 ```shell
-docker-compose down
+spinup-local-wp dc down
 ```
 
 Cleanup
 
 ```shell
-docker-compose rm -v
+spinup-local-wp dc rm -v
 ```
 
 Recreate
 
 ```shell
-docker-compose up -d --force-recreate
+spinup-local-wp dc up -d --force-recreate
 ```
 
-Rebuild docker container when Dockerfile has changed
+Rebuild docker container when Dockerfile has changed due to package update
 
 ```shell
-docker-compose up -d --force-recreate --build
+spinup-local-wp dc up -d --force-recreate --build
 ```
 </details>
