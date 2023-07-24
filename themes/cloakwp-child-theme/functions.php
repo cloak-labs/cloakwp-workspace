@@ -2,8 +2,10 @@
 
 use CloakWP\Utils;
 
-Utils::require_glob(get_stylesheet_directory() . '/models/*.php');
-Utils::require_glob(get_stylesheet_directory() . '/blocks/*/*.php');
+if(class_exists('CloakWP\Utils')) {
+  Utils::require_glob(get_stylesheet_directory() . '/blocks/*/*.php');
+  Utils::require_glob(get_stylesheet_directory() . '/models/*.php');
+}
 
 add_action('enqueue_block_editor_assets', 'my_gutenberg_editor_assets');
 function my_gutenberg_editor_assets()
