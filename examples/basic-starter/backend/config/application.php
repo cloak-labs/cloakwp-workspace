@@ -36,7 +36,7 @@ $env_files = file_exists($root_dir . '/.env.local')
 $dotenv = Dotenv\Dotenv::createUnsafeImmutable($root_dir, $env_files, false);
 if (file_exists($root_dir . '/.env')) {
     $dotenv->load();
-    $dotenv->required(['WP_HOME', 'WP_SITEURL']);
+    $dotenv->required(['WP_HOME']);
     if (!env('DATABASE_URL')) {
         $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD']);
     }
@@ -51,8 +51,23 @@ define('WP_ENV', env('WP_ENV') ?: 'production');
 /**
  * URLs
  */
+$is_multisite = env('MULTISITE') == true || env('MULTISITE') == "true" || env('MULTISITE') == 1 || env('MULTISITE') == "1";
 Config::define('WP_HOME', env('WP_HOME'));
-Config::define('WP_SITEURL', env('WP_SITEURL'));
+Config::define('WP_SITEURL', env('WP_SITEURL') ?: ($is_multisite ? env('WP_HOME') : env('WP_HOME') . "/wp"));
+
+/**
+ * Multisite Network
+ */
+Config::define('WP_ALLOW_MULTISITE', true);
+Config::define('MULTISITE', env('MULTISITE') ?: false);
+
+if ($is_multisite) {
+  Config::define('SUBDOMAIN_INSTALL', false);
+  Config::define('DOMAIN_CURRENT_SITE', env('DOMAIN_CURRENT_SITE') ?: parse_url(env('WP_HOME'), env('PHP_URL_HOST')));
+  Config::define('PATH_CURRENT_SITE', '/');
+  Config::define('SITE_ID_CURRENT_SITE', 1);
+  Config::define('BLOG_ID_CURRENT_SITE', 1);
+}
 
 /**
  * Custom Content Directory
@@ -128,9 +143,9 @@ Config::define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?: true);
 /**
  * Debugging Settings
  */
-Config::define('WP_DEBUG_DISPLAY', false);
-Config::define('WP_DEBUG_LOG', false);
-Config::define('SCRIPT_DEBUG', false);
+Config::define('WP_DEBUG_DISPLAY', true);
+Config::define('WP_DEBUG_LOG', true);
+Config::define('SCRIPT_DEBUG', true);
 ini_set('display_errors', '0');
 
 /**
