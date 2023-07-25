@@ -58,7 +58,7 @@ Config::define('WP_SITEURL', env('WP_SITEURL') ?: ($is_multisite ? env('WP_HOME'
 /**
  * Multisite Network
  */
-Config::define('WP_ALLOW_MULTISITE', true);
+Config::define('WP_ALLOW_MULTISITE', env('WP_ALLOW_MULTISITE') ?: false);
 Config::define('MULTISITE', env('MULTISITE') ?: false);
 
 if ($is_multisite) {
