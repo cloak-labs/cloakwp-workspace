@@ -13,3 +13,4 @@ public/dist
 .turbo
 *.zip
 /plugins/cloakwp-plugin
+/packages/cloakwp/
