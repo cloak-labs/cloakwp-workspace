@@ -1,5 +1,6 @@
 {
   "projects": {
-    "plugins/cloakwp-plugin": "git@github.com:cloak-labs/cloakwp-plugin.git"
+    "plugins/cloakwp-plugin": "git@github.com:cloak-labs/cloakwp-plugin.git",
+    "packages/cloakwp": "git@github.com:cloak-labs/cloakwp-js.git"
   }
 }
