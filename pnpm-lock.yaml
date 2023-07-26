@@ -141,7 +141,7 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13(react@18.2.0)
       cloakwp:
-        specifier: ^0.3.8
+        specifier: workspace:*
         version: link:../../../packages/cloakwp
       focus-visible:
         specifier: ^5.2.0
