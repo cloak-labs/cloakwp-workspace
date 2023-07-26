@@ -17,6 +17,7 @@
     "@wordpress/env": "^6.0.0",
     "browser-sync": "^2.29.3",
     "eslint": "^7.32.0",
+    "meta-npm": "^1.2.7",
     "prettier": "^2.5.1",
     "turbo": "latest"
   },
