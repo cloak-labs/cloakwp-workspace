@@ -1,0 +1,5 @@
+{
+  "projects": {
+    "plugins/cloakwp-plugin": "git@github.com:cloak-labs/cloakwp-plugin.git"
+  }
+}
