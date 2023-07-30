@@ -4,6 +4,7 @@
     "packages/npm/cloakwp": "git@github.com:cloak-labs/cloakwp-js.git",
     "packages/npm/spinup-local-wp": "git@github.com:cloak-labs/spinup-local-wp.git",
     "packages/composer/cloakwp-base-theme": "git@github.com:cloak-labs/cloakwp-base-theme.git",
-    "packages/composer/cloakwp-inception-theme": "git@github.com:cloak-labs/cloakwp-inception-theme.git"
+    "packages/composer/cloakwp-inception-theme": "git@github.com:cloak-labs/cloakwp-inception-theme.git",
+    "packages/composer/cloakwp-bedrock": "git@github.com:cloak-labs/cloakwp-bedrock.git"
   }
 }
