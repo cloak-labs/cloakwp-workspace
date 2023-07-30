@@ -1,7 +1,8 @@
 {
   "projects": {
-    "plugins/cloakwp-plugin": "git@github.com:cloak-labs/cloakwp-plugin.git",
-    "packages/cloakwp": "git@github.com:cloak-labs/cloakwp-js.git",
-    "packages/spinup-local-wp": "git@github.com:cloak-labs/spinup-local-wp.git"
+    "packages/composer/cloakwp-plugin": "git@github.com:cloak-labs/cloakwp-plugin.git",
+    "packages/npm/cloakwp": "git@github.com:cloak-labs/cloakwp-js.git",
+    "packages/npm/spinup-local-wp": "git@github.com:cloak-labs/spinup-local-wp.git",
+    "packages/composer/cloakwp-base-theme": "git@github.com:cloak-labs/cloakwp-base-theme.git"
   }
 }
