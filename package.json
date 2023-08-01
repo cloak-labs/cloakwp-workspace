@@ -2,7 +2,8 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev --no-cache --continue & npx browser-sync start --config bs-config.js",
+    "dev": "turbo run dev --no-cache --continue --filter=@cloakwp* --filter=@project-name/wordpress --filter=@inception/frontend & pnpm browser-sync",
+    "browser-sync": "npx browser-sync start --config bs-config.js",
     "lint": "turbo run lint",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
