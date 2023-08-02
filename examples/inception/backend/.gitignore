@@ -4,7 +4,7 @@ web/app/plugins/*
 web/app/mu-plugins/*/
 web/app/themes/twentytwentythree/
 web/app/themes/cloakwp-theme
-web/app/themes/cloakwp-child-theme
+web/app/themes/cloakwp-inception-theme
 web/app/upgrade
 web/app/uploads/*
 !web/app/uploads/.gitkeep
@@ -13,6 +13,9 @@ web/app/cache/*
 # WordPress
 web/wp
 web/.htaccess
+
+# Local MYSQL data
+/data
 
 # Logs
 *.log
