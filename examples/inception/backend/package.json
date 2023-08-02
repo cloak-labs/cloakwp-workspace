@@ -12,6 +12,6 @@
     "generate-env": "php -r \"copy('.env.example', '.env');\""
   },
   "dependencies": {
-    "@cloakwp/spinup-local-wp": "0.0.8"
+    "@cloakwp/spinup-local-wp": "^0.0.8"
   }
 }
