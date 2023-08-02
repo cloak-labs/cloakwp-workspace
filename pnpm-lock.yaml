@@ -129,7 +129,7 @@ importers:
   examples/inception/backend:
     dependencies:
       '@cloakwp/spinup-local-wp':
-        specifier: ^0.0.8
+        specifier: ^0.0.9
         version: link:../../../packages/npm/spinup-local-wp
 
   examples/inception/nextjs/frontend:
@@ -209,7 +209,7 @@ importers:
     dependencies:
       '@cloakwp/spinup-local-wp':
         specifier: 0.0.8
-        version: link:../../npm/spinup-local-wp
+        version: 0.0.8
 
   packages/npm/cloakwp:
     dependencies:
@@ -647,6 +647,14 @@ packages:
       human-id: 1.0.2
       prettier: 2.8.7
     dev: true
+
+  /@cloakwp/spinup-local-wp@0.0.8:
+    resolution: {integrity: sha512-hKrsFXYP8zo0mxyyZdxH52c/UN0wB7FEJaid/H4hSl4Ah1ogQbz7NlMtQ5PV7/+qyhLySlas4alelSrRIZ/JwA==}
+    hasBin: true
+    dependencies:
+      dotenv: 16.3.1
+      yargs: 17.7.2
+    dev: false
 
   /@emotion/is-prop-valid@0.8.8:
     resolution: {integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==}
