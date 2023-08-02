@@ -1,0 +1,590 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 2,
+  "settings": {
+    "color": {
+      "custom": false,
+      "customDuotone": false,
+      "customGradient": false,
+      "defaultGradients": false,
+      "defaultPalette": false,
+      "palette": [
+        {
+          "slug": "transparent",
+          "name": "transparent",
+          "color": "rgba(0,0,0,0)"
+        },
+        {
+          "slug": "white",
+          "name": "white",
+          "color": "#FFFFFF"
+        },
+        {
+          "slug": "blue-50",
+          "name": "blue-50",
+          "color": "#ecfeff"
+        },
+        {
+          "slug": "blue-100",
+          "name": "blue-100",
+          "color": "#cffafe"
+        },
+        {
+          "slug": "blue-200",
+          "name": "blue-200",
+          "color": "#a5f3fc"
+        },
+        {
+          "slug": "blue-300",
+          "name": "blue-300",
+          "color": "#67e8f9"
+        },
+        {
+          "slug": "blue-400",
+          "name": "blue-400",
+          "color": "#22d3ee"
+        },
+        {
+          "slug": "blue-500",
+          "name": "blue-500",
+          "color": "#06b6d4"
+        },
+        {
+          "slug": "blue-600",
+          "name": "blue-600",
+          "color": "#0891b2"
+        },
+        {
+          "slug": "blue-700",
+          "name": "blue-700",
+          "color": "#0e7490"
+        },
+        {
+          "slug": "blue-800",
+          "name": "blue-800",
+          "color": "#155e75"
+        },
+        {
+          "slug": "blue-900",
+          "name": "blue-900",
+          "color": "#164e63"
+        },
+        {
+          "slug": "blue-950",
+          "name": "blue-950",
+          "color": "#083344"
+        },
+        {
+          "slug": "gray-50",
+          "name": "gray-50",
+          "color": "#f8fafc"
+        },
+        {
+          "slug": "gray-100",
+          "name": "gray-100",
+          "color": "#f1f5f9"
+        },
+        {
+          "slug": "gray-200",
+          "name": "gray-200",
+          "color": "#e2e8f0"
+        },
+        {
+          "slug": "gray-300",
+          "name": "gray-300",
+          "color": "#cbd5e1"
+        },
+        {
+          "slug": "gray-400",
+          "name": "gray-400",
+          "color": "#94a3b8"
+        },
+        {
+          "slug": "gray-500",
+          "name": "gray-500",
+          "color": "#64748b"
+        },
+        {
+          "slug": "gray-600",
+          "name": "gray-600",
+          "color": "#475569"
+        },
+        {
+          "slug": "gray-700",
+          "name": "gray-700",
+          "color": "#334155"
+        },
+        {
+          "slug": "gray-800",
+          "name": "gray-800",
+          "color": "#1e293b"
+        },
+        {
+          "slug": "gray-900",
+          "name": "gray-900",
+          "color": "#0f172a"
+        },
+        {
+          "slug": "gray-950",
+          "name": "gray-950",
+          "color": "#020617"
+        }
+      ]
+    },
+    "border": {
+      "radius": false,
+      "color": false,
+      "style": false,
+      "width": false
+    },
+    "custom": {},
+    "layout": {
+      "contentSize": "900px",
+      "wideSize": "1100px"
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true,
+      "units": [
+        "px",
+        "%"
+      ]
+    },
+    "typography": {
+      "customFontSize": false,
+      "lineHeight": false,
+      "dropCap": false,
+      "fontStyle": true,
+      "fontWeight": true,
+      "letterSpacing": false,
+      "textDecoration": true,
+      "textTransform": true,
+      "fontSizes": [
+        {
+          "slug": "xs",
+          "size": "0.75rem",
+          "name": "xs"
+        },
+        {
+          "slug": "sm",
+          "size": "0.875rem",
+          "name": "sm"
+        },
+        {
+          "slug": "base",
+          "size": "1rem",
+          "name": "base"
+        },
+        {
+          "slug": "lg",
+          "size": "1.125rem",
+          "name": "lg"
+        },
+        {
+          "slug": "xl",
+          "size": "1.25rem",
+          "name": "xl"
+        },
+        {
+          "slug": "2xl",
+          "size": "1.5rem",
+          "name": "2xl"
+        },
+        {
+          "slug": "3xl",
+          "size": "1.875rem",
+          "name": "3xl"
+        },
+        {
+          "slug": "4xl",
+          "size": "2.25rem",
+          "name": "4xl"
+        },
+        {
+          "slug": "5xl",
+          "size": "3rem",
+          "name": "5xl"
+        },
+        {
+          "slug": "6xl",
+          "size": "3.75rem",
+          "name": "6xl"
+        },
+        {
+          "slug": "7xl",
+          "size": "4.5rem",
+          "name": "7xl"
+        },
+        {
+          "slug": "8xl",
+          "size": "6rem",
+          "name": "8xl"
+        },
+        {
+          "slug": "9xl",
+          "size": "8rem",
+          "name": "9xl"
+        }
+      ],
+      "fontFamilies": [
+        {
+          "fontFamily": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+          "slug": "system-fonts",
+          "name": "System fonts"
+        },
+        {
+          "fontFamily": "Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif",
+          "slug": "heading",
+          "name": "Open Sans"
+        }
+      ]
+    },
+    "styles": {
+      "typography": {
+        "fontFamily": "var(--wp--preset--font-family--heading)"
+      }
+    },
+    "blocks": {
+      "core/column": {
+        "spacing": {
+          "blockGap": false
+        }
+      },
+      "core/group": {
+        "spacing": {
+          "blockGap": false
+        }
+      },
+      "core/buttons": {
+        "spacing": {
+          "blockGap": false
+        }
+      },
+      "core/button": {
+        "border": {
+          "radius": false,
+          "color": false,
+          "style": false,
+          "width": false
+        },
+        "spacing": {
+          "padding": false
+        },
+        "typography": {
+          "fontSizes": [],
+          "fontFamilies": [],
+          "lineHeight": false,
+          "dropCap": false,
+          "fontStyle": false,
+          "fontWeight": false,
+          "letterSpacing": false,
+          "textDecoration": false,
+          "textTransform": false
+        },
+        "color": {
+          "background": true,
+          "text": false,
+          "palette": [
+            {
+              "slug": "blue-800",
+              "name": "blue-800",
+              "color": "#155e75"
+            },
+            {
+              "slug": "blue-900",
+              "name": "blue-900",
+              "color": "#164e63"
+            }
+          ]
+        },
+        "style": {
+          "color": {
+            "type": "string",
+            "default": "white"
+          }
+        }
+      },
+      "acf/hero": {
+        "color": {
+          "palette": [
+            {
+              "slug": "white",
+              "name": "white",
+              "color": "#FFFFFF"
+            },
+            {
+              "slug": "gray-100",
+              "name": "gray-100",
+              "color": "#f1f5f9"
+            },
+            {
+              "slug": "gray-200",
+              "name": "gray-200",
+              "color": "#e2e8f0"
+            },
+            {
+              "slug": "gray-300",
+              "name": "gray-300",
+              "color": "#cbd5e1"
+            },
+            {
+              "slug": "gray-700",
+              "name": "gray-700",
+              "color": "#334155"
+            },
+            {
+              "slug": "gray-800",
+              "name": "gray-800",
+              "color": "#1e293b"
+            },
+            {
+              "slug": "gray-900",
+              "name": "gray-900",
+              "color": "#0f172a"
+            },
+            {
+              "slug": "gray-950",
+              "name": "gray-950",
+              "color": "#020617"
+            }   
+          ]
+        }
+      },
+      "acf/cards": {
+        "color": {
+          "palette": [
+            {
+              "slug": "white",
+              "name": "white",
+              "color": "#FFFFFF"
+            },
+            {
+              "slug": "blue-50",
+              "name": "blue-50",
+              "color": "#ecfeff"
+            },
+            {
+              "slug": "blue-700",
+              "name": "blue-700",
+              "color": "#0e7490"
+            },
+            {
+              "slug": "blue-800",
+              "name": "blue-800",
+              "color": "#155e75"
+            },
+            {
+              "slug": "blue-900",
+              "name": "blue-900",
+              "color": "#164e63"
+            },
+            {
+              "slug": "blue-950",
+              "name": "blue-950",
+              "color": "#083344"
+            },    
+            {
+              "slug": "gray-50",
+              "name": "gray-50",
+              "color": "#f8fafc"
+            },
+            {
+              "slug": "gray-100",
+              "name": "gray-100",
+              "color": "#f1f5f9"
+            },
+            {
+              "slug": "gray-200",
+              "name": "gray-200",
+              "color": "#e2e8f0"
+            },
+            {
+              "slug": "gray-800",
+              "name": "gray-800",
+              "color": "#1e293b"
+            },
+            {
+              "slug": "gray-900",
+              "name": "gray-900",
+              "color": "#0f172a"
+            },
+            {
+              "slug": "gray-950",
+              "name": "gray-950",
+              "color": "#020617"
+            }
+          ]
+        }
+      },
+      "acf/faq": {
+        "color": {
+          "palette": [
+            {
+              "slug": "transparent",
+              "name": "transparent",
+              "color": "rgba(0,0,0,0)"
+            },
+            {
+              "slug": "blue-50",
+              "name": "blue-50",
+              "color": "#ecfeff"
+            },
+            {
+              "slug": "blue-100",
+              "name": "blue-100",
+              "color": "#cffafe"
+            },
+            {
+              "slug": "blue-200",
+              "name": "blue-200",
+              "color": "#a5f3fc"
+            },
+            {
+              "slug": "blue-400",
+              "name": "blue-400",
+              "color": "#22d3ee"
+            },
+            {
+              "slug": "blue-500",
+              "name": "blue-500",
+              "color": "#06b6d4"
+            },
+            {
+              "slug": "blue-600",
+              "name": "blue-600",
+              "color": "#0891b2"
+            },
+            {
+              "slug": "blue-700",
+              "name": "blue-700",
+              "color": "#0e7490"
+            },
+            {
+              "slug": "blue-800",
+              "name": "blue-800",
+              "color": "#155e75"
+            },
+            {
+              "slug": "blue-900",
+              "name": "blue-900",
+              "color": "#164e63"
+            },
+            {
+              "slug": "white",
+              "name": "white",
+              "color": "#FFFFFF"
+            },
+            {
+              "slug": "gray-50",
+              "name": "gray-50",
+              "color": "#f8fafc"
+            },
+            {
+              "slug": "gray-100",
+              "name": "gray-100",
+              "color": "#f1f5f9"
+            },
+            {
+              "slug": "gray-200",
+              "name": "gray-200",
+              "color": "#e2e8f0"
+            },
+            {
+              "slug": "gray-600",
+              "name": "gray-600",
+              "color": "#475569"
+            },
+            {
+              "slug": "gray-700",
+              "name": "gray-700",
+              "color": "#374151"
+            },
+            {
+              "slug": "gray-800",
+              "name": "gray-800",
+              "color": "#1e293b"
+            },
+            {
+              "slug": "gray-900",
+              "name": "gray-900",
+              "color": "#0f172a"
+            }
+          ]
+        }
+      },
+      "acf/testimonial": {
+        "color": {
+          "palette": [
+            {
+              "slug": "blue-300",
+              "name": "blue-300",
+              "color": "#67e8f9"
+            },
+            {
+              "slug": "blue-400",
+              "name": "blue-400",
+              "color": "#22d3ee"
+            },
+            {
+              "slug": "blue-500",
+              "name": "blue-500",
+              "color": "#06b6d4"
+            },
+            {
+              "slug": "blue-600",
+              "name": "blue-600",
+              "color": "#0891b2"
+            },
+            {
+              "slug": "blue-700",
+              "name": "blue-700",
+              "color": "#0e7490"
+            },
+            {
+              "slug": "blue-800",
+              "name": "blue-800",
+              "color": "#155e75"
+            },
+            {
+              "slug": "blue-900",
+              "name": "blue-900",
+              "color": "#164e63"
+            }
+          ]
+        }
+      },
+      "acf/cta": {
+        "color": {
+          "palette": [
+            {
+              "slug": "blue-300",
+              "name": "blue-300",
+              "color": "#67e8f9"
+            },
+            {
+              "slug": "blue-400",
+              "name": "blue-400",
+              "color": "#22d3ee"
+            },
+            {
+              "slug": "blue-500",
+              "name": "blue-500",
+              "color": "#06b6d4"
+            },
+            {
+              "slug": "blue-600",
+              "name": "blue-600",
+              "color": "#0891b2"
+            },
+            {
+              "slug": "blue-800",
+              "name": "blue-800",
+              "color": "#155e75"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

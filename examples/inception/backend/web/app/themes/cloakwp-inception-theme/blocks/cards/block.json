@@ -1,0 +1,55 @@
+{
+  "name": "acf/cards",
+  "title": "Cards",
+  "description": "A custom block for displaying pages/posts/manual data as cards.",
+  "textdomain": "cloakwp",
+  "category": "widgets",
+  "icon": "admin-page",
+  "keywords": [
+    "cards",
+    "posts",
+    "pages",
+    "tiles"
+  ],
+  "acf": {
+    "mode": "edit",
+    "renderCallback": "render_acf_block_iframe_preview"
+  },
+  "align": false,
+  "supports": {
+    "anchor": true,
+    "mode": true,
+    "align": false,
+    "html": false,
+    "reusable": false,
+    "lock": false,
+    "spacing": {
+      "margin": [
+        "top",
+        "bottom"
+      ]
+    },
+    "color": {
+      "background": true,
+      "gradients": false,
+      "text": false
+    }
+  },
+  "attributes": {
+    "backgroundColor": {
+      "type": "string",
+      "default": "blue-300"
+    },
+    "style": {
+      "type": "object",
+      "default": {
+        "spacing": {
+          "margin": {
+            "top": "80px",
+            "bottom": "80px"
+          }
+        }
+      }
+    }
+  }
+}
