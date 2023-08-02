@@ -38,7 +38,9 @@
     "vinkla/extended-acf": "^13.4",
     "cloak-labs/cloakwp-base-theme": "^1.0.0",
     "cloak-labs/cloakwp-inception-theme": "^0.0.2",
-    "cloak-labs/cloakwp-plugin": "^1.0.1"
+    "cloak-labs/cloakwp-plugin": "^1.0.1",
+    "wpengine/advanced-custom-fields-pro": "^6.1",
+    "franzl/studio": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
@@ -60,7 +62,8 @@
     "preferred-install": "dist",
     "allow-plugins": {
       "composer/installers": true,
-      "roots/wordpress-core-installer": true
+      "roots/wordpress-core-installer": true,
+      "franzl/studio": true
     }
   },
   "minimum-stability": "stable",
