@@ -126,6 +126,12 @@ importers:
         specifier: ^0.2.6
         version: 0.2.6(prettier@2.8.7)
 
+  examples/inception/backend:
+    dependencies:
+      '@cloakwp/spinup-local-wp':
+        specifier: ^0.0.8
+        version: link:../../../packages/npm/spinup-local-wp
+
   examples/inception/nextjs/frontend:
     dependencies:
       '@headlessui/react':
