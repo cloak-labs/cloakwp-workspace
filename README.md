@@ -66,7 +66,7 @@ We use a tool called [Studio](https://github.com/franzliedke/studio) to make our
 
 Typically you would install `studio` globally on your machine, but since we run our local WordPress instances in Docker, we need to install it as a composer dependency in each WordPress instance, so that it's available in the Docker environment.
 
-The first two steps below are already done for you on existing example projects.
+The first two steps below are already done for you on existing example projects, so you only need to follow these when creating new example projects.
 
 1. Install `studio` as project dependency:
 ```bash
@@ -79,7 +79,7 @@ npm run composer require --dev franzl/studio
 {
   "version": 2,
   "paths": [
-    "./local-packages/*"
+    "../local-packages/*"
   ]
 }
 ```
