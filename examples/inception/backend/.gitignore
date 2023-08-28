@@ -3,7 +3,7 @@ web/app/plugins/*
 !web/app/plugins/.gitkeep
 web/app/mu-plugins/*/
 web/app/themes/twentytwentythree/
-web/app/themes/cloakwp-theme
+web/app/themes/cloakwp-base-theme
 web/app/themes/cloakwp-inception-theme
 web/app/upgrade
 web/app/uploads/*
