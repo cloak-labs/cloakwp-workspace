@@ -35,7 +35,7 @@
     "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.3.2",
     "wpackagist-plugin/post-2-post-for-acf": "^1.7.0",
     "johnbillion/extended-cpts": "^5.0",
-    "vinkla/extended-acf": "^13.4",
+    "vinkla/extended-acf": "^13.7.0",
     "cloak-labs/cloakwp-base-theme": "^1.0.0",
     "cloak-labs/cloakwp-inception-theme": "^0.0.2",
     "cloak-labs/cloakwp-plugin": "^1.0.1",
