@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "spinup-local-wp dc up",
     "dev:rebuild": "spinup-local-wp dc up -d --force-recreate --build",
-    "stop": "spinup-local-wp dc down",
+    "stop": "spinup-local-wp dc stop",
+    "down": "spinup-local-wp dc down",
     "composer": "spinup-local-wp dc run composer",
     "spinup-local-wp": "spinup-local-wp",
     "generate-env": "php -r \"copy('.env.example', '.env');\""
