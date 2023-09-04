@@ -1,0 +1,1 @@
+// this empty tailwind.config.js file is a bug-fix that makes Tailwind Intellisense work in a monorepo; see https://github.com/tailwindlabs/tailwindcss-intellisense/issues/153

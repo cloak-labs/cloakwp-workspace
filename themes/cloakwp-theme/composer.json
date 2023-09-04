@@ -1,9 +1,0 @@
-{
-  "name": "cloak-labs/cloakwp-theme",
-  "description": "Dead simple theme that strips WordPress for use as a headless CMS.",
-  "type": "wordpress-theme",
-  "version": "1.0.0",
-  "require": {
-    "composer/installers": "^2.2"
-  }
-}

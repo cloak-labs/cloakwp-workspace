@@ -1,0 +1,18 @@
+{
+  "prviate": true,
+  "name": "@inception/backend",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "dev": "spinup-local-wp dc up",
+    "dev:rebuild": "spinup-local-wp dc up -d --force-recreate --build",
+    "stop": "spinup-local-wp dc stop",
+    "down": "spinup-local-wp dc down",
+    "composer": "spinup-local-wp dc run composer",
+    "spinup-local-wp": "spinup-local-wp",
+    "generate-env": "php -r \"copy('.env.example', '.env');\""
+  },
+  "dependencies": {
+    "@cloakwp/spinup-local-wp": "^0.0.9"
+  }
+}
