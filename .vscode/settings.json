@@ -12,7 +12,6 @@
     "**/plugins": true,
     "**/themes": true,
     "**/vendor": true,
-    "**/wp-admin": true,
-    "**/wp-includes": true
+    "**/web/wp": true
   }
 }
