@@ -1,12 +1,10 @@
 module.exports = {
   files: [
-    "./themes/**/*.php",
-    "./themes/**/*.json",
-    "./themes/**/*.css",
-    "./themes/**/*.js",
-    "./plugins/**/*.php",
-    "./plugins/**/*.css",
-    "./plugins/**/*.js",
+    "./packages/composer/**/*.php",
+    "./packages/composer/**/*.json",
+    "./packages/composer/**/*.css",
+    "./packages/composer/**/*.js",
     // Add more directories as needed
   ],
+  debugInfo: false 
 };

@@ -1,3 +1,17 @@
 {
-  "prettier.prettierPath": "./node_modules/prettier"
+  // "prettier.prettierPath": "./node_modules/prettier",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+  "explorer.excludeGitIgnore": false,
+  "search.useIgnoreFiles": false,
+  "search.exclude": {
+    "**/.next": true,
+    "**/dist": true,
+    "**/plugins": true,
+    "**/themes": true,
+    "**/vendor": true,
+    "**/web/wp": true
+  }
 }
