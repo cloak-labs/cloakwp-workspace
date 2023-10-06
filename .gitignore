@@ -12,3 +12,11 @@ server/dist
 public/dist
 .turbo
 *.zip
+/packages/npm/cloakwp/
+/packages/npm/spinup-local-wp/
+/packages/composer/cloakwp-base-theme/
+/packages/composer/cloakwp-inception-theme/
+/packages/composer/cloakwp-bedrock/
+/packages/composer/cloakwp-plugin/
+/examples/inception/nextjs/
+/packages/npm/node-wpapi/
