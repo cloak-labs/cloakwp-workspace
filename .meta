@@ -7,6 +7,7 @@
     "packages/composer/cloakwp-inception-theme": "git@github.com:cloak-labs/cloakwp-inception-theme.git",
     "packages/composer/cloakwp-bedrock": "git@github.com:cloak-labs/cloakwp-bedrock.git",
     "examples/inception/nextjs": "git@github.com:cloak-labs/cloakwp-inception-nextjs.git",
-    "packages/npm/node-wpapi": "git@github.com:cloak-labs/node-wpapi.git"
+    "packages/npm/node-wpapi": "git@github.com:cloak-labs/node-wpapi.git",
+    "packages/composer/wp-virtual-fields": "git@github.com:cloak-labs/wp-virtual-fields.git"
   }
 }
