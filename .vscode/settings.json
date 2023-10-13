@@ -13,5 +13,6 @@
     "**/themes": true,
     "**/vendor": true,
     "**/web/wp": true
-  }
+  },
+  "git.repositoryScanMaxDepth": 5
 }
