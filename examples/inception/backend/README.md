@@ -1,7 +1,9 @@
 # CloakWP Bedrock - Headless WordPress Boilerplate
+
 This is the official WordPress boilerplate for CloakWP (headless WordPress) projects. It's an opinionated, modern approach to WordPress development. However, it isn't a required piece of the CloakWP stack -- you can opt-out and use your own preferred WordPress development stack while still leveraging the other CloakWP tools.
 
 This opinionated starter leverages many modern WordPress development tools:
+
 - [Bedrock](https://roots.io/bedrock/) - a popular WordPress boilerplate with Composer, easier configuration, and an improved folder structure, enabling:
   - Separate configs per environment
   - Environment variables
@@ -20,6 +22,7 @@ This opinionated starter leverages many modern WordPress development tools:
 - An opinionated collection of WordPress plugins pre-installed that enable/improve the headless WordPress experience, obviously including the CloakWP Plugin and Theme, plus a production-ready child theme with all kinds of goodies related to registering/configuring CPTs, taxonomies, ACF Blocks, and ACF Field Groups via code -- the best-practice way you'll learn to love.
 
 ## Requirements
+
 - Composer
 - PHP >= 8.0
 - [Docker](https://www.docker.com/get-started) + Docker Compose + Docker Desktop
@@ -27,27 +30,35 @@ This opinionated starter leverages many modern WordPress development tools:
 - Node.js
 
 ## Installation
+
 cd into your desired installation directory and run:
+
 ```bash
 composer create-project cloak-labs/cloakwp-bedrock
 ```
 
 Then run:
+
 ```bash
 cd cloakwp-bedrock
 ```
 
 and:
+
 ```bash
 npm install
 ```
+
 ... which installs [Spinup Local WP](https://github.com/cloak-labs/spinup-local-wp).
 
 Optionally run the following to update your plugins/themes to their latest versions:
+
 ```bash
 npm run composer update
 ```
+
 ## Configuration
+
 <details>
  <summary>Env Variables</summary>
 The Composer install command above will automatically copy the `.env.example` file to a `.env` file that you can now edit.
@@ -55,7 +66,7 @@ The Composer install command above will automatically copy the `.env.example` fi
 - Ensure you modify the `APP_NAME` variable for each project, to ensure you don't end up with clashing Docker Containers.
 - You may need to modify `VOLUME_WORDPRESS_PATH` if the "run" commands detailed further below don't work. This variable must point to your WordPress installation folder relative to wherever the `spinup-local-wp` node package root is installed; it should work out-of-the-box with NPM, but not with PNPM which installs packages in a different location.
 - Optionally adjust the `DB_NAME`, `DB_USER`, and `DB_PASSWORD` variables to be more secure and to match your production environment.
-- Modify `.env.local` to override any production variables from `.env` for local development purposes. It is configured by default to cover the required overrides, such as overriding your decoupled front-end's production URL with `http://localhost:5000` via the `CLOAKWP_FRONTEND_URL` variable.
+- Modify `.env.local` to override any production variables from `.env` for local development purposes. It is configured by default to cover the required overrides, such as overriding your decoupled front-end's production URL with `http://localhost:5000` via the `MY_FRONTEND_URL` variable.
 
 Note: `.env` is gitignored by default, and you likely want to keep it that way to keep your production values secure/secret. So, remember to manually add your `.env` to your production server environment, or build your own solution for automating that (this will likely be the topic of a guide in the future).
 
@@ -65,15 +76,19 @@ Note: `.env` is gitignored by default, and you likely want to keep it that way t
  <summary>ACF Pro</summary>
 
 It is highly recommended to purchase an Advanced Custom Fields (ACF) Pro license [here](https://www.advancedcustomfields.com/pro/#pricing-table), and install by running:
+
 ```bash
 npm run composer require wpengine/advanced-custom-fields-pro
 ```
+
 ACF Pro enables content-modelling features that most headless sites will require, such as repeater fields, ACF blocks, options pages, the gallery field, and more.
 
 Installing ACF Pro via composer requires a couple extra steps, since they need to validate your license. Follow [this article](https://www.advancedcustomfields.com/resources/installing-acf-pro-with-composer/) to create an `auth.json` file within the CloakWP Bedrock root folder (i.e. alongside `composer.json`).
+
 </details>
 
 ## Run
+
 Make sure you open the Docker Desktop app before running the dev command below:
 
 ```bash
