@@ -2,7 +2,7 @@
   "name": "@cloakwp/eslint-config",
   "version": "0.0.1",
   "main": "index.js",
-  "license": "MIT",
+  "license": "LGPL-3.0-only",
   "dependencies": {
     "eslint-config-next": "latest",
     "eslint-config-prettier": "^8.3.0",

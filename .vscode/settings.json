@@ -1,18 +1,22 @@
 {
-  // "prettier.prettierPath": "./node_modules/prettier",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[php]": {
-    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    "editor.defaultFormatter": "DEVSENSE.phptools-vscode"
   },
   "explorer.excludeGitIgnore": false,
   "search.useIgnoreFiles": false,
   "search.exclude": {
     "**/.next": true,
     "**/dist": true,
-    "**/plugins": true,
+    "**/web/wp": true,
+    "**/z_plugins": true,
     "**/themes": true,
-    "**/vendor": true,
-    "**/web/wp": true
+    "**/vendor": true
   },
-  "git.repositoryScanMaxDepth": 5
+  "git.repositoryScanMaxDepth": 5,
+  "git.detectSubmodulesLimit": 25,
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
 }

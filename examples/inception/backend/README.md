@@ -13,7 +13,7 @@ This opinionated starter leverages many modern WordPress development tools:
   - Enhanced WordPress security (folder structure limits access to non-public files and offers more secure passwords through [wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt))
   - Gets WordPress 80% of the way towards becoming a proper [Twelve-Factor App](http://12factor.net/)
 - [Spinup Local WP](https://github.com/cloak-labs/spinup-local-wp) - another NPM package by the CloakWP team that acts as a simple abstraction layer over [Docker + Docker Compose](https://docs.docker.com/compose/), enabling you to quickly spin up your WordPress site locally while in development with zero effort. It includes the following:
-  - PHP 8.1,
+  - PHP 8.2,
   - Nginx server,
   - MariaDB (popular MySQL fork),
   - [WP-CLI](https://wp-cli.org/) - the command-line interface for WordPress,

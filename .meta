@@ -1,13 +1,28 @@
 {
   "projects": {
+    "examples/inception/nextjs": "git@github.com:cloak-labs/cloakwp-inception-nextjs.git",
     "packages/composer/cloakwp-plugin": "git@github.com:cloak-labs/cloakwp-plugin.git",
-    "packages/npm/cloakwp": "git@github.com:cloak-labs/cloakwp-js.git",
-    "packages/npm/spinup-local-wp": "git@github.com:cloak-labs/spinup-local-wp.git",
     "packages/composer/cloakwp-base-theme": "git@github.com:cloak-labs/cloakwp-base-theme.git",
     "packages/composer/cloakwp-inception-theme": "git@github.com:cloak-labs/cloakwp-inception-theme.git",
     "packages/composer/cloakwp-bedrock": "git@github.com:cloak-labs/cloakwp-bedrock.git",
-    "examples/inception/nextjs": "git@github.com:cloak-labs/cloakwp-inception-nextjs.git",
+    "packages/composer/wp-virtual-fields": "git@github.com:cloak-labs/wp-virtual-fields.git",
+    "packages/npm/cloakcms": "git@github.com:cloak-labs/cloakcms.git",
+    "packages/npm/cloakui/primitives/react": "git@github.com:cloak-labs/cloakui-react-primitives.git",
+    "packages/npm/cloakui/utils": "git@github.com:cloak-labs/cloakui-utils.git",
+    "packages/npm/cloakwp/core": "git@github.com:cloak-labs/cloakwp-js.git",
+    "packages/npm/cloakwp/blocks/react": "git@github.com:cloak-labs/cloakwp-blocks-react.git",
+    "packages/npm/cloakwp/blocks/nextjs": "git@github.com:cloak-labs/cloakwp-blocks-nextjs.git",
+    "packages/npm/cloakwp/blocks/data-routers": "git@github.com:cloak-labs/cloakwp-block-data-routers.git",
+    "packages/npm/cloakwp/react": "git@github.com:cloak-labs/cloakwp-react.git",
+    "packages/npm/cloakwp/nextjs": "git@github.com:cloak-labs/cloakwp-nextjs.git",
     "packages/npm/node-wpapi": "git@github.com:cloak-labs/node-wpapi.git",
-    "packages/composer/wp-virtual-fields": "git@github.com:cloak-labs/wp-virtual-fields.git"
+    "packages/npm/render-blocks": "git@github.com:cloak-labs/render-blocks.git",
+    "packages/npm/spinup-local-wp": "git@github.com:cloak-labs/spinup-local-wp.git",
+    "packages/npm/with-plugins": "git@github.com:kaelansmith/with-plugins.git",
+    "packages/npm/cloakui/types": "git@github.com:cloak-labs/cloakui-types.git",
+    "packages/npm/cloakui/primitives/nextjs": "git@github.com:cloak-labs/cloakui-nextjs-primitives.git",
+    "packages/npm/tailwind-easy-theme": "git@github.com:kaelansmith/tailwind-easy-theme.git",
+    "packages/npm/tailwind-extended-shadows": "git@github.com:kaelansmith/tailwind-extended-shadows.git",
+    "packages/npm/cloakui/styles": "git@github.com:cloak-labs/cloakui-styles.git"
   }
 }

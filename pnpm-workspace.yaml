@@ -1,4 +1,6 @@
 packages:
   - "packages/**"
   - "docs"
-  - "examples/**"
+  - "examples/inception/backend"
+  - "examples/inception/nextjs/frontend"
+  # note: we purposely don't do `examples/**` above because any deeply nested WP plugins with a package.json would be picked up as a workspace sub-package
